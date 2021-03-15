@@ -14,7 +14,7 @@
 <meta property="og:description" content="@propertyWrapper的一种用处">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-03-13T09:55:05.000Z">
-<meta property="article:modified_time" content="2021-03-15T09:57:29.179Z">
+<meta property="article:modified_time" content="2021-03-15T12:33:13.097Z">
 <meta property="article:author" content="Tino Wu">
 <meta property="article:tag" content="swift">
 <meta property="article:tag" content="iOS">
@@ -111,17 +111,14 @@
 <blockquote>
 <p>在实际开发中，有时候如果我们遇到后台返回的一个URL字符串中带有中文，会导致我们在代码中初始化URL失败。而这在swift里有了巧妙的解决方案——<code>@propertyWrapper</code></p>
 </blockquote>
-<p>###@propertyWrapper</p>
-<ul>
+<h3 id="propertyWrapper"><a href="#propertyWrapper" class="headerlink" title="@propertyWrapper"></a>@propertyWrapper</h3><ul>
 <li><code>@propertyWrapper</code>是swift中的一大特性，即<code>属性包装</code>。可以使用<code>@propertyWrapper</code>进行属性的统一限定或封装，减少重复的代码。更多具体的介绍这篇文章里不细讲。</li>
 </ul>
-<p>###使用<code>@propertyWrapper</code>避免URL初始化失败</p>
-<ul>
+<h3 id="使用-propertyWrapper避免URL初始化失败"><a href="#使用-propertyWrapper避免URL初始化失败" class="headerlink" title="使用@propertyWrapper避免URL初始化失败"></a>使用<code>@propertyWrapper</code>避免URL初始化失败</h3><ul>
 <li>先放代码<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@propertyWrapper</span><br><span class="line">struct Trimmed &#123;</span><br><span class="line">    private var value &#x3D; String()</span><br><span class="line">    </span><br><span class="line">    var wrappedValue : String&#123;</span><br><span class="line">        get &#123; value &#125;</span><br><span class="line">        set &#123;</span><br><span class="line">            &#x2F;&#x2F;可以用于字符串去中文</span><br><span class="line">            value &#x3D; newValue.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    init(wrappedValue : String)&#123;</span><br><span class="line">        self.wrappedValue &#x3D; wrappedValue</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li>以上就是<code>Trimmed</code>这个属性包装器的具体实现，使用时只需要在属性前加上<code>@Trimmed</code>即可</li>
 </ul>
-<p>###效果</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">struct Test &#123;</span><br><span class="line">        @Trimmed var name : String</span><br><span class="line">   &#125;</span><br><span class="line">var a &#x3D; Test(name: &quot;www.baidu中文.com&quot;)</span><br><span class="line">print(a.name)</span><br><span class="line">&#x2F;&#x2F;输出&#96;www.baidu%E4%B8%AD%E6%96%87.com&#96;</span><br></pre></td></tr></table></figure>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">struct Test &#123;</span><br><span class="line">        @Trimmed var name : String</span><br><span class="line">   &#125;</span><br><span class="line">var a &#x3D; Test(name: &quot;www.baidu中文.com&quot;)</span><br><span class="line">print(a.name)</span><br><span class="line">&#x2F;&#x2F;输出&#96;www.baidu%E4%B8%AD%E6%96%87.com&#96;</span><br></pre></td></tr></table></figure>
 
 <hr>
 <p>TINO WU</p>
