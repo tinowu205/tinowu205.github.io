@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>初探iOS14-Widget小组件 | Tino又想吃肉了</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="简单了解iOS14中widget的实现和使用方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初探iOS14-Widget小组件">
+<meta property="og:url" content="http://example.com/2021/03/15/Widget/index.html">
+<meta property="og:site_name" content="Tino又想吃肉了">
+<meta property="og:description" content="简单了解iOS14中widget的实现和使用方法">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/24256383-4845261f79179dbf.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2021-03-15T09:58:03.000Z">
+<meta property="article:modified_time" content="2021-03-15T12:25:59.919Z">
+<meta property="article:author" content="Tino Wu">
+<meta property="article:tag" content="iOS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/24256383-4845261f79179dbf.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+  
+    <link rel="alternate" href="/atom.xml" title="Tino又想吃肉了" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Tino又想吃肉了</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">学习笔记</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Widget" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/03/15/Widget/" class="article-date">
+  <time class="dt-published" datetime="2021-03-15T09:58:03.000Z" itemprop="datePublished">2021-03-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Note/">Note</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      初探iOS14-Widget小组件
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>简单了解iOS14中widget的实现和使用方法</p>
+<span id="more"></span>
+
+<blockquote>
+<p>小组件(Widget)可以在主屏幕上实现内容展示和功能跳转。 系统会向小组件获取时间线(TimeLine)，根据当前时间对时间线上的数据进行展示。点击正在展示的视觉元素可以跳转到APP内，实现对应的功能。</p>
+</blockquote>
+<h3 id="Widget技术栈"><a href="#Widget技术栈" class="headerlink" title="Widget技术栈"></a>Widget技术栈</h3><p><img src="https://upload-images.jianshu.io/upload_images/24256383-4845261f79179dbf.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="16063822333913.jpg"></p>
+<h3 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h3><ul>
+<li><p>开发框架 ： 必须为<code>swiftUI</code></p>
+</li>
+<li><p>尺寸 ： 小组件分为小尺寸、中等尺寸、大尺寸三种</p>
+</li>
+<li><p>TimeLine ：Timeline 是一个以<code>TimelineEntry</code>为元素的数组。<code>TimelineEntry </code>包含一个 <code>date</code> 的时间对象，用以告知系统在何时使用此对象来创建小组件的快照。也可以自定义一个模型struct，实现<code>TimelineEntry</code>协议，加入业务所需要的数据模型或其他信息。小组件的运行，是基于TimeLine的，不同于普通的app。</p>
+</li>
+<li><p>SnapShot : 快照，用于小组件在组件库中的展示</p>
+</li>
+</ul>
+<h3 id="Provider"><a href="#Provider" class="headerlink" title="Provider"></a>Provider</h3><p><strong>当我们使用Xcode新建一个小组件项目时，Xcode会为我们实现一个默认效果的小组件。</strong></p>
+<ul>
+<li><p>Provider: provider是提供小组件所需信息的结构体，遵循TimeLineProvider协议。其中包含了<code>placeholder</code> <code>getSnapshot</code> <code>getTimeline</code> 这几个方法。</p>
+</li>
+<li><p>getSnapshot : getSnapshot方法实现了一个当小组件出现异常或者网络错误请求不到数据时展示的view。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -&gt; ()) &#123;</span><br><span class="line">        let entry &#x3D; SimpleEntry(date: Date())</span><br><span class="line">        completion(entry)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>getTimeline : 在这个方法中可以进行网络请求，获得所需要的数据，并保存在对应的<code>entry</code>中，也就是遵循<code>TimelineEntry</code>协议的结构体</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">func getTimeline(in context: Context, completion: @escaping (Timeline&lt;Entry&gt;) -&gt; ()) &#123;</span><br><span class="line">        var entries: [SimpleEntry] &#x3D; []</span><br><span class="line">        let currentDate &#x3D; Date()</span><br><span class="line">        for hourOffset in 0 ..&lt; 5 &#123;</span><br><span class="line">            let entryDate &#x3D; Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!</span><br><span class="line">            let entry &#x3D; SimpleEntry(date: entryDate)</span><br><span class="line">            entries.append(entry)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        let timeline &#x3D; Timeline(entries: entries, policy: .atEnd)</span><br><span class="line">        completion(timeline)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>TimelineEntry : 在上述代码中使用的SimpleEntry就是遵循了TimelineEntry协议的结构体，用来保存所需要的数据。由于小组件是由时间流驱动的，所以TimelineEntry非常重要，它决定了在某个时间小组件显示的内容。</p>
+</li>
+<li><p>completion : 当调用completion方法时，小组件的内容和界面会进行刷新。<strong>注意，小组件每日是有刷新限制的，并且只有主app在前台运行时才可以主动刷新</strong></p>
+</li>
+</ul>
+<h3 id="WidgetEntryView"><a href="#WidgetEntryView" class="headerlink" title="WidgetEntryView"></a>WidgetEntryView</h3><p>这个结构体是我们用来展示的视图view，我们可以在里面进行UI的搭建。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">struct WidgetEntryView : View &#123;</span><br><span class="line">    var entry: Provider.Entry</span><br><span class="line">    var body: some View &#123;</span><br><span class="line">        Text(entry.date, style: .time)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="main"><a href="#main" class="headerlink" title="@main"></a>@main</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@main</span><br><span class="line">struct TestWidget: Widget &#123;</span><br><span class="line">    let kind: String &#x3D; &quot;TestWidget&quot;</span><br><span class="line"></span><br><span class="line">    var body: some WidgetConfiguration &#123;</span><br><span class="line">        StaticConfiguration(kind: kind, provider: Provider()) &#123; entry in</span><br><span class="line">            TestWidgetEntryView(entry: entry)</span><br><span class="line">        &#125;</span><br><span class="line">        .configurationDisplayName(&quot;My Widget&quot;)</span><br><span class="line">        .description(&quot;This is an example widget.&quot;)</span><br><span class="line">        &#x2F;&#x2F;supportedFamilies不设置的话默认三个样式都实现</span><br><span class="line">        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在小组件的开发中，我们会发现有<code>@main</code>关键字，这是整个小组件的主入口，系统从这里开始加载。</li>
+<li>在遵循<code>Widget</code>协议的结构体中，会有<code>kind</code>字段，这是小组件的唯一标识。</li>
+<li>StaticConfiguration ：初始化配置代码</li>
+<li>configurationDisplayName ：添加编辑界面展示的标题</li>
+<li>description ：添加编辑界面展示的描述内容</li>
+<li>supportedFamilies ：这里可以限制要提供三个样式中的哪几个</li>
+</ul>
+<h3 id="如果我们需要为app创建多个widget呢？"><a href="#如果我们需要为app创建多个widget呢？" class="headerlink" title="如果我们需要为app创建多个widget呢？"></a>如果我们需要为app创建多个widget呢？</h3><p><strong>那么 这时候我们就需要用到WidgetBundle协议了</strong></p>
+<ul>
+<li>首先，我们创建好我们需要的widget，也就是多个遵循<code>Widget</code>协议的结构体，当然这些widget各自的timeline和timelineEntry也要写好</li>
+<li>接下来我们创建一个遵循<code>WidgetBundle</code>协议的结构体。并将<code>@main</code>标志符更改至这个结构体的上方。</li>
+<li>在遵循<code>WidgetBundle</code>协议的结构体中，返回我们写好的widget，就完成了多个小组件的创建。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">struct YourWidgets: WidgetBundle &#123;</span><br><span class="line">    @WidgetBundleBuilder</span><br><span class="line">    var body: some Widget &#123;</span><br><span class="line">        OneWidget()</span><br><span class="line">        TwoWidget()</span><br><span class="line">        ThreeWidget()</span><br><span class="line">        ......  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="关于数据"><a href="#关于数据" class="headerlink" title="关于数据"></a>关于数据</h3><ul>
+<li><p>在widget中，网络请求可以使用原生的<code>URLSession</code>实现. 在使用swift写时我们可以封装一个用来进行网络请求的struct，并在里面实现网络请求和JSON数据转化以及创建数据模型的函数。<br>示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">static func request(completion: @escaping (Result&lt;Poetry, Error&gt;) -&gt; Void) &#123;</span><br><span class="line">        let url &#x3D; URL(string: &quot;&quot;)!</span><br><span class="line">        let task &#x3D; URLSession.shared.dataTask(with: url) &#123; (data, response, error) in</span><br><span class="line">            guard error &#x3D;&#x3D; nil else &#123;</span><br><span class="line">                completion(.failure(error!))</span><br><span class="line">                return</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            completion(.success(xxx))</span><br><span class="line">        &#125;</span><br><span class="line">        task.resume()</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>在widget中，是可以拿到主app的一些数据的。实现的方式是<code>App Group</code>。在Widget的Target中添加<code>App groups</code>，并添加与主程序相同的<code>App Group ID</code>，注意，主程序也需要有<code>App groups</code>。设置好之后，我们可以通过<code>NSUserDefaults</code>和<code>NSFileManager</code>两种方式来与主app通讯。前者使用<code>- (instancetype)initWithSuiteName:(NSString *)suitename;</code>方法，传入app group id，就可以存取数据；后者使用<code>- (NSURL *)containerURLForSecurityApplicationGroupIdentifier:(NSString *)groupIdentifier;</code>方法。</p>
+</li>
+</ul>
+<h3 id="关于跳转"><a href="#关于跳转" class="headerlink" title="关于跳转"></a>关于跳转</h3><p><strong>跳转是小组件的一个重要功能，如果只实现了简单的数据展示的话小组件并不能成为一个流量入口</strong></p>
+<ul>
+<li>widget支持两种跳转方式： <code>widgetURL</code> 和 <code>Link</code></li>
+<li>其中，小尺寸的widget只支持<code>widgetURL</code></li>
+<li>widgetURL : 点击区域是小组件的所有区域，适用于比较简单的小组件。且只能有一个url，多添加的不会响应。</li>
+<li>Link : 点击区域可以细分到各个控件。</li>
+<li>URL Schemes : URL Schemes是小组件能跳转到主app的重要桥梁。注册自定义 URL Scheme 非常简单，通过 info.plist –&gt; URL Types –&gt; item0 –&gt; URL Schemes –&gt; 自定义的Scheme 来设置。</li>
+<li>在iOS13之后，我们可以在<code>SceneDelegate</code>中的代理方法处理跳转的url，并完成跳转后相应的需求。</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>正如widget的定义<code>App Extension</code>,小组件并不是一个mini的app，它只是一连串由时间流串起来的数据驱动的静态视图。不能实时更新数据是一个很大的限制，所以开发时不能把它当成一个mini app来思考。</li>
+<li>合理设计小组件可以增加主app的曝光率，并且点击就可以跳转至主app的指定功能可以使主app更易用。</li>
+<li>利用小组件静态、常驻桌面的特点，可以开发出一些如图片展示、词句展示、英文词句等小组件，它还是具有很大的商业价值的。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/03/15/Widget/" data-id="ckmakfhig00037g9k1bmo3g8b" data-title="初探iOS14-Widget小组件" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/" rel="tag">iOS</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/03/15/Cocoapods/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Cocoapods的安装和使用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/03/15/swift%20/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">swift笔记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Note/">Note</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/" rel="tag">iOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/" rel="tag">swift</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%BD%91/" rel="tag">计网</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/swift/" style="font-size: 15px;">swift</a> <a href="/tags/%E8%AE%A1%E7%BD%91/" style="font-size: 10px;">计网</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/03/15/Cocoapods/">Cocoapods的安装和使用</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/15/Widget/">初探iOS14-Widget小组件</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/15/swift%20/">swift笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/13/@propertyWrapper/">巧用@propertyWrapper避免非法字符串</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 Tino Wu<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

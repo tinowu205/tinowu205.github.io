@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Cocoapods的安装和使用 | Tino又想吃肉了</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Cocoapods的安装、使用及换源">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cocoapods的安装和使用">
+<meta property="og:url" content="http://example.com/2021/03/15/Cocoapods/index.html">
+<meta property="og:site_name" content="Tino又想吃肉了">
+<meta property="og:description" content="Cocoapods的安装、使用及换源">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-03-15T12:27:04.000Z">
+<meta property="article:modified_time" content="2021-03-15T12:28:32.392Z">
+<meta property="article:author" content="Tino Wu">
+<meta property="article:tag" content="Tools">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Tino又想吃肉了" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Tino又想吃肉了</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">学习笔记</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Cocoapods" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/03/15/Cocoapods/" class="article-date">
+  <time class="dt-published" datetime="2021-03-15T12:27:04.000Z" itemprop="datePublished">2021-03-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Note/">Note</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Cocoapods的安装和使用
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Cocoapods的安装、使用及换源</p>
+<span id="more"></span>
+
+<h4 id="Cocoapods是什么"><a href="#Cocoapods是什么" class="headerlink" title="Cocoapods是什么"></a>Cocoapods是什么</h4><blockquote>
+<p>Cocoapods是一个为你的项目管理第三方库以及建立和管理lib依赖的工具，可以让你优雅地使用第三方框架。</p>
+</blockquote>
+<h4 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h4><p>我们用macos自带的gem来安装Cocoapods，在安装前建议将gem更新至最新的版本。<em>如果ruby版本过老，也建议同时更新ruby版本</em><br>在这之前，我建议你先将gem的源更换为国内镜像源<br><strong>首先打开终端。<code>Command+空格</code>输入terminal后回车</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;更换源</span><br><span class="line">$ sudo gem sources -a https:&#x2F;&#x2F;ruby.taobao.org&#x2F; </span><br><span class="line">&#x2F;&#x2F;检查是否成功更换</span><br><span class="line">$ gem sources –l</span><br><span class="line">&#x2F;&#x2F;更新gem</span><br><span class="line">$ sudo gem update --system</span><br></pre></td></tr></table></figure>
+<p>在处理好gem的相关事宜后，我们开始来安装cocoapods</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo gem install cocoapods</span><br></pre></td></tr></table></figure>
+<p>如果出现类似于权限不够无法读写的报错，尝试执行下面这条命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo gem install -n &#x2F;usr&#x2F;local&#x2F;bin cocoapods</span><br></pre></td></tr></table></figure>
+<p>在看到成功安装的提示后，执行下面这条命令。由于是第一次初始化cocoapods，请耐心等待。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pod setup</span><br></pre></td></tr></table></figure>
+<p>至此，安装部分完成。</p>
+<h4 id="2-使用"><a href="#2-使用" class="headerlink" title="2.使用"></a>2.使用</h4><ul>
+<li>我们可以用<code>$ pod search xxx</code>命令来搜索源库中是否有我们需要的框架<br>接着我们cd到项目文件夹下，并初始化Podfile文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd [项目路径]</span><br><span class="line">&#x2F;&#x2F;直接将项目文件夹拖入终端即可</span><br><span class="line">$ pod init</span><br></pre></td></tr></table></figure>
+至此你会发现在项目文件夹中多出了一个名称为Podfile的文件。熟悉vim的同学可以直接在终端内使用vim打开此文件。我个人更喜欢用macos的文字编辑器打开。<br>打开后我们需要编辑以下信息<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">     platform :ios, &#39;12.0&#39;</span><br><span class="line">&#x2F;&#x2F;需要将ios版本修改至与自己的项目对于的版本号</span><br><span class="line"> #  MyApp 就是 TARGET NAME 会自动生成</span><br><span class="line">     target &#39;MyApp&#39; do</span><br><span class="line"># &#96;在target &#39;项目名&#39; do&#96;下一行指定库 和 库的版本</span><br><span class="line">     pod &#39;AFNetworking&#39;, &#39;~&gt; 4.0&#39; &#x2F;&#x2F;例子，此处安装AFNetworking框架</span><br><span class="line">&#x2F;&#x2F;其他的信息如非需要，无需更改</span><br></pre></td></tr></table></figure>
+回到终端<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;安装在Podfile文件中指定好的库</span><br><span class="line">$ pod install</span><br><span class="line">&#x2F;&#x2F;安装成功后</span><br><span class="line">$ pod update</span><br><span class="line">&#x2F;&#x2F;如果一直卡在pod install，请往下翻查看换源操作</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>至此，框架便用Cocoapods安装完成，用在项目文件夹中新生成的xxx.xcworkplace文件打开项目，在项目中只需<code>Command+B</code>编译后就可以只用第三方框架了。</strong></p>
+<h4 id="3-换源"><a href="#3-换源" class="headerlink" title="3.换源"></a>3.换源</h4><p>在上面的操作中，Cocoapods是默认使用官方源的。但如果遇到一直卡在pod update或者pod install的情况，建议更换Cocoapods的repo。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;此命令可以查看Cocoapods的repo有哪些</span><br><span class="line">$ pod repo</span><br><span class="line">&#x2F;&#x2F;删除官方源</span><br><span class="line">$ pod repo remove master &#x2F;&#x2F;master为源的name，如remove失败，用上方的命令查看目前源的name</span><br><span class="line">&#x2F;&#x2F;添加新源</span><br><span class="line">$ pod repo add master https:&#x2F;&#x2F;cdn.cocoapods.org&#x2F;</span><br><span class="line">$ pod update</span><br></pre></td></tr></table></figure>
+<p>目前国内有好几个Cocoapods的repo源，个人常用这个，你可以根据使用体验自行更换其他源。<br><strong>cdn源</strong><br><a target="_blank" rel="noopener" href="https://cdn.cocoapods.org/">https://cdn.cocoapods.org/</a><br><strong>清华镜像源</strong><br><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git">https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git</a></p>
+<h4 id="4-结语"><a href="#4-结语" class="headerlink" title="4.结语"></a>4.结语</h4><p>Cocoapods的安装与使用会遇到的问题大概就是这些。其他的一些命令，如<code>$ pod list</code>可以自行查看使用。如遇到其他问题，可以根据终端抛出的fatal提示自己查找解决方案。<br>当过久没有使用时，建议先用<code>$ pod update</code>命令更新框架。</p>
+<h2 id="以上"><a href="#以上" class="headerlink" title="以上"></a>以上</h2><p>Tino Wu</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/03/15/Cocoapods/" data-id="ckmakfhi400007g9k6jjha7xr" data-title="Cocoapods的安装和使用" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/03/15/Widget/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">初探iOS14-Widget小组件</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Note/">Note</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/" rel="tag">iOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/" rel="tag">swift</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%BD%91/" rel="tag">计网</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/swift/" style="font-size: 15px;">swift</a> <a href="/tags/%E8%AE%A1%E7%BD%91/" style="font-size: 10px;">计网</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/03/15/Cocoapods/">Cocoapods的安装和使用</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/15/Widget/">初探iOS14-Widget小组件</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/15/swift%20/">swift笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/13/@propertyWrapper/">巧用@propertyWrapper避免非法字符串</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 Tino Wu<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
