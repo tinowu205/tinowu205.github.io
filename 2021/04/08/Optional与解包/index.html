@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Optional与解包 | Tino又想吃肉了</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="谈谈swift中的Optional类型与如何正确解包">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Optional与解包">
+<meta property="og:url" content="http://example.com/2021/04/08/Optional%E4%B8%8E%E8%A7%A3%E5%8C%85/index.html">
+<meta property="og:site_name" content="Tino又想吃肉了">
+<meta property="og:description" content="谈谈swift中的Optional类型与如何正确解包">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-04-08T08:44:17.000Z">
+<meta property="article:modified_time" content="2021-04-08T09:40:45.890Z">
+<meta property="article:author" content="Tino Wu">
+<meta property="article:tag" content="iOS">
+<meta property="article:tag" content="swift">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Tino又想吃肉了" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Tino又想吃肉了</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">学习笔记</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Optional与解包" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/08/Optional%E4%B8%8E%E8%A7%A3%E5%8C%85/" class="article-date">
+  <time class="dt-published" datetime="2021-04-08T08:44:17.000Z" itemprop="datePublished">2021-04-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Note/">Note</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Optional与解包
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>谈谈swift中的Optional类型与如何正确解包</p>
+<span id="more"></span>
+<h3 id="首先，在了解解包之前，我们来了解什么是Optional类型。"><a href="#首先，在了解解包之前，我们来了解什么是Optional类型。" class="headerlink" title="首先，在了解解包之前，我们来了解什么是Optional类型。"></a>首先，在了解解包之前，我们来了解什么是Optional类型。</h3><p>对于<code>var num : Int</code>而言，它声明了一个名为num的整形变量，<strong>而对于<code>var num : Int?</code>而言，这时它声明的是一个什么变量呢？没错，它不是一个Int变量了，它是一个Optional变量，更具体地来说，一个<code>Optional&lt;Int&gt;</code>变量。</strong></p>
+<p><strong>可选型Optional</strong>的存在，是swift区别与Objective-C的一大特点，这个特性有效减小了程序崩溃的概率，然而在我们第一次接触的时候，它也大大提高了编码难度。</p>
+<h3 id="Optional与解包"><a href="#Optional与解包" class="headerlink" title="Optional与解包"></a>Optional与解包</h3><p><strong>本质上，Optional在底层是一个带泛型参数的enum枚举类型，这使它可以为nil</strong><br>那么有几种解包的方法呢？</p>
+<ul>
+<li><p>强制解包<br>最符合我们第一直觉的可能是强制解包。<strong>然而它并不安全</strong>。强制解包使用<code>!</code>作为运算符，它表示程序员向编译器保证这个可选型在程序运行中永远不会为<code>nil</code>值，那么当然，如果它碰巧是一个<code>nil</code>值的话，将可能会导致程序崩溃。<br>并且这个方式使我们在每个需要用到这个可选型的时候都需要强制解包一次，增加了很多无谓的代码量，也埋下了很多隐患。</p>
+</li>
+<li><p>if let<br><code>if let</code>方法是一个安全的解包方式，以上文中的<code>num</code>为例子，我们可以使用<code>if let</code>来对它解包，形如<code>if let unwrappedNum = num&#123;&#125;</code>,当解包成功时，就会执行花括号里的代码。</p>
+</li>
+<li><p>guard let<br>同样的，<code>guard let</code>也是一个跟<code>if let</code>相似的安全解包方式，形如<code>guard let unwrappedNum = num else&#123;throw error/return nil&#125;</code>。</p>
+</li>
+</ul>
+<p><strong>在使用<code>if let</code>或者<code>guard let</code>解包之后，我们就可以使用解包得到的<code>unwrappedNum</code>，不用每次需要使用都解包一次</strong></p>
+<h3 id="可选链"><a href="#可选链" class="headerlink" title="可选链"></a>可选链</h3><p><strong>可选链的概念在于我们可以同时解包与调用方法，如果可选型为nil值就不会执行后面的方法，所以这是一种安全且方便的方法，因为你不用先解包再调用方法。</strong><br>然而，在实践中，当我们定义一个类，里面包含了一个非可选型的val:Int和一个可选型的next:class，我们就当这个例子是链表类。那么，当我们通过可选链获取下一个节点的<code>val</code>时，会发生什么呢？<br><strong>形如<code>head?.val = head?.next?.val</code></strong></p>
+<p>然而，这样并不能通过编译，Xcode会要求你对<code>head?.next?.val</code>解包。</p>
+<p><strong>因为通过一个可选链，它返回的类型必然是一个可选链类型，即使该类型在定义里是非可选类型</strong></p>
+<p>那么，这时你想：那我给他解包不就好了。我们先试试强制解包。<code>head?.next?.val!</code></p>
+<p>然而，编译器又报错了。<code>Cannot force unwrap value of non-optional type &#39;Int&#39;</code></p>
+<p>这时你可能很疑惑，不是说可选链的返回值必然是可选型吗？为什么我们不能直接强制解包呢？</p>
+<p>其实，问题就出在这里。直接在val后面打上问号，是对val强制解包，不是对返回值强制解包，正确的写法应该是<code>(head?.next?.val)!</code>.这时候编译器终于不报错了。</p>
+<p>然而，当你接下来，想要获取下一个节点时，你写了这样的代码<code>head?.next = head?.next?.next</code>。发现，<strong>Xcode并没有报错！</strong>。这是为什么呢？</p>
+<p><strong>其实，我们在等式的左边，由于没有括号，所以我们赋值的对象是val和next，而从可选链返回为可选型这个规则，其实是(head?.val)。所以第一次，我们向val赋值,等式右边必须是一个Int类型的值，也就是我们必须强制解包或者给它一个非可选型的默认值。而第二次，next在定义里已经是一个可选型，那么我们就可以赋一个可选型给它。</strong>(这也是某位同学卡住的点)</p>
+<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><ul>
+<li>解包的确在编写程序的角度上给我们带来了一些麻烦，比如当一个可选链很长时如何正确地使用<code>?</code>、<code>!</code>、<code>??</code>。</li>
+<li>上面的讨论还存在一个问题，就是<code>(head?.val)</code>是一个可选型，通过print语句可以验证。然而，当我们使用括号括起来后，我们对它赋值，形如<code>(head?.val) = head?.next?.val</code>。这时候Xcode又报错了。然而这次的报错很值得玩味，<code>Cannot assign to immutable expression of type &#39;Int?&#39;</code>. 这进一步验证了可选链的返回类型是可选型这一说法，然而我们却不能向可选型赋值，它是<code>immutable</code>的。那么当我们在<code>head?.next = head?.next?.next</code>这里，对可选型<code>next</code>赋值时，底层里发生了什么呢？由于Optional类型本质上只是一个enum类型，那么它是怎么封装原本的类型的，并且封装后，Optional类型真的跟原本的类型完全解耦了吗？在解包时，Optional类型又是怎么剖离出原本的类型的？</li>
+</ul>
+<p><strong>这些都是笔者还没发解答的问题，或许得等到有了读懂源码的水平后才能解答了…</strong></p>
+<hr>
+<p>Tino Wu</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/04/08/Optional%E4%B8%8E%E8%A7%A3%E5%8C%85/" data-id="ckn8ordui0000dr9kae688hvr" data-title="Optional与解包" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/" rel="tag">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/swift/" rel="tag">swift</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/03/25/%E5%88%A4%E6%96%AD%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">判断平衡二叉树</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Note/">Note</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/" rel="tag">iOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/" rel="tag">swift</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tree/" rel="tag">tree</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%BD%91/" rel="tag">计网</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/algorithm/" style="font-size: 15px;">algorithm</a> <a href="/tags/iOS/" style="font-size: 17.5px;">iOS</a> <a href="/tags/leetcode/" style="font-size: 15px;">leetcode</a> <a href="/tags/swift/" style="font-size: 20px;">swift</a> <a href="/tags/tree/" style="font-size: 12.5px;">tree</a> <a href="/tags/%E8%AE%A1%E7%BD%91/" style="font-size: 10px;">计网</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/04/08/Optional%E4%B8%8E%E8%A7%A3%E5%8C%85/">Optional与解包</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/25/%E5%88%A4%E6%96%AD%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/">判断平衡二叉树</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/25/%E5%B0%86%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E8%BD%AC%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/">将有序数组转为二叉搜索树</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/17/map-filter-reduce/">map,filter,reduce</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/16/%E5%AF%B9%E7%A7%B0%E4%BA%8C%E5%8F%89%E6%A0%91/">对称二叉树</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 Tino Wu<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
