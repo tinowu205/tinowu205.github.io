@@ -20,23 +20,26 @@
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog,iOS,swift">
     
     <meta name="description" content="">
-    <meta name="description" content="讨论swift中的Set以及它与Array的区别">
+    <meta name="description" content="Leetcode 797.所有可能的路径，看这个名字就是DFS的味道…">
 <meta property="og:type" content="article">
-<meta property="og:title" content="swift中的Set">
-<meta property="og:url" content="http://example.com/2021/04/20/swift%E4%B8%AD%E7%9A%84Set/index.html">
+<meta property="og:title" content="一道典型的DFS">
+<meta property="og:url" content="http://example.com/2021/08/25/%E4%B8%80%E9%81%93%E5%85%B8%E5%9E%8B%E7%9A%84DFS/index.html">
 <meta property="og:site_name" content="Tino又想吃肉了">
-<meta property="og:description" content="讨论swift中的Set以及它与Array的区别">
+<meta property="og:description" content="Leetcode 797.所有可能的路径，看这个名字就是DFS的味道…">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-04-20T13:08:08.000Z">
-<meta property="article:modified_time" content="2021-04-20T13:51:58.347Z">
+<meta property="article:published_time" content="2021-08-25T02:54:59.000Z">
+<meta property="article:modified_time" content="2021-08-25T03:14:26.313Z">
 <meta property="article:author" content="Tino Wu">
 <meta property="article:tag" content="swift">
+<meta property="article:tag" content="algorithm">
+<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="DFS算法">
 <meta name="twitter:card" content="summary">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon1.ico">
     
-    <title>swift中的Set · Tino又想吃肉了</title>
+    <title>一道典型的DFS · Tino又想吃肉了</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -262,7 +265,7 @@
                 <a href="/">Tino又想吃肉了</a>
             </div>
             <div class="post-title header-element">
-                <a href="#" class="post-name">swift中的Set</a>
+                <a href="#" class="post-name">一道典型的DFS</a>
             </div>
         </div>
     
@@ -310,7 +313,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-                swift中的Set
+                一道典型的DFS
             <!-- 404 -->
             
         </h1>
@@ -344,18 +347,24 @@
     
         <a class="post-tag" href="javascript:void(0);" data-tags="swift">swift</a>
     
+        <a class="post-tag" href="javascript:void(0);" data-tags="algorithm">algorithm</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="leetcode">leetcode</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="DFS算法">DFS算法</a>
+    
 </div>
 
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">1.1k</span>Reading time: <span class="post-count reading-time">4 min</span></span>
+                        <span>Word count: <span class="post-count word-count">584</span>Reading time: <span class="post-count reading-time">2 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <!-- 撰写日期 -->
                     <span class="iconfont-archer post-intro-calander">&#xe676;</span>
-                    <span class="post-intro-time">2021/04/20</span>
+                    <span class="post-intro-time">2021/08/25</span>
                     <!-- busuanzi -->
                     
                         <span id="busuanzi_container_page_pv" class="busuanzi-pv">
@@ -510,47 +519,17 @@
             <div class="container container-unloaded">
                 <main class="main post-page">
     <article class="article-entry">
-        <p>讨论swift中的Set以及它与Array的区别</p>
+        <p>Leetcode 797.所有可能的路径，看这个名字就是DFS的味道…</p>
 <span id="more"></span>
-
-<h1 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h1><blockquote>
-<p>首先给出<code>Set</code>在源码中的定义 <code>struct Set&lt;Element&gt; where Element : Hashable</code></p>
+<blockquote>
+<p>题目描述：给你一个有 n 个节点的 有向无环图（DAG），请你找出所有从节点 0 到节点 n-1 的路径并输出（不要求按特定顺序）。二维数组的第 i 个数组中的单元都表示有向图中 i 号节点所能到达的下一些节点，空就是没有下一个结点了。<br>示例：输入：graph = [[1,2],[3],[3],[]]<br>       输出：[[0,1,3],[0,2,3]]<br>       解释：有两条路径 0 -&gt; 1 -&gt; 3 和 0 -&gt; 2 -&gt; 3</p>
 </blockquote>
-<p><code>Set</code>是swift中的集合类型，用来储存相同类型且没有确定顺序的值，所以<code>Set</code>使用时必须明确指定它的类型，当然如果使用字面量初始化方法的话编译器会帮我们推断<code>Set</code>中包含的元素类型。需要注意的是，<code>Set</code>中的元素只可以出现一次，也就是说每个元素的值是不能重复的，这点区别于数组。<strong>所以，当我们希望我们的数据结构不在意元素存放的顺序，但是对于唯一性有严格要求时，我们可以使用<code>Set</code>而非<code>Array</code></strong><br><em>此外，swift中的<code>Set</code>被桥接至<code>Foundation</code>框架也就是Objective-C中的<code>NSSet</code>类型。</em></p>
-<h1 id="三大特性"><a href="#三大特性" class="headerlink" title="三大特性"></a>三大特性</h1><ul>
-<li>确定性：给定某一个<code>Set</code>，对于某一元素，它属于或不属于该集合，其二者必居其一。</li>
-<li>无序性：在<code>Set</code>中，我们的元素的存放顺序是无序的，也就是说每个元素没有先后顺序。<strong>由定义中可知，集合的元素必须实现<code>Hashable</code>协议，这为无序性提供了基础，也就是说<code>Set</code>可以是由哈希表构成，从而实现无序。</strong></li>
-<li>确定性：在<code>Set</code>中，每个元素都互不相同，相同的值只能出现一次。</li>
-</ul>
-<h1 id="创建方法"><a href="#创建方法" class="headerlink" title="创建方法"></a>创建方法</h1><ul>
-<li>初始化器构建。此时必须指定集合的类型。</li>
-<li>字面量构建。可以使用数组的字面量构建方法来构建一个集合，当然里面的元素必须是同类型的，此时编译器会自动推断这个集合的类型。</li>
-</ul>
-<h1 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h1><ul>
-<li>和数组类似，我们可以使用<code>For - in</code>来遍历集合，如果我们需要按序遍历集合，可以先使用<code>sorted()</code>来获得有序的集合。</li>
-</ul>
-<h1 id="Set常用API"><a href="#Set常用API" class="headerlink" title="Set常用API"></a><code>Set</code>常用API</h1><ul>
-<li>首先集合必用到的一个操作就是插入：<code>mutating func insert(_ newMember: Element) -&gt; (inserted: Bool, memberAfterInsert: Element)</code> . 可以看到该函数返回一个<code>元组Tuple</code>。<em>元组是一个在括号中用逗号分隔元素的类型，声明后不可以增加或者删除元素，但可以更改元素的值。取值时使用下标或声明时写的名称。常见的如多个参数或函数多个返回值即是元组。</em><br>在这里，如果要插入的值在集合中已经存在，则插入无效并会返回<code>(false, oldMember)</code>,如果值不存在则成功插入并返回<code>(true, newMember)</code>.</li>
-<li>update: 与<code>insert</code>类似，但在遇到集合已存在新值时会替换掉旧值。</li>
-<li>filter: 这个高级函数我们并不陌生，在之前的文章里已经有细讲，这里就不在赘述。它会根据给出的条件返回一个新的<code>Set</code></li>
-<li>remove：<code>mutating func remove(_ member: Element) -&gt; Element?</code>，如果值存在于集合，则移除该元素并返回该值，否则返回<code>nil</code></li>
-<li>removeAll() / removeFirst() : 前者为移除所有元素，后者为移除第一个元素。需要注意的是，由于集合中的元素是无序的，所以调用<code>removeFirst()</code>时移除的并不一定是第一个插入的元素。</li>
-</ul>
-<h1 id="一些集合特有的集合运算"><a href="#一些集合特有的集合运算" class="headerlink" title="一些集合特有的集合运算"></a>一些集合特有的集合运算</h1><ul>
-<li>intersection交集：<code>func intersection(_ other: Set&lt;Element&gt;) -&gt; Set&lt;Element&gt;</code>,根据两个集合中的值返回一个交集的Set</li>
-<li>symmetricDifference对称差集：<code>func symmetricDifference(_ other: Self) -&gt; Self</code>,返回值在一个或另一个集合中，但不都在的集合。Returns a new option set with the elements contained in this set or in the given set, but not in both.</li>
-<li>union并集：返回两个集合的并集</li>
-<li>subtract相对补集：<code>mutating func subtract(_ other: Set&lt;Element&gt;)</code>，去掉原有的集合中在另一个集合中也存在的元素。Removes the elements of the given set from this set.</li>
-</ul>
-<h1 id="一些判断方法"><a href="#一些判断方法" class="headerlink" title="一些判断方法"></a>一些判断方法</h1><ul>
-<li>isSubset(of:)子集：<code>func isSubset(of other: Set&lt;Element&gt;) -&gt; Bool</code>,Returns a Boolean value that indicates whether this set is a subset of the given set.</li>
-<li>isSuperset(of:)超集：A是B的子集，则B是A的超集，返回一个Bool值。</li>
-<li>isStrictSubset(of:)真子集：A是B的子集但A不等于B，则A是B的真子集。返回一个Bool值</li>
-<li>isDisjoint(with:)是否有公共元素：返回一个Bool值，判断是否两个集合有公共元素，即是否没有交集。</li>
-</ul>
-<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>以上是<code>Set</code>的大概介绍，当我们对数据的唯一性有严格要求时可以使用Set，同时我们也可以使用它的集合运算来处理我们的数据以实现特定需求。</p>
-<hr>
-<p>Tino Wu</p>
+<p>很显然，这个题目需要在图中搜索出所有符合条件的路径，自然而然我们可以想到DFS，即深度优先搜索。并且题目已经规定2 &lt;= n &lt;= 15，所以不会超时。<br>我们从0号节点出发，遍历它能走到的节点，在示例中就是1和2。然后再深度优先搜索1和2所能走到的节点，如果走到了n-1号节点，说明我们找到了一条符合条件的路径，于是把这条路径加入到结果集中。<strong>需要注意的是，我们在swift中需要使用Array来记录走过的路径，而我们在操作路径时需要遵循尾进尾出的原则，所以需要使用<code>append()</code>和<code>removeLast()</code></strong></p>
+<p><strong>本题中已经指定为有向无环图，所以我们不需要再另外记录在本次搜索中已走过的节点，如果是有环，为避免反复经过同一个节点，需要记录当前搜索已走过的节点。</strong></p>
+<p>以下为实现代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    var ans &#x3D; [[Int]]()</span><br><span class="line">    var stack &#x3D; [Int]()</span><br><span class="line"></span><br><span class="line">    func allPathsSourceTarget(_ graph: [[Int]]) -&gt; [[Int]] &#123;</span><br><span class="line">        stack.append(0)</span><br><span class="line">        dfs(graph,0)</span><br><span class="line">        return ans</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    func dfs(_ graph: [[Int]] , _ start: Int) &#123;</span><br><span class="line">        if start &#x3D;&#x3D; graph.count - 1</span><br><span class="line">        &#123;</span><br><span class="line">            ans.append(stack)</span><br><span class="line">            return</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for node in graph[start] &#123;</span><br><span class="line">            stack.append(node)</span><br><span class="line">            dfs(graph,node)</span><br><span class="line">            stack.removeLast()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>DFS和BFS在算法题中是非常高频出现的考点，这道题是比较典型的DFS。虽然说一看题目就有思路，但是代码写起来还是比较生涩，学习算法理论以及应用的时候也要注意训练怎么用代码来做具体实现，要多练习这个难度的中等题。</p>
 
     </article>
     <!-- license -->
@@ -559,17 +538,12 @@
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href="/2021/06/15/What's%20new%20in%20Swift5.5/" title="What's new in Swift5.5">
-                    <div class="nextTitle">What's new in Swift5.5</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2021/04/08/Optional%E4%B8%8E%E8%A7%A3%E5%8C%85/" title="Optional与解包">
-                    <div class="prevTitle">Optional与解包</div>
+                <a href="/2021/07/22/%E6%9C%80%E5%A4%A7%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/" title="最大回文子串(Leetcode no.5)">
+                    <div class="prevTitle">最大回文子串(Leetcode no.5)</div>
                 </a>
             
         </li>
@@ -707,7 +681,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Set"><span class="toc-number">1.</span> <span class="toc-text">Set</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7"><span class="toc-number">2.</span> <span class="toc-text">三大特性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%96%B9%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">创建方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%81%8D%E5%8E%86"><span class="toc-number">4.</span> <span class="toc-text">遍历</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Set%E5%B8%B8%E7%94%A8API"><span class="toc-number">5.</span> <span class="toc-text">Set常用API</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E9%9B%86%E5%90%88%E7%89%B9%E6%9C%89%E7%9A%84%E9%9B%86%E5%90%88%E8%BF%90%E7%AE%97"><span class="toc-number">6.</span> <span class="toc-text">一些集合特有的集合运算</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E5%88%A4%E6%96%AD%E6%96%B9%E6%B3%95"><span class="toc-number">7.</span> <span class="toc-text">一些判断方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%80%E5%90%8E"><span class="toc-number">8.</span> <span class="toc-text">最后</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.</span> <span class="toc-text">总结</span></a></li></ol>
             </div>
         
         <!-- sidebar -->
