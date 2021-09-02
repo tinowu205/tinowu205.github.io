@@ -20,26 +20,26 @@
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog,iOS,swift">
     
     <meta name="description" content="">
-    <meta name="description" content="Leetcode 797.所有可能的路径，看这个名字就是DFS的味道…">
+    <meta name="description" content="两数之和的进阶版，很容易想到使用多个指针，可以将三数之和转化为两数之和问题，但是这个问题的规模使得写的时候由于超时快被气死…系统复习系列">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一道典型的DFS">
-<meta property="og:url" content="http://example.com/2021/08/25/%E4%B8%80%E9%81%93%E5%85%B8%E5%9E%8B%E7%9A%84DFS/index.html">
+<meta property="og:title" content="三数之和">
+<meta property="og:url" content="http://example.com/2021/09/03/%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/index.html">
 <meta property="og:site_name" content="Tino又想吃肉了">
-<meta property="og:description" content="Leetcode 797.所有可能的路径，看这个名字就是DFS的味道…">
+<meta property="og:description" content="两数之和的进阶版，很容易想到使用多个指针，可以将三数之和转化为两数之和问题，但是这个问题的规模使得写的时候由于超时快被气死…系统复习系列">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-08-25T02:54:59.000Z">
-<meta property="article:modified_time" content="2021-08-25T03:14:26.313Z">
+<meta property="article:published_time" content="2021-09-02T16:07:30.000Z">
+<meta property="article:modified_time" content="2021-09-02T16:16:51.945Z">
 <meta property="article:author" content="Tino Wu">
 <meta property="article:tag" content="swift">
 <meta property="article:tag" content="algorithm">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="DFS算法">
+<meta property="article:tag" content="双指针">
 <meta name="twitter:card" content="summary">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon1.ico">
     
-    <title>一道典型的DFS · Tino又想吃肉了</title>
+    <title>三数之和 · Tino又想吃肉了</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -265,7 +265,7 @@
                 <a href="/">Tino又想吃肉了</a>
             </div>
             <div class="post-title header-element">
-                <a href="#" class="post-name">一道典型的DFS</a>
+                <a href="#" class="post-name">三数之和</a>
             </div>
         </div>
     
@@ -313,7 +313,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-                一道典型的DFS
+                三数之和
             <!-- 404 -->
             
         </h1>
@@ -351,20 +351,20 @@
     
         <a class="post-tag" href="javascript:void(0);" data-tags="leetcode">leetcode</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="DFS算法">DFS算法</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="双指针">双指针</a>
     
 </div>
 
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">584</span>Reading time: <span class="post-count reading-time">2 min</span></span>
+                        <span>Word count: <span class="post-count word-count">631</span>Reading time: <span class="post-count reading-time">2 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <!-- 撰写日期 -->
                     <span class="iconfont-archer post-intro-calander">&#xe676;</span>
-                    <span class="post-intro-time">2021/08/25</span>
+                    <span class="post-intro-time">2021/09/03</span>
                     <!-- busuanzi -->
                     
                         <span id="busuanzi_container_page_pv" class="busuanzi-pv">
@@ -519,17 +519,15 @@
             <div class="container container-unloaded">
                 <main class="main post-page">
     <article class="article-entry">
-        <p>Leetcode 797.所有可能的路径，看这个名字就是DFS的味道…</p>
+        <p>两数之和的进阶版，很容易想到使用多个指针，可以将三数之和转化为两数之和问题，但是这个问题的规模使得写的时候由于超时快被气死…<br><strong>系统复习系列</strong></p>
 <span id="more"></span>
 <blockquote>
-<p>题目描述：给你一个有 n 个节点的 有向无环图（DAG），请你找出所有从节点 0 到节点 n-1 的路径并输出（不要求按特定顺序）。二维数组的第 i 个数组中的单元都表示有向图中 i 号节点所能到达的下一些节点，空就是没有下一个结点了。<br>示例：输入：graph = [[1,2],[3],[3],[]]<br>       输出：[[0,1,3],[0,2,3]]<br>       解释：有两条路径 0 -&gt; 1 -&gt; 3 和 0 -&gt; 2 -&gt; 3</p>
+<p>给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？请你找出所有和为 0 且不重复的三元组。<br>注意：答案中不可以包含重复的三元组。<br>0 &lt;= nums.length &lt;= 3000<br>-105 &lt;= nums[i] &lt;= 105</p>
 </blockquote>
-<p>很显然，这个题目需要在图中搜索出所有符合条件的路径，自然而然我们可以想到DFS，即深度优先搜索。并且题目已经规定2 &lt;= n &lt;= 15，所以不会超时。<br>我们从0号节点出发，遍历它能走到的节点，在示例中就是1和2。然后再深度优先搜索1和2所能走到的节点，如果走到了n-1号节点，说明我们找到了一条符合条件的路径，于是把这条路径加入到结果集中。<strong>需要注意的是，我们在swift中需要使用Array来记录走过的路径，而我们在操作路径时需要遵循尾进尾出的原则，所以需要使用<code>append()</code>和<code>removeLast()</code></strong></p>
-<p><strong>本题中已经指定为有向无环图，所以我们不需要再另外记录在本次搜索中已走过的节点，如果是有环，为避免反复经过同一个节点，需要记录当前搜索已走过的节点。</strong></p>
-<p>以下为实现代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    var ans &#x3D; [[Int]]()</span><br><span class="line">    var stack &#x3D; [Int]()</span><br><span class="line"></span><br><span class="line">    func allPathsSourceTarget(_ graph: [[Int]]) -&gt; [[Int]] &#123;</span><br><span class="line">        stack.append(0)</span><br><span class="line">        dfs(graph,0)</span><br><span class="line">        return ans</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    func dfs(_ graph: [[Int]] , _ start: Int) &#123;</span><br><span class="line">        if start &#x3D;&#x3D; graph.count - 1</span><br><span class="line">        &#123;</span><br><span class="line">            ans.append(stack)</span><br><span class="line">            return</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for node in graph[start] &#123;</span><br><span class="line">            stack.append(node)</span><br><span class="line">            dfs(graph,node)</span><br><span class="line">            stack.removeLast()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>很显然，为了<code>a + b + c = 0</code>，我们可以转化成<code>a + b = -c</code>,即双指针的两数之和问题，当然我们也可以直接使用三个指针，本质上并无区别…<br>但这题关键的地方在于优化算法速度，不然随随便便就超时.<br>思路仍然是<strong>先排序</strong>，然后确定a的大小，将a从<code>0遍历至length-1</code>，在每轮遍历再通过b和c指针找出符合题意的答案。<br>以下为实现代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    func threeSum(_ nums: [Int]) -&gt; [[Int]] &#123;</span><br><span class="line">        if nums.count &lt; 3 &#123;</span><br><span class="line">            return []</span><br><span class="line">        &#125;</span><br><span class="line">        var res &#x3D; [[Int]]()</span><br><span class="line">        &#x2F;&#x2F; 排序</span><br><span class="line">        var arr &#x3D; nums.sorted(by:&#123;</span><br><span class="line">            return $0 &lt; $1</span><br><span class="line">        &#125;)</span><br><span class="line">        </span><br><span class="line">        &#x2F;&#x2F; 将a从0遍历至末尾</span><br><span class="line">        for a in 0..&lt;arr.count &#123;</span><br><span class="line">            &#x2F;&#x2F; 如果a大于0并且与前一个数相同，则跳过本轮循环</span><br><span class="line">            if (a &gt; 0 &amp;&amp; arr[a] &#x3D;&#x3D; arr[a - 1]) </span><br><span class="line">            &#123;</span><br><span class="line">                continue</span><br><span class="line">            &#125;</span><br><span class="line">            var b &#x3D; a + 1</span><br><span class="line">            var c &#x3D; arr.count - 1</span><br><span class="line">            while (b &lt; c) &#123;</span><br><span class="line">                &#x2F;&#x2F; 如果b与前面一轮循环的b相同，也跳过本轮循环。</span><br><span class="line">                &#x2F;&#x2F; b要大于a+1是因为a+1是第一个b值</span><br><span class="line">                while (b &gt; a + 1 &amp;&amp; b &lt; arr.count &amp;&amp; arr[b] &#x3D;&#x3D; arr[b - 1]) &#123;</span><br><span class="line">                    b +&#x3D; 1</span><br><span class="line">                &#125;</span><br><span class="line">                &#x2F;&#x2F; 如果b大于或等于c，说明本轮循环已没有不重复的组了 跳出循环</span><br><span class="line">                if b &gt;&#x3D; c &#123;</span><br><span class="line">                    break</span><br><span class="line">                &#125;</span><br><span class="line">                let cnt &#x3D; arr[a] + arr[b] + arr[c]</span><br><span class="line">                if cnt &#x3D;&#x3D; 0 &#123;</span><br><span class="line">                    let temp &#x3D; [arr[a],arr[b],arr[c]]</span><br><span class="line">                    &#x2F;&#x2F; 由于确定了a和b不同，即c肯定不同，所以不用判断res中是否已有temp</span><br><span class="line">                    res.append(temp)</span><br><span class="line">                    b +&#x3D; 1</span><br><span class="line">                &#125; else if cnt &lt; 0 &#123;</span><br><span class="line">                    b +&#x3D; 1</span><br><span class="line">                &#125; else if cnt &gt; 0 &#123;</span><br><span class="line">                    c -&#x3D; 1</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return res</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>DFS和BFS在算法题中是非常高频出现的考点，这道题是比较典型的DFS。虽然说一看题目就有思路，但是代码写起来还是比较生涩，学习算法理论以及应用的时候也要注意训练怎么用代码来做具体实现，要多练习这个难度的中等题。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本题虽然是两数之和同类型的题，但是需要注意的细节比两数之和多了很多，可以锻炼到对双指针的灵活运用，同时也涉及到了一些算法优化。</p>
 
     </article>
     <!-- license -->
@@ -538,17 +536,12 @@
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href="/2021/09/01/%E5%BF%AB%E6%85%A2%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E7%BB%93%E7%82%B9/" title="找出链表的倒数第N个结点">
-                    <div class="nextTitle">找出链表的倒数第N个结点</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2021/07/22/%E6%9C%80%E5%A4%A7%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/" title="最大回文子串(Leetcode no.5)">
-                    <div class="prevTitle">最大回文子串(Leetcode no.5)</div>
+                <a href="/2021/09/01/%E5%BF%AB%E6%85%A2%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E7%BB%93%E7%82%B9/" title="找出链表的倒数第N个结点">
+                    <div class="prevTitle">找出链表的倒数第N个结点</div>
                 </a>
             
         </li>
