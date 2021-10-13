@@ -20,24 +20,25 @@
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog,iOS,swift">
     
     <meta name="description" content="">
-    <meta name="description" content="WWDC 2021学习记录第一篇，后续陆续更新">
+    <meta name="description" content="离屏渲染的定义、类型和解决思路。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="What&#39;s new in Swift5.5">
-<meta property="og:url" content="http://example.com/2021/06/15/What's%20new%20in%20Swift5.5/index.html">
+<meta property="og:title" content="离屏渲染 Off-Screen Rendering">
+<meta property="og:url" content="http://example.com/2021/10/13/Rendering/index.html">
 <meta property="og:site_name" content="Tino又想吃肉了">
-<meta property="og:description" content="WWDC 2021学习记录第一篇，后续陆续更新">
+<meta property="og:description" content="离屏渲染的定义、类型和解决思路。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-06-15T14:23:43.000Z">
-<meta property="article:modified_time" content="2021-06-15T14:29:41.381Z">
+<meta property="og:image" content="https://i.loli.net/2021/10/10/UzsBJw1YOPgHeVf.jpg">
+<meta property="article:published_time" content="2021-10-13T15:51:42.000Z">
+<meta property="article:modified_time" content="2021-10-13T15:59:54.383Z">
 <meta property="article:author" content="Tino Wu">
-<meta property="article:tag" content="swift">
-<meta property="article:tag" content="iOS">
+<meta property="article:tag" content="性能优化">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/10/10/UzsBJw1YOPgHeVf.jpg">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon1.ico">
     
-    <title>What&#39;s new in Swift5.5 · Tino又想吃肉了</title>
+    <title>离屏渲染 Off-Screen Rendering · Tino又想吃肉了</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -263,7 +264,7 @@
                 <a href="/">Tino又想吃肉了</a>
             </div>
             <div class="post-title header-element">
-                <a href="#" class="post-name">What's new in Swift5.5</a>
+                <a href="#" class="post-name">离屏渲染 Off-Screen Rendering</a>
             </div>
         </div>
     
@@ -311,7 +312,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-                What's new in Swift5.5
+                离屏渲染 Off-Screen Rendering
             <!-- 404 -->
             
         </h1>
@@ -343,22 +344,20 @@
         </span>
     
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="swift">swift</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="iOS">iOS</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="性能优化">性能优化</a>
     
 </div>
 
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">1.1k</span>Reading time: <span class="post-count reading-time">4 min</span></span>
+                        <span>Word count: <span class="post-count word-count">979</span>Reading time: <span class="post-count reading-time">3 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <!-- 撰写日期 -->
                     <span class="iconfont-archer post-intro-calander">&#xe676;</span>
-                    <span class="post-intro-time">2021/06/15</span>
+                    <span class="post-intro-time">2021/10/13</span>
                     <!-- busuanzi -->
                     
                         <span id="busuanzi_container_page_pv" class="busuanzi-pv">
@@ -513,31 +512,26 @@
             <div class="container container-unloaded">
                 <main class="main post-page">
     <article class="article-entry">
-        <p>WWDC 2021学习记录第一篇，后续陆续更新</p>
+        <p>离屏渲染的定义、类型和解决思路。</p>
 <span id="more"></span>
-<p>What’s new in swift 5.5<br><strong>1) async/await</strong></p>
-<ul>
-<li>几个概念：</li>
-<li><strong>并发Concurrency/顺次Sequential</strong>：<strong>并发中</strong>两个任务队列可以交替执行，在一个CPU时间片中A执行自己的任务并在用完时间片后将CPU使用权交给B。本质上仍然是单线程作业，只不过由于CPU时间片很短，在宏观角度上显示出来类似并行的效果。<strong>顺次</strong>则是两个任务队列只能先执行完一个再接着执行另外一个。</li>
-<li><strong>并行Parallelism/串行Serialism</strong>：<strong>并行</strong>相当于CPU的多个核心可以同时运算，<strong>串行</strong>则相当于CPU只有一个核心。而当一个设备同时支持<strong>并发和并行时</strong>，则CPU的利用率可以达到非常高的程度。在这种情况下每个核心对应的任务队列都可以交替进行，并且<strong>每个核心之间</strong>任务是同时进行的。</li>
-<li><strong>数据竞争Data Race</strong>：并发计算中由于两个队列可以同时争夺一组资源，所以他们之间形成了数据竞争的关系，从而可能获取到错误或者无用的数据。<em>例子：两个队列并发可乐机打可乐，可乐机由可乐糖浆和苏打水混合而成，这样的话可能一个队列取到糖浆另一个取到苏打水，他们都没有拿到正确有效的数据</em></li>
-<li><strong>目标：并发，并行，没竞争或者保证数据安全。</strong> <em>（加锁）</em></li>
-<li><strong>Swift5.5的并发模型</strong>：1.以异步函数为中心 2.以结构化任务和数据隔离为基本点</li>
-<li><strong>async/await</strong>: async只是标记某个函数可以被await而已，告诉了编译器该函数在一定时间后可能会调用某个函数。async/await本质上只是替代了传统的completionHandler调用完成后函数的方法。在代码上减少了大量花括号，逻辑更直观。现在我们可以通过<strong>async/await</strong>用同步的思维来编写异步代码。被<code>async</code>标记的函数表示该函数可能会存在异步，也就是任务运行在global线程的情况。而<code>await</code>则意味着该函数可以放弃当前线程。</li>
-<li><strong>结构化并发</strong>:使用<strong>withTaskGroup</strong>API可以创建一个async的任务组上下文，由于该上下文本身就是被async标记的，所以我们在创建的时候要<strong>await</strong>该上下文。在创建之后我们就可以使用<strong>group.async</strong>等派发函数向上下文中派发任务并执行。<code>let _ = await withTaskGroup(of: Class.Type) &#123; group -&gt; Class.Type in group.async&#123;&#125; &#125; </code></li>
-<li>更方便的API写法: 在swift5.5中我们可以直接将某个变量<strong>异步地绑定</strong>到我们的函数上。<strong>这就是函数式编程(Functional Programming)的思想，函数是一等公民，函数也可以是变量。</strong>那么之后我们只需要<strong>await</strong>该变量就可以得到函数执行的结果。[此处有图片]</li>
-<li>传统的在并发模型中保证数据的线程安全问题的方法：抽象出一个数据类，在数据类中定义一个串行队列，并将对数据的操作都派发到这个串行队列中同步执行，这样子避免了多个线程之间对数据的争抢。<br>[此处有图片]</li>
-<li><strong>Task</strong>：在比较早的swift5.5版本中是以<code>async&#123; ... &#125;</code>的方式创建一个异步的任务块，在Experiment版本的swift中该方法被废弃，由<code>Task &#123; ... &#125;</code>替代。</li>
-<li><strong>actor</strong>: 本质上是一个类，但是编译器会保证该类都运行在一个串行队列(DispatchQueue.sync)上（该类编译器帮我们封装了一个串行队列），保证线程安全。所以我们在取被<code>actor</code>修饰的类时我们要使用<code>await</code>关键词。<strong>同一个actor隔离，编译器保证同步访问。不同的actor隔离之间，编译器保证异步访问。</strong></li>
-<li><strong>@MainActor</strong>:在开发UI时我们必须在主线程上操作我们的UI，通常我们需要使用GCD函数将任务派发到主线程上，使用<code>MainActor</code>关键词将保证其修饰的类或者函数始终运行在主线程。</li>
-<li><strong>@globalActor</strong>:使用<code>@globalActor</code>关键词修饰一个<code>actor</code>类可以自定义一个actor来修饰我们的类或者函数</li>
-</ul>
-<p><strong>2）Codable synthesis for enum</strong></p>
-<ul>
-<li>带关联值的枚举在swift5.5中已支持<code>Codable</code>协议，编译器会自动合成<code>encode</code>和<code>decode</code>代码。</li>
-</ul>
-<hr>
-<p>Tino Wu</p>
+<blockquote>
+<p>定义：如果要在显示屏上显示内容，我们至少需要<strong>一块与屏幕像素数据量一样大的frame buffer</strong>，作为像素数据存储区域，而这也是GPU存储渲染结果的地方。如果有时因为面临一些限制，无法把渲染结果直接写入<code>frame buffer</code>，而是先暂存在另外的内存区域，之后再写入<code>frame buffer</code>，那么这个过程被称之为离屏渲染。</p>
+</blockquote>
+<h3 id="CPU中的离屏渲染"><a href="#CPU中的离屏渲染" class="headerlink" title="CPU中的离屏渲染"></a>CPU中的离屏渲染</h3><p>当我们实现了<code>UIView</code>中的<code>drawRect</code>方法时，即使方法体内没有实际代码，系统都会为该<code>View</code>申请一块额外的内存区域，等待<code>CoreGraphics</code>可能的绘画操作，对于这样的多开一块CGContext来绘制的操作，有些人把他称之为离屏渲染。然而，他实际上是离屏渲染在CPU上的一种体现。事实上，所有CPU进行的光栅化操作（如文字渲染、图片解码），都无法直接绘制到由GPU掌管的<code>frame buffer</code>上，只能暂时先放在另一块内存之中，说起来都属于“离屏渲染”。<br>然而，<strong>这样的CPU离屏渲染并不expensive。</strong></p>
+<blockquote>
+<p>In particular, a few (implementing drawRect and doing any CoreGraphics drawing, drawing with CoreText [which is just using CoreGraphics]) are indeed “offscreen drawing,” but they’re not what we usually mean when we say that. They’re very different from the rest of the list. When you implement drawRect or draw with CoreGraphics, you’re using the CPU to draw, and that drawing will happen synchronously within your application. You’re just calling some function which writes bits in a bitmap buffer, basically.</p>
+</blockquote>
+<p>根据<a target="_blank" rel="noopener" href="https://lobste.rs/s/ckm4uw/performance_minded_take_on_ios_design#c_itdkfh">苹果工程师的回复</a>，CPU上的离屏渲染并不是开发者常谈的离屏渲染，事实上，即使我们打开Xcode的<code>Color offscreen rendered yellow</code>调试开关，这一类的离屏渲染也不会被标记。</p>
+<h3 id="GPU中的离屏渲染"><a href="#GPU中的离屏渲染" class="headerlink" title="GPU中的离屏渲染"></a>GPU中的离屏渲染</h3><p>真正需要我们注意的离屏渲染，发生在GPU中。<br><img src="https://i.loli.net/2021/10/10/UzsBJw1YOPgHeVf.jpg" alt="GPU渲染管线"><br>上图为iOS应用的渲染管线，可以看到，主要的渲染操作都是由CoreAnimation的<code>Render Server</code>模块，通过调用显卡驱动所提供的<code>OpenGL/Metal</code>接口来执行的。</p>
+<p>当我们需要渲染的图像，无法根据<code>画家算法</code>一次遍历就绘制出来时，GPU则需要开辟另一块渲染缓存区。在GPU中，来回地在缓存区上下文之间切换，代价是非常昂贵的。根据<code>Texture</code>框架中对离屏渲染的讨论，当我们触发离屏渲染时，在滑动的每一帧GPU都要切换一次上下文，这意味着GPU至多（在60hz刷新率的机器上）每秒将要切换60次缓存区上下文，这对于GPU来说带来的负荷非常高。</p>
+<blockquote>
+<p>Use of CALayer’s .cornerRadius property triggers offscreen rendering to perform the clipping operation on every frame - 60 FPS during scrolling - even if the content in that area isn’t changing! This means that the GPU has to switch contexts on every frame, between compositing the overall frame + additional passes for each use of .cornerRadius.</p>
+</blockquote>
+<h3 id="常见的离屏渲染"><a href="#常见的离屏渲染" class="headerlink" title="常见的离屏渲染"></a>常见的离屏渲染</h3><p>在iOS开发中，常见的一些情况都有可能触发离屏渲染。<br>1.cornerRadius+clipsToBounds<br>2.shadow<br>3.group opacity<br>4.mask<br>5.UIBlurEffect<br>6.allowsEdgeAntialiasing<br>7.backgroundColor（color设置为clear时）<br>8.修改已光栅化的内容</p>
+<h3 id="如何检测"><a href="#如何检测" class="headerlink" title="如何检测"></a>如何检测</h3><p>1、模拟器<code>Debug</code>选项中选中<code>Color Offscreen Renderd</code>，离屏渲染的图层高亮成黄色，可能存在性能问题</p>
+<p>2、真机<code>Instrument</code>,选中<code>Core Animation</code>,勾选<code>Color Offscreen-Rendered Yellow</code></p>
+<h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>离屏渲染是开发iOS App中一个非常常见的问题，其尤其影响滑动控件的性能，特别是当我们的列表存在大量的复杂控件或者图片时尤其需要注意。（各种头像圆角、卡片阴影等）<br>理解产生离屏渲染的原理和学习业界解决该问题的思路，可以帮助我们写出更流畅的滑动列表。</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/72653360">关于iOS离屏渲染的深入研究 - 即刻团队</a><br><a target="_blank" rel="noopener" href="https://texturegroup.org/docs/corner-rounding.html">Texture文档</a></p>
 
     </article>
     <!-- license -->
@@ -546,17 +540,12 @@
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href="/2021/07/21/%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%8A%E6%96%AD%E5%86%85%E5%AD%98%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98/" title="检测和诊断APP内存问题">
-                    <div class="nextTitle">检测和诊断APP内存问题</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2021/04/20/swift%E4%B8%AD%E7%9A%84Set/" title="swift中的Set">
-                    <div class="prevTitle">swift中的Set</div>
+                <a href="/2021/10/10/App%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" title="App性能优化">
+                    <div class="prevTitle">App性能优化</div>
                 </a>
             
         </li>
@@ -694,7 +683,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                
+                <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#CPU%E4%B8%AD%E7%9A%84%E7%A6%BB%E5%B1%8F%E6%B8%B2%E6%9F%93"><span class="toc-number">1.</span> <span class="toc-text">CPU中的离屏渲染</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GPU%E4%B8%AD%E7%9A%84%E7%A6%BB%E5%B1%8F%E6%B8%B2%E6%9F%93"><span class="toc-number">2.</span> <span class="toc-text">GPU中的离屏渲染</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E7%A6%BB%E5%B1%8F%E6%B8%B2%E6%9F%93"><span class="toc-number">3.</span> <span class="toc-text">常见的离屏渲染</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%A3%80%E6%B5%8B"><span class="toc-number">4.</span> <span class="toc-text">如何检测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-number">5.</span> <span class="toc-text">写在最后</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">5.1.</span> <span class="toc-text">参考</span></a></li></ol></li></ol>
             </div>
         
         <!-- sidebar -->
