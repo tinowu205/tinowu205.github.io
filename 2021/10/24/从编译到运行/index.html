@@ -20,18 +20,27 @@
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog,iOS,swift">
     
     <meta name="description" content="">
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Tino又想吃肉了">
-<meta property="og:url" content="http://example.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/index.html">
+    <meta name="description" content="第一次梳理一下iOS app从编译到运行的过程，其中涉及到一小部分编译原理和dyld的东西。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS app - 从编译到运行">
+<meta property="og:url" content="http://example.com/2021/10/24/%E4%BB%8E%E7%BC%96%E8%AF%91%E5%88%B0%E8%BF%90%E8%A1%8C/index.html">
 <meta property="og:site_name" content="Tino又想吃肉了">
+<meta property="og:description" content="第一次梳理一下iOS app从编译到运行的过程，其中涉及到一小部分编译原理和dyld的东西。">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/10/24/M4nOHzWm8rygSVZ.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/10/24/36ByoItCM2JFTAq.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/10/24/yhDUCJQRgpoLacH.jpg">
+<meta property="article:published_time" content="2021-10-24T09:08:04.000Z">
+<meta property="article:modified_time" content="2021-10-24T09:10:39.918Z">
 <meta property="article:author" content="Tino Wu">
+<meta property="article:tag" content="底层原理">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/10/24/M4nOHzWm8rygSVZ.jpg">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon1.ico">
     
-    <title>Tino又想吃肉了</title>
+    <title>iOS app - 从编译到运行 · Tino又想吃肉了</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -219,6 +228,8 @@
         }
     </script>
     
+        <body class="post-body">
+    
         <!-- header -->
         <header class="header header-mobile">
     <!-- top read progress line -->
@@ -248,6 +259,17 @@
     </div>
     <!-- toggle banner for post layout -->
     
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">Tino又想吃肉了</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name">iOS app - 从编译到运行</a>
+            </div>
+        </div>
+    
 </header>
 
         <!-- dark mode -->
@@ -276,24 +298,91 @@
 
 
 
+    height:40vh;
+
 ">
     
     <!-- 主页  -->
+    
+        
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/IMG_8046.JPG)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+                iOS app - 从编译到运行
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+                
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        
+        
+            
+        
+        
+        <span class="post-category" data-categories="Note"">
+            <i class="far fa-folder post-category-icon"></i>
+            <span class="post-category-text">
+                Note
+            </span>
+        </span>
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="底层原理">底层原理</a>
+    
+</div>
+
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">2.5k</span>Reading time: <span class="post-count reading-time">8 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2021/10/24</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -423,59 +512,134 @@
         
             <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
             <div class="container container-unloaded">
-                <main class="main index-page">
-    
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2021/07/22/%E6%9C%80%E5%A4%A7%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/">
-                
-                <span class="abstract-title-text">最大回文子串(Leetcode no.5)</span>
-            </a>
-            <div class="abstract-content">
-                <p>Leetcode第五题，判断最大回文子串，难度中等。（个人感觉在中等里算较难的）</p>
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/07/22</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-        
-        
-            
-        
-        
-        <span class="post-category" data-categories="Note"">
-            <i class="far fa-folder post-category-icon"></i>
-            <span class="post-category-text">
-                Note
-            </span>
-        </span>
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="swift">swift</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="algorithm">algorithm</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="leetcode">leetcode</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="动态规划">动态规划</a>
-    
-</div>
+                <main class="main post-page">
+    <article class="article-entry">
+        <p>第一次梳理一下iOS app从编译到运行的过程，其中涉及到一小部分编译原理和dyld的东西。</p>
+<span id="more"></span>
+<blockquote>
+<p>在iOS开发中，app是被直接编译成机器码后在CPU上运行的，而不是使用解释器编译成字节码再运行。从app的编译到运行的过程中，要经过编译、链接、启动几个步骤。而在iOS中，编译阶段分为前端和后端，前端使用Apple开发的Clang，后端使用LLVM。</p>
+</blockquote>
+<h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><p><img src="https://i.loli.net/2021/10/24/M4nOHzWm8rygSVZ.jpg" alt="编译过程"></p>
+<p>编译过程主要有</p>
+<ul>
+<li>预处理</li>
+<li>词法分析</li>
+<li>语法分析</li>
+<li>静态分析</li>
+<li>中间代码生成</li>
+<li>汇编生成</li>
+<li>链接生成可执行文件</li>
+</ul>
+<h4 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h4><p>在预处理的阶段中，编译器Clang首先预处理我们代码，做一些比如将宏替换到代码中、删除注释、处理预编译命令等工作</p>
+<h4 id="词法分析"><a href="#词法分析" class="headerlink" title="词法分析"></a>词法分析</h4><p>在此阶段词法分析器读入预处理过的代码字节流，将其中的字符处理成有意义的<strong>词素序列</strong>，对于每个词素产生词法单元并标记位置，处理完成后进入下一步。这个过程主要是为了在下一步生成语法树做基础工作。</p>
+<h4 id="语法分析"><a href="#语法分析" class="headerlink" title="语法分析"></a>语法分析</h4><p>这一步中使用在词法分析中生成的词法单元，抽象生成一个语法树（AST，Abstract syntax tree)。抽象语法树上的每个节点也标记了它在源代码的位置。抽象语法树的遍历比起源代码块很多，这一步主要是为了后面的静态分析。</p>
+<h4 id="静态分析-｜-中间代码生成"><a href="#静态分析-｜-中间代码生成" class="headerlink" title="静态分析 ｜ 中间代码生成"></a>静态分析 ｜ 中间代码生成</h4><p>将源代码转化为抽象语法树后，编译器就可以遍历整个树来做静态分析。常见的类型检查、语法错误、方法未定义等都是在静态分析中发现并处理的，当然静态分析能做的事情还有非常多。<br>在静态分析结束后，编译器会生成IR。IR是整个编译链接系统的中间产物，是一种比较接近机器码的形式，但他与平台无关，通过IR可以生成多个平台的机器码。IR是在iOS编译系统中，前端Clang和后端LLVM的分界点。Clang的任务在生成<code>IR</code>后结束，将<code>IR</code>交付给LLVM后LLVM开始工作。</p>
+<h4 id="汇编生成"><a href="#汇编生成" class="headerlink" title="汇编生成"></a>汇编生成</h4><p>在获得到<code>IR</code>后，LLVM可以根据优化策略对<code>IR</code>进行一些优化，如尾递归优化、循环优化、全局变量优化。在优化完成后，LLVM会调用汇编生成器将IR转化成汇编代码。此时，生成产物就是<code>.o</code>文件了（二进制文件）。<br><strong>在生成二进制文件后，我们可以通过二进制重排的方式对我们的编译产物进行更进一步的优化，已达到缩小编译产物大小、优化启动速度等目的</strong></p>
+<h4 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h4><p>在将源代码编译成<code>.o</code>文件后，就开始链接。链接其实就是一个打包的过程，将编译出的所有<code>.o</code>文件和一些如dylib,.a,tbd文件链接起来，一起合并生成一个Mach-o文件。到这里，编译过程全部结束，可执行文件mach-o已生成。</p>
+<h4 id="Mach-o文件结构"><a href="#Mach-o文件结构" class="headerlink" title="Mach-o文件结构"></a>Mach-o文件结构</h4><p><img src="https://i.loli.net/2021/10/24/36ByoItCM2JFTAq.jpg" alt="-w313"></p>
+<ul>
+<li>Header<ul>
+<li>Header 包含该二进制文件的一般信息 字节顺序、架构类型、加载指令的数量等。 使得可以快速确认一些信息，比如当前文件用于32位还是64位，对应的处理器是什么、文件类型是什么</li>
+</ul>
+</li>
+<li>Load Commands <ul>
+<li>是一张包含很多内容的表。内容包括区域的位置、符号表、动态符号表等。这一段紧跟Header，加载Mach-O文件时会使用这里的数据来确定内存的分布</li>
+</ul>
+</li>
+<li>Data<ul>
+<li>Data 通常是对象文件中最大的部分，包含Segement的具体数据，如静态C字符串，带参数/不带参数的OC方法，带参数/不带参数的C函数。当运行一个可执行文件时，虚拟内存 (virtual memory) 系统将 segment 映射到进程的地址空间上。</li>
+<li>Segment __PAGEZERO 大小为4GB，规定进程地址空间的前4GB不可读写</li>
+<li>Segment __TEXT 包含可执行的二进制代码</li>
+<li>Segment __DATA 包含了将被更改的数据</li>
+<li>Segment __LINKEDIT 包含了方法和变量的元数据，代码签名等信息。</li>
+</ul>
+</li>
+</ul>
+<h4 id="静态链接"><a href="#静态链接" class="headerlink" title="静态链接"></a>静态链接</h4><p>编译主要分为<code>静态链接</code>和<code>动态链接</code>。在编译器阶段进行的是静态链接，也就是在上文中提到的过程。这一阶段是将在前面生成的各种目标文件和各种库(or module in swift)链接起来，生成一个可执行文件mach-o。</p>
+<hr>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><h4 id="装载"><a href="#装载" class="headerlink" title="装载"></a>装载</h4><p>一个程序从可执行文件到运行，基本都要经过装载和动态库链接两个阶段。由于在可执行文件生成前已经完成了静态库链接，所以在装载时所有的源代码和静态库已经完成了装载，而动态库链接则需要下文提到的动态链接来完成。</p>
+<p>可执行文件，或者说<code>程序</code>，是一个静态的概念，而进程是一个动态的概念。每个程序在运行起来后，他对应的进程都会拥有独立的地址空间，而这个地址空间是由计算机硬件（CPU的位数）决定的，当然，进程只是以为自己拥有计算机整个的地址空间，实际上他是与其他的进程共享计算机的内存（虚拟化）</p>
+<p>装载，就是把硬盘上的可执行文件映射到虚拟内存上的过程。</p>
+<p>装载的过程，也可以当作是进程建立的过程，一般来说有以下几个步骤。</p>
+<ul>
+<li>创建一个独立的虚拟地址空间</li>
+<li>读取可执行文件头，建立虚拟地址空间与可执行文件之间的映射关系。（将可执行文件中的相对地址与虚拟地址空间的地址进行绑定）</li>
+<li>将CPU的指令寄存器设为可执行文件的入口地址，交与CPU启动运行</li>
+</ul>
+<h4 id="动态链接"><a href="#动态链接" class="headerlink" title="动态链接"></a>动态链接</h4><p>静态链接是链接静态库，需要链接进Mach-o文件中，如果需要更新就需要重新编译一次，所以无法动态更新和加载。而动态链接是使用<code>dyld</code>动态加载动态库，可以实现动态地加载和更新。并且其他的进程、框架链接的都是同一个动态库，节省了内存。</p>
+<p>iOS中我们常用的一些如<code>UIKit</code>、<code>Foundation</code>等框架都是使用动态链接的，而为了节省内存，系统将这些库放在<code>动态库共享缓存区（Dyld shared cache)</code>。</p>
+<p>在<code>mach-o</code>文件中，属于动态库的符号会被标记为未定义，但他们的名字与路径会被记录下来。在运行时<code>dyld</code>会通过<code>dlopen</code>与<code>dlsym</code>导入动态库，并通过记录的路径找到对应的动态库，通过记录的名字找到对应的地址，进行符号与地址的绑定。</p>
+<p><code>dlopen</code>会将动态库映射到进程的虚拟地址空间中，由于载入的动态库中可能也会存在<strong>未定义的符号</strong>，也就是说该动态库还依赖了其他的动态库，这时会触发更多的动态库被载入，但<code>dlopen</code>可以决定是立刻载入这些依赖库还是延后载入。</p>
+<p><code>dlopen</code>打开动态库后返回的是引用的指针，<code>dlsym</code>的作用就是通过<code>dlopen</code>返回的动态库指针和函数符号，得到函数的地址然后使用。</p>
+<p>动态链接解决了静态链接<code>内存占用过多</code>，<code>只要有库修改就要重新编译打包</code>的缺点，但同时也引入了新的问题。</p>
+<ul>
+<li>结构复杂，动态链接将重定位推迟到运行时进行。</li>
+<li>引入了安全问题，这也是我们能够进行PLT HOOK的基础</li>
+<li>性能问题</li>
+</ul>
+<p>而提到动态库链接，在iOS领域就必须提到我们的<code>dyld</code>。</p>
+<h4 id="dyld-Dynamic-Link-Editor"><a href="#dyld-Dynamic-Link-Editor" class="headerlink" title="dyld -  Dynamic Link Editor"></a>dyld -  Dynamic Link Editor</h4><blockquote>
+<p><code>dyld</code>是苹果开发的动态链接器，是苹果系统的一个重要组成部分。它负责<code>mach-o</code>文件的动态库链接和程序的启动。相关代码已开源</p>
+</blockquote>
+<ul>
+<li>启动流程</li>
+</ul>
+<p><img src="https://i.loli.net/2021/10/24/yhDUCJQRgpoLacH.jpg" alt="main方法前的调用栈"></p>
+<p>启动工程，在<code>_objc_init</code>处设置一个<code>symbolic breakpoint</code>，Xcode会帮我们在<code>main</code>方法执行前设置断点。进入<code>lldb</code>后使用<code>bt</code>命令，我们就可以看到<code>_objc_init</code>方法前的调用栈。</p>
+<p>可以看到，<code>dyld</code>是最先被启动的。<code>_dyld_start</code>后，首先调用的是<code>dyldbootstrap</code>命名空间里的<code>start</code>函数。由于dyld比较复杂，在这里就先不详细展开，留待另一篇文章中细讲。启动的大体流程为</p>
+<ul>
+<li>dyld 开始将程序二进制文件初始化</li>
+<li>交由 ImageLoader 读取image，其中包含了我们的类、方法等各种符号</li>
+<li>由于 runtime 向 dyld 绑定了回调，当image 加载到内存后，dyld会通知runtime进行处理</li>
+<li>runtime接手后调用map_images做解析和处理，接下来load_images中调用call_load_methods方法，遍历所有加载进来的Class，按继承层级依次调用Class的 +load 方法和其 Category 的 +load 方法</li>
+</ul>
+<h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>在写这篇的过程中系统地学习了一下app从编译到运行的过程。在编译阶段，<code>静态链接</code>和<code>动态链接</code>这种编译原理相关的知识很重要，有时间可以读一下编译原理那本书。运行阶段，<code>dyld</code>在main函数执行前做了非常多工作，其实现也很复杂，待仔细学习后再写一篇聚焦于<code>dyld</code>的笔记。</p>
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
+    </article>
+    <!-- license -->
     
-    <!-- paginator  -->
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2021/10/13/Rendering/" title="离屏渲染 Off-Screen Rendering">
+                    <div class="prevTitle">离屏渲染 Off-Screen Rendering</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- comment -->
+     
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+
+            
+
+            
+
+            
+
+            <!-- utteranc评论 -->
+
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+
+            
+            
+
+        </div>
+    
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    
+    <!-- Mathjax -->
     
 </main>
 
@@ -566,6 +730,23 @@
 
         </div>
         <!-- toc -->
+        
+            <div class="toc-wrapper" style=
+
+
+
+
+
+
+
+    top:40vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%AF%91"><span class="toc-number">1.</span> <span class="toc-text">编译</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-number">1.1.</span> <span class="toc-text">预处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90"><span class="toc-number">1.2.</span> <span class="toc-text">词法分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90"><span class="toc-number">1.3.</span> <span class="toc-text">语法分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90-%EF%BD%9C-%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90"><span class="toc-number">1.4.</span> <span class="toc-text">静态分析 ｜ 中间代码生成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B1%87%E7%BC%96%E7%94%9F%E6%88%90"><span class="toc-number">1.5.</span> <span class="toc-text">汇编生成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%93%BE%E6%8E%A5"><span class="toc-number">1.6.</span> <span class="toc-text">链接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Mach-o%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-number">1.7.</span> <span class="toc-text">Mach-o文件结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E9%93%BE%E6%8E%A5"><span class="toc-number">1.8.</span> <span class="toc-text">静态链接</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C"><span class="toc-number">2.</span> <span class="toc-text">运行</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A3%85%E8%BD%BD"><span class="toc-number">2.1.</span> <span class="toc-text">装载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5"><span class="toc-number">2.2.</span> <span class="toc-text">动态链接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dyld-Dynamic-Link-Editor"><span class="toc-number">2.3.</span> <span class="toc-text">dyld -  Dynamic Link Editor</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-number">3.</span> <span class="toc-text">写在最后</span></a></li></ol>
+            </div>
         
         <!-- sidebar -->
         <div class="sidebar sidebar-hide">
@@ -1150,6 +1331,8 @@
         <!-- CNZZ -->
         
         <!-- async load share.js -->
+        
+            <script src="/scripts/share.js" async></script>    
         
         <!-- mermaid -->
         
