@@ -28,10 +28,11 @@
 <meta property="og:description" content="第一次梳理一下iOS app从编译到运行的过程，其中涉及到一小部分编译原理和dyld的东西。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://i.loli.net/2021/10/24/M4nOHzWm8rygSVZ.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/08/UiA2otavyXZO9Jl.jpg">
 <meta property="og:image" content="https://i.loli.net/2021/10/24/36ByoItCM2JFTAq.jpg">
 <meta property="og:image" content="https://i.loli.net/2021/10/24/yhDUCJQRgpoLacH.jpg">
 <meta property="article:published_time" content="2021-10-24T09:08:04.000Z">
-<meta property="article:modified_time" content="2021-10-24T09:10:39.918Z">
+<meta property="article:modified_time" content="2021-11-08T12:04:15.719Z">
 <meta property="article:author" content="Tino Wu">
 <meta property="article:tag" content="底层原理">
 <meta name="twitter:card" content="summary">
@@ -353,7 +354,7 @@
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">2.5k</span>Reading time: <span class="post-count reading-time">8 min</span></span>
+                        <span>Word count: <span class="post-count word-count">2.8k</span>Reading time: <span class="post-count reading-time">9 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -532,10 +533,10 @@
 </ul>
 <h4 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h4><p>在预处理的阶段中，编译器Clang首先预处理我们代码，做一些比如将宏替换到代码中、删除注释、处理预编译命令等工作</p>
 <h4 id="词法分析"><a href="#词法分析" class="headerlink" title="词法分析"></a>词法分析</h4><p>在此阶段词法分析器读入预处理过的代码字节流，将其中的字符处理成有意义的<strong>词素序列</strong>，对于每个词素产生词法单元并标记位置，处理完成后进入下一步。这个过程主要是为了在下一步生成语法树做基础工作。</p>
-<h4 id="语法分析"><a href="#语法分析" class="headerlink" title="语法分析"></a>语法分析</h4><p>这一步中使用在词法分析中生成的词法单元，抽象生成一个语法树（AST，Abstract syntax tree)。抽象语法树上的每个节点也标记了它在源代码的位置。抽象语法树的遍历比起源代码块很多，这一步主要是为了后面的静态分析。</p>
-<h4 id="静态分析-｜-中间代码生成"><a href="#静态分析-｜-中间代码生成" class="headerlink" title="静态分析 ｜ 中间代码生成"></a>静态分析 ｜ 中间代码生成</h4><p>将源代码转化为抽象语法树后，编译器就可以遍历整个树来做静态分析。常见的类型检查、语法错误、方法未定义等都是在静态分析中发现并处理的，当然静态分析能做的事情还有非常多。<br>在静态分析结束后，编译器会生成IR。IR是整个编译链接系统的中间产物，是一种比较接近机器码的形式，但他与平台无关，通过IR可以生成多个平台的机器码。IR是在iOS编译系统中，前端Clang和后端LLVM的分界点。Clang的任务在生成<code>IR</code>后结束，将<code>IR</code>交付给LLVM后LLVM开始工作。</p>
+<h4 id="语法分析"><a href="#语法分析" class="headerlink" title="语法分析"></a>语法分析</h4><p>这一步中使用在词法分析中生成的词法单元，抽象生成一个语法树（AST，Abstract syntax tree)。抽象语法树上的每个节点也标记了它在源代码的位置。<strong>抽象语法树的遍历比起源代码块很多，这一步主要是为了后面的静态分析。</strong><br><img src="https://i.loli.net/2021/11/08/UiA2otavyXZO9Jl.jpg" alt="抽象语法树AST"></p>
+<h4 id="静态分析-｜-中间代码生成"><a href="#静态分析-｜-中间代码生成" class="headerlink" title="静态分析 ｜ 中间代码生成"></a>静态分析 ｜ 中间代码生成</h4><p>将源代码转化为抽象语法树后，编译器就可以遍历整个树来做静态分析。<strong>常见的类型检查、语法错误、方法未定义等都是在静态分析中发现并处理的，当然静态分析能做的事情还有非常多。</strong>在静态分析结束后，编译器会生成IR。IR是整个编译链接系统的中间产物，是一种比较接近机器码的形式，但他与平台无关，通过IR可以生成多个平台的机器码。IR是在iOS编译系统中，前端Clang和后端LLVM的分界点。Clang的任务在生成<code>IR</code>后结束，将<code>IR</code>交付给LLVM后LLVM开始工作。</p>
 <h4 id="汇编生成"><a href="#汇编生成" class="headerlink" title="汇编生成"></a>汇编生成</h4><p>在获得到<code>IR</code>后，LLVM可以根据优化策略对<code>IR</code>进行一些优化，如尾递归优化、循环优化、全局变量优化。在优化完成后，LLVM会调用汇编生成器将IR转化成汇编代码。此时，生成产物就是<code>.o</code>文件了（二进制文件）。<br><strong>在生成二进制文件后，我们可以通过二进制重排的方式对我们的编译产物进行更进一步的优化，已达到缩小编译产物大小、优化启动速度等目的</strong></p>
-<h4 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h4><p>在将源代码编译成<code>.o</code>文件后，就开始链接。链接其实就是一个打包的过程，将编译出的所有<code>.o</code>文件和一些如dylib,.a,tbd文件链接起来，一起合并生成一个Mach-o文件。到这里，编译过程全部结束，可执行文件mach-o已生成。</p>
+<h4 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h4><p>在将源代码编译成<code>.o</code>文件后，就开始链接。链接其实就是一个打包的过程，将编译出的所有<code>.o</code>文件和一些如dylib,.a,tbd文件链接起来，一起合并生成一个Mach-o文件。到这里，编译过程全部结束，可执行文件mach-o已生成。<strong>在链接前，符号是未跟内存地址、寄存器绑定的，尤其是一些被定义在其他模块的符号。而在链接阶段，链接器完成了上述工作，进行了除动态库符号外的符号绑定，同时将这些目标文件链接成一个可执行文件</strong></p>
 <h4 id="Mach-o文件结构"><a href="#Mach-o文件结构" class="headerlink" title="Mach-o文件结构"></a>Mach-o文件结构</h4><p><img src="https://i.loli.net/2021/10/24/36ByoItCM2JFTAq.jpg" alt="-w313"></p>
 <ul>
 <li>Header<ul>
@@ -586,14 +587,25 @@
 </ul>
 <p><img src="https://i.loli.net/2021/10/24/yhDUCJQRgpoLacH.jpg" alt="main方法前的调用栈"></p>
 <p>启动工程，在<code>_objc_init</code>处设置一个<code>symbolic breakpoint</code>，Xcode会帮我们在<code>main</code>方法执行前设置断点。进入<code>lldb</code>后使用<code>bt</code>命令，我们就可以看到<code>_objc_init</code>方法前的调用栈。</p>
-<p>可以看到，<code>dyld</code>是最先被启动的。<code>_dyld_start</code>后，首先调用的是<code>dyldbootstrap</code>命名空间里的<code>start</code>函数。由于dyld比较复杂，在这里就先不详细展开，留待另一篇文章中细讲。启动的大体流程为</p>
+<p>可以看到，<code>dyld</code>是最先被启动的。<code>_dyld_start</code>后，首先调用的是<code>dyldbootstrap</code>命名空间里的<code>start</code>函数，<code>dyld:bootstrap</code>意义为dyld进行<strong>自举</strong>工作。由于动态链接器本身也是一个共享对象，那么它自己也需要重定向工作。那么为了避免循环重定向的问题，动态链接器相对于其他的共享对象需要有一些特性。第一个就是<strong>它不可以依赖于其他的共享对象</strong>，第二个是<strong>它的重定向工作可以由自己完成</strong>。这种<strong>具有一定限制条件的启动代码称为自举（bootstrap）</strong>。</p>
+<p>由于dyld比较复杂，在这里就先不详细展开，留待另一篇文章中细讲。启动的大体流程为</p>
 <ul>
 <li>dyld 开始将程序二进制文件初始化</li>
 <li>交由 ImageLoader 读取image，其中包含了我们的类、方法等各种符号</li>
 <li>由于 runtime 向 dyld 绑定了回调，当image 加载到内存后，dyld会通知runtime进行处理</li>
 <li>runtime接手后调用map_images做解析和处理，接下来load_images中调用call_load_methods方法，遍历所有加载进来的Class，按继承层级依次调用Class的 +load 方法和其 Category 的 +load 方法</li>
 </ul>
+<p><strong>所以动态链接器的工作流程为</strong></p>
+<ol>
+<li>动态链接器自举 （动态链接器的地址在可执行文件的<code>.interp</code>段） -&gt; </li>
+<li>装载共享对象（在这个步骤合并生成全局符号表）-&gt; </li>
+<li>重定位（遍历可执行文件和每个共享对象的重定位表将GOT/PLT中需要重定位的位置进行修正）-&gt; </li>
+<li>初始化（执行共享对象.init段中的代码，进程的.init段由程序初始化代码执行）-&gt; </li>
+<li>将控制权交还给程序的入口</li>
+</ol>
 <h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>在写这篇的过程中系统地学习了一下app从编译到运行的过程。在编译阶段，<code>静态链接</code>和<code>动态链接</code>这种编译原理相关的知识很重要，有时间可以读一下编译原理那本书。运行阶段，<code>dyld</code>在main函数执行前做了非常多工作，其实现也很复杂，待仔细学习后再写一篇聚焦于<code>dyld</code>的笔记。</p>
+<hr>
+<p><em>更新于2021.11.8</em></p>
 
     </article>
     <!-- license -->
