@@ -20,18 +20,32 @@
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog,iOS,swift">
     
     <meta name="description" content="">
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Tino又想吃肉了">
-<meta property="og:url" content="http://example.com/archives/2021/page/3/index.html">
+    <meta name="description" content="以weak与__weak为切口，深入了解一下它们与背后的weak table的机制。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="weak与weak_table">
+<meta property="og:url" content="http://example.com/2021/11/11/weak%E4%B8%8Eweak-table/index.html">
 <meta property="og:site_name" content="Tino又想吃肉了">
+<meta property="og:description" content="以weak与__weak为切口，深入了解一下它们与背后的weak table的机制。">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/11/11/mSKC7rZvDTEGLwd.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/11/3PakoMn2gm6BxXC.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/11/2frgt8AJqPUzDIc.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/11/wfgR1A9TzdkIMhO.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/11/25Zhq1VB3PSIXvc.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/11/iyb7akMQpUj6lhc.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/11/H2ahENJ58IxQSLv.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/11/qyMLYuzdhEwcHl8.jpg">
+<meta property="article:published_time" content="2021-11-11T03:52:37.000Z">
+<meta property="article:modified_time" content="2021-11-11T03:54:05.896Z">
 <meta property="article:author" content="Tino Wu">
+<meta property="article:tag" content="底层原理">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/11/11/mSKC7rZvDTEGLwd.jpg">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon1.ico">
     
-    <title>Tino又想吃肉了</title>
+    <title>weak与weak_table · Tino又想吃肉了</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -219,6 +233,8 @@
         }
     </script>
     
+        <body class="post-body">
+    
         <!-- header -->
         <header class="header header-mobile">
     <!-- top read progress line -->
@@ -248,6 +264,17 @@
     </div>
     <!-- toggle banner for post layout -->
     
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">Tino又想吃肉了</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name">weak与weak_table</a>
+            </div>
+        </div>
+    
 </header>
 
         <!-- dark mode -->
@@ -276,24 +303,91 @@
 
 
 
+    height:40vh;
+
 ">
     
     <!-- 主页  -->
+    
+        
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/IMG_8046.JPG)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+                weak与weak_table
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+                
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        
+        
+            
+        
+        
+        <span class="post-category" data-categories="Note"">
+            <i class="far fa-folder post-category-icon"></i>
+            <span class="post-category-text">
+                Note
+            </span>
+        </span>
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="底层原理">底层原理</a>
+    
+</div>
+
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">1.2k</span>Reading time: <span class="post-count reading-time">4 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2021/11/11</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -423,237 +517,72 @@
         
             <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
             <div class="container container-unloaded">
-                <main class="main index-page">
-    
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2021/03/15/Cocoapods/">
-                
-                <span class="abstract-title-text">Cocoapods的安装和使用</span>
-            </a>
-            <div class="abstract-content">
-                <p>Cocoapods的安装、使用及换源</p>
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/03/15</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-        
-        
-            
-        
-        
-        <span class="post-category" data-categories="Note"">
-            <i class="far fa-folder post-category-icon"></i>
-            <span class="post-category-text">
-                Note
-            </span>
-        </span>
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Tools">Tools</a>
-    
-</div>
+                <main class="main post-page">
+    <article class="article-entry">
+        <p>以weak与__weak为切口，深入了解一下它们与背后的weak table的机制。</p>
+<span id="more"></span>
+<h1 id="Weak与Weak表"><a href="#Weak与Weak表" class="headerlink" title="Weak与Weak表"></a>Weak与Weak表</h1><blockquote>
+<p>The weak table is a hash table governed by a single spin lock.<br>An allocated blob of memory, most often an object, but under GC any such allocation, may have its address stored in a __weak marked storage location through use of compiler generated write-barriers or hand coded uses of the register weak primitive. Associated with the registration can be a callback block for the case when one of the allocated chunks of memory is reclaimed.<br>The table is hashed on the address of the allocated memory.  When __weak marked memory changes its reference, we count on the fact that we can still see its previous reference.<br>So, in the hash table, indexed by the weakly referenced item, is a list of all locations where this address is currently being stored.</p>
+</blockquote>
+<p>以上是<code>objc4-781</code>版本中<code>objc_weak.h</code>头文件中对于<code>weak表</code>的定义。weak表是什么？回答这个问题我们需要联想到开发中常用的<code>weak</code>或者<code>__weak</code>修饰词。在开发中，通常在防止诸如delegate使用时的内存泄漏问题时，我们会在delegate属性定义的修饰词中使用<code>weak</code>来修饰它，这样子就能解决使用代理时循环引用导致内存泄漏的问题。或者，当我们有一个UI控件在交互中显示一次后就不再需要它时，我们也可以用weak来定义，这样在它被从图层上移除时就会自动置nil，减少了内存占用。但在这个机制的背后是怎样运作的，为什么被<code>weak</code>或者<code>__weak</code>修饰的对象可以自动置nil，这背后就是<code>weak表</code>在起作用。</p>
+<h3 id="源码定义"><a href="#源码定义" class="headerlink" title="源码定义"></a>源码定义</h3><p>首先我们来看一下<code>weak table</code>在源码中的定义。<br><img src="https://i.loli.net/2021/11/11/mSKC7rZvDTEGLwd.jpg" alt="-w629"><br>可以看到<code>weak table</code>的结构并不太复杂，结构体内有一个<code>weak_entry_t</code>类型的变量，该结构体是弱引用的入口，<code>num_entries</code>表示来表的大小，此外<code>mask</code>和<code>max_hash_displacement</code>两个变量主要是与掩码和哈希偏移量有关。通过源码中的注释可以知道，<code>weak table</code>以<code>object ids</code>作为hash table的keys，以<code>weak_entry_t</code>作为hash table的values。接下来我们看看<code>weak_table_t</code>结构体是什么样的。<br><img src="https://i.loli.net/2021/11/11/3PakoMn2gm6BxXC.jpg" alt="-w723"><br>其中，<code>DisguisedPtr</code>的定义是这样的<br><img src="https://i.loli.net/2021/11/11/2frgt8AJqPUzDIc.jpg" alt="-w713"><br><img src="https://i.loli.net/2021/11/11/wfgR1A9TzdkIMhO.jpg" alt="-w707"></p>
+<p>可以见到，<code>DisguisedPtr</code>类是对范型对象的指针做了一个封装。<code>weak_entry_t</code>结构体其中的 <code>referrers</code>是<code>weak_referrer_t</code>的指针，也就是对<code>DisguisedPtr&lt;objc_object *&gt;</code>的二维指针，所以它是一个<code>DisguisedPtr&lt;objc_object *&gt;</code>的二维数组。通过一个二维指针地址偏移，用下标作为 hash 的 key，做成了一个弱引用散列。这就是<code>weak table</code>是hash table的来源，弱引用表是一个静态的hash table结构。</p>
+<h3 id="weak对象插入"><a href="#weak对象插入" class="headerlink" title="weak对象插入"></a>weak对象插入</h3><p>在<code>NSObject.mm</code>文件中我们可以找到<code>StoreWeak</code>方法的实现，<code>StoreWeak</code>方法由<code>objc_initweak</code>方法调用。<br><img src="https://i.loli.net/2021/11/11/25Zhq1VB3PSIXvc.jpg" alt="-w738"></p>
+<p>可以看到，在<code>storeweak</code>方法中，<code>weak_register_no_lock</code>方法是关键的将弱引用添加到<code>weak table</code>中的方法，当然在这之前还有各种必要的加锁以及其他操作。</p>
+<p>在<code>weak_register_no_lock</code>方法中，方法体里构建了弱引用的<code>referent</code>，其属性是一个<code>objc_object</code>对象。<br><img src="https://i.loli.net/2021/11/11/iyb7akMQpUj6lhc.jpg" alt="-w535"></p>
+<p>之后向<code>referent</code>中填充相关信息后，就要开始插入操作了。<br><img src="https://i.loli.net/2021/11/11/H2ahENJ58IxQSLv.jpg" alt="-w626"></p>
+<p>可以看到，在这里首先定义了一个弱引用入口<code>weak_entry_t *entry</code>，并通过<code>weak_entry_for_referent()</code>方法尝试获取该对象的弱引用入口，如果获取到了说明该对象在之前已经在weak table中存在了，那么就在<code>weak_entry_t</code>中拓展即可。<br>如果没有获取到，说明该弱引用对象是第一次被加入到<code>weak table</code>中，代码执行else分支，在创建了一个<code>weak_entry_t</code>后通过<code>weak_entry_insert</code>方法将其插入到全局的<code>weak_table</code>中。</p>
+<p><strong>至此，一个weak对象已经成功地加入到了weak table中。通过这个过程我们可以更清晰地了解到weak table运作的机制，也验证了weak table是以object为key，weak_entry_t为value的hash table这一事实。</strong></p>
+<h3 id="其他的相关方法"><a href="#其他的相关方法" class="headerlink" title="其他的相关方法"></a>其他的相关方法</h3><p><img src="https://i.loli.net/2021/11/11/qyMLYuzdhEwcHl8.jpg" alt="-w744"><br>我们在<code>weak_table_t</code>结构体的定义下可以看到<code>objc_weak.h</code>向外暴露了四个接口，分别是向weak table注册插入对象、注销移除对象、查找弱引用对象是否已在表中、将所有该object的弱引用指针置nil。<br>这几个方法是整个weak table运作的关键方法，当然还有诸如对weak table扩容等内部方法。</p>
+<p>自此，<code>__weak obj1 = obj;</code>这行代码的运行过程，已经全部梳理完成。</p>
+<h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>总体上来看，weak table的实现并不算太过复杂。它有着<code>weak_table_t</code>,<code>weak_entry_t</code>,<code>DisguisedPtr&lt;objc_object *&gt;</code>等几个关键数据结构，有着<code>weak_register_no_lock</code>,<code>weak_unregister_no_lock</code>,<code>weak_entry_insert</code>,<code>append_referrer</code>等几个关键方法。<br>其中更多的细节，可以从<code>objc4</code>源码中的<code>objc_weak.h</code>,<code>objc_weak.mm</code>,<code>NSObject.h</code>,<code>NSObject.mm</code>等文件获取到。</p>
+<p>如有错漏，欢迎读者提出。</p>
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
+    </article>
+    <!-- license -->
     
-        
-        
-        
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
             
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2021/03/15/Widget/">
-                
-                <span class="abstract-title-text">初探iOS14-Widget小组件</span>
-            </a>
-            <div class="abstract-content">
-                <p>简单了解iOS14中widget的实现和使用方法</p>
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/03/15</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-        
-        
+        </li>
+        <li class="previous">
             
-        
-        
-        <span class="post-category" data-categories="Note"">
-            <i class="far fa-folder post-category-icon"></i>
-            <span class="post-category-text">
-                Note
-            </span>
-        </span>
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="iOS">iOS</a>
-    
-</div>
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2021/10/24/%E4%BB%8E%E7%BC%96%E8%AF%91%E5%88%B0%E8%BF%90%E8%A1%8C/" title="iOS app - 从编译到运行">
+                    <div class="prevTitle">iOS app - 从编译到运行</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- comment -->
+     
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2021/03/15/swift%20/">
-                
-                <span class="abstract-title-text">swift笔记</span>
-            </a>
-            <div class="abstract-content">
-                <p>学习swift中的一些记录</p>
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/03/15</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-        
-        
-            
-        
-        
-        <span class="post-category" data-categories="Note"">
-            <i class="far fa-folder post-category-icon"></i>
-            <span class="post-category-text">
-                Note
-            </span>
-        </span>
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="swift">swift</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="iOS">iOS</a>
-    
-</div>
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
             
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2021/03/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-                
-                <span class="abstract-title-text">计算机网络</span>
-            </a>
-            <div class="abstract-content">
-                <p>计网笔记</p>
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/03/15</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-        
-        
-            
-        
-        
-        <span class="post-category" data-categories="Note"">
-            <i class="far fa-folder post-category-icon"></i>
-            <span class="post-category-text">
-                Note
-            </span>
-        </span>
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="计网">计网</a>
-    
-</div>
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
             
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2021/03/13/@propertyWrapper/">
-                
-                <span class="abstract-title-text">巧用@propertyWrapper避免非法字符串</span>
-            </a>
-            <div class="abstract-content">
-                <p>@propertyWrapper的一种用处</p>
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/03/13</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-        
-        
-            
-        
-        
-        <span class="post-category" data-categories="Note"">
-            <i class="far fa-folder post-category-icon"></i>
-            <span class="post-category-text">
-                Note
-            </span>
-        </span>
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="swift">swift</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="iOS">iOS</a>
-    
-</div>
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
+            
+
+            <!-- utteranc评论 -->
+
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+
+            
+            
+
+        </div>
     
-    <!-- paginator  -->
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
     
-        <nav class="page-nav">
-            <a class="extend prev" rel="prev" href="/archives/2021/page/2/">&lt; PREV</a><a class="page-number" href="/archives/2021/">1</a><a class="page-number" href="/archives/2021/page/2/">2</a><span class="page-number current">3</span>
-        </nav>
+    <!-- Mathjax -->
     
 </main>
 
@@ -744,6 +673,23 @@
 
         </div>
         <!-- toc -->
+        
+            <div class="toc-wrapper" style=
+
+
+
+
+
+
+
+    top:40vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Weak%E4%B8%8EWeak%E8%A1%A8"><span class="toc-number">1.</span> <span class="toc-text">Weak与Weak表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E5%AE%9A%E4%B9%89"><span class="toc-number">1.0.1.</span> <span class="toc-text">源码定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#weak%E5%AF%B9%E8%B1%A1%E6%8F%92%E5%85%A5"><span class="toc-number">1.0.2.</span> <span class="toc-text">weak对象插入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E7%9A%84%E7%9B%B8%E5%85%B3%E6%96%B9%E6%B3%95"><span class="toc-number">1.0.3.</span> <span class="toc-text">其他的相关方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-number">1.0.4.</span> <span class="toc-text">写在最后</span></a></li></ol></li></ol></li></ol>
+            </div>
         
         <!-- sidebar -->
         <div class="sidebar sidebar-hide">
@@ -1349,6 +1295,8 @@
         <!-- CNZZ -->
         
         <!-- async load share.js -->
+        
+            <script src="/scripts/share.js" async></script>    
         
         <!-- mermaid -->
         
