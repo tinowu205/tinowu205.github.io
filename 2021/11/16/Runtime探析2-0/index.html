@@ -20,22 +20,56 @@
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog,iOS,swift">
     
     <meta name="description" content="">
-    <meta name="description" content="Hey">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://example.com/hello-world.html">
+    <meta name="description" content="利用lldb和源码探析了Runtime，系统整理了过程和结果，不然老是忘…本文主题为类与对象的本质，objc_msgSend、weak-table等不在本文讨论,将会另外开文章。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Runtime探析2.0">
+<meta property="og:url" content="http://example.com/2021/11/16/Runtime%E6%8E%A2%E6%9E%902-0/index.html">
 <meta property="og:site_name" content="Tino又想吃肉了">
-<meta property="og:description" content="Hey">
+<meta property="og:description" content="利用lldb和源码探析了Runtime，系统整理了过程和结果，不然老是忘…本文主题为类与对象的本质，objc_msgSend、weak-table等不在本文讨论,将会另外开文章。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-03-15T12:31:44.465Z">
-<meta property="article:modified_time" content="2021-03-15T09:21:20.781Z">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/ci7xbYoLmtWjFhQ.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/d7AVsjOg4Grpvyx.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/78N9EMPZBRf1oFz.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/nIN4lRKZ8PSJTFv.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/dQNlOqr6RmeA715.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/UK3M51Ecxgf6Py7.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/CIz1rfuFiVZaqpX.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/UwlXRKryIDtiZC7.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/H1IQBFmNeA6PXyC.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/odFQx3nIRz9Sb8c.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/H1IQBFmNeA6PXyC.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/1uVJgG5rWDCmdbz.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/wa38snuPMEVybtB.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/BgZSE9Iuvnah7YF.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/KXqMyJZsj4mtHWB.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/ImYONCUZ2uFKPXp.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/fESeHL2Mi1uQDdn.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/LXq2cVsFOnafHU1.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/QfFYuzla2SiqMLB.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/CVEimTZ9bABwWhF.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/9jflQHqMBGZiRPN.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/Xr34oUxn8dsYjgC.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/yd73FieECP9HZgu.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/RNp9vAnIVDSgxO3.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/odFQx3nIRz9Sb8c.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/GpH2fsezyBQD1cu.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/xkF2ElvMjeibVYn.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/mOSwysMvKL7gjkl.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/FAcabnt9JQoDeP5.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/7osdmV1DaQy83Ur.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/tBiYh3RNoEKdFIv.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/16/g8XbcdNmHQrD6VE.jpg">
+<meta property="article:published_time" content="2021-11-16T02:45:12.000Z">
+<meta property="article:modified_time" content="2021-11-16T02:59:42.145Z">
 <meta property="article:author" content="Tino Wu">
+<meta property="article:tag" content="底层原理">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/11/16/ci7xbYoLmtWjFhQ.jpg">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon1.ico">
     
-    <title>Hello World · Tino又想吃肉了</title>
+    <title>Runtime探析2.0 · Tino又想吃肉了</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -223,6 +257,8 @@
         }
     </script>
     
+        <body class="post-body">
+    
         <!-- header -->
         <header class="header header-mobile">
     <!-- top read progress line -->
@@ -252,6 +288,17 @@
     </div>
     <!-- toggle banner for post layout -->
     
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">Tino又想吃肉了</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name">Runtime探析2.0</a>
+            </div>
+        </div>
+    
 </header>
 
         <!-- dark mode -->
@@ -280,24 +327,91 @@
 
 
 
+    height:40vh;
+
 ">
     
     <!-- 主页  -->
+    
+        
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/IMG_8046.JPG)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+                Runtime探析2.0
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+                
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        
+        
+            
+        
+        
+        <span class="post-category" data-categories="Note"">
+            <i class="far fa-folder post-category-icon"></i>
+            <span class="post-category-text">
+                Note
+            </span>
+        </span>
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="底层原理">底层原理</a>
+    
+</div>
+
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">3.3k</span>Reading time: <span class="post-count reading-time">11 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2021/11/16</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -429,22 +543,99 @@
             <div class="container container-unloaded">
                 <main class="main post-page">
     <article class="article-entry">
-        <p>Hey</p>
+        <p>利用lldb和源码探析了Runtime，系统整理了过程和结果，不然老是忘…本文主题为类与对象的本质，objc_msgSend、weak-table等不在本文讨论,将会另外开文章。</p>
 <span id="more"></span>
-
-<p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h1 id="类与对象的本质"><a href="#类与对象的本质" class="headerlink" title="类与对象的本质"></a>类与对象的本质</h1><blockquote>
+<p>Runtime是<code>Objective-C</code>语言与C语言最大的一个不同，通过<code>Runtime</code>库OC实现了C语言没有的面向对象特性与动态语言特性。就如名字一样，Runtime指的是运行时，即程序已经在计算机系统中装载运行起来后的时期，区别于编译期。Runtime本身是一个由C/C++编写的库，包含了大部分我们在OC中日常使用到的数据结构与方法，目前已经开源，源代码可以在Apple Open Source网站上下载到。</p>
+</blockquote>
+<p><strong>本文参考Objc4-781版本源码</strong></p>
+<h3 id="类与对象"><a href="#类与对象" class="headerlink" title="类与对象"></a>类与对象</h3><p>类与对象，是面向对象语言中的基石，每个第一次学习面向对象语言的开发者都会面对一个灵魂拷问问题：什么是类与对象。</p>
+<p>在Objective-C中，我们使用.h和.m文件，通过<code>@interface @implement</code>就可以定义一个Objective-C Class。而当我们使用该Class创建一个Class的实例时，该实例(instance)就被叫做对象。<br><img src="https://i.loli.net/2021/11/16/ci7xbYoLmtWjFhQ.jpg"></p>
+<p>如图，我们在main方法中创建了一个名为<code>t1</code>的对象，<code>t1</code>是<code>Test1</code>类的实例。</p>
+<p>那么在Objective-C中，类和对象在底层的定义是什么样的呢？我们先将<code>main.m</code>转换成<code>main.cpp</code>，看看能不能在其中发现什么端倪。</p>
+<h4 id="OC-to-C"><a href="#OC-to-C" class="headerlink" title="OC to C++"></a>OC to C++</h4><p>通过<code>clang -rewrite-objc main.m</code>命令，<code>main.m</code>文件被转换成了<code>main.cpp</code>，也就是C++代码，Runtime本身就是一个包含了大量C++代码的运行库。</p>
+<p>查看转换出来的<code>main.cpp</code>，我们在第一行就可以看到一段疑似是类的定义的代码。</p>
+<p><img src="https://i.loli.net/2021/11/16/d7AVsjOg4Grpvyx.jpg"></p>
+<p><strong>记住这个<code>struct objc_class</code>，同时也要注意到我们的运行环境是<code>__OBJC2__</code>，这也是源码阅读的一个关键点，因为在OBJC4的代码中依然存在一些已经老旧的OBJC1代码。</strong></p>
+<p>将代码往下拉，找到我们的main函数。在main函数的上方，我们可以找到这样的一条定义。</p>
+<p><img src="https://i.loli.net/2021/11/16/78N9EMPZBRf1oFz.jpg"></p>
+<p>从命名可以得知，<code>struct objc_object</code>就是对象在Runtime中的定义，这点在之后我们会继续验证。</p>
+<p>接着，让我们把注意点放到main方法中。在这里我们可以看到我们的源代码中的<code>Test1 *t1 = [[Test1 alloc] init];</code>变成了什么样子。</p>
+<p><img src="https://i.loli.net/2021/11/16/nIN4lRKZ8PSJTFv.jpg"></p>
+<p>注意这个<code>objc_msgSend</code>,该方法是OC的灵魂，使OC有了动态语言的特性。该方法的实现是直接用汇编语言实现的，可以看到我们的方法调用都是变成了<code>void objc_msgSend(void);</code>的形式。</p>
+<h4 id="struct-objc-object"><a href="#struct-objc-object" class="headerlink" title="struct objc_object"></a>struct objc_object</h4><p>在cpp代码文件中，我们得知了对象的底层类型是<code>struct objc_object</code>,并且如果我们翻一遍该文件，可以发现<strong>万物皆对象</strong>这句话的来源。可以发现无论是<code>Protocol</code>、<code>NSArray</code>等常用数据类型、<code>id</code>等都是<code>struct objc_object</code>类型。那么我们到OBJC4源码中找找objc_object是一个什么样的结构。</p>
+<p><img src="https://i.loli.net/2021/11/16/dQNlOqr6RmeA715.jpg" alt="objc_object"></p>
+<p>可以看到，除了一些公开函数外，在<strong>private</strong>部分<code>objc_object</code>只有一个值，一个类型为<code>isa_t</code>的变量。</p>
+<p>让我们再找一下<code>isa_t</code>是什么</p>
+<p><img src="https://i.loli.net/2021/11/16/UK3M51Ecxgf6Py7.jpg" alt="isa"></p>
+<p>实际上，<code>isa_t</code>对应的就是OBJC1中的<code>isa</code>指针。在OBJC2中对isa指针做了更多的一些优化和封装，而它的关键功能还是不变的，就是包含了一个<code>Class</code>类型的值<code>cls</code>。</p>
+<p>这里的Class就是<strong>类</strong>。在此处的上方可以找到<code>Class</code>的定义，也就是<code>objc_class</code><br><img src="https://i.loli.net/2021/11/16/CIz1rfuFiVZaqpX.jpg"></p>
+<p>自此，类与对象的底层结构都已经找到了。<br><strong>这里有很关键的一点：OBJC1与OBJC2对于类与对象的结构定义有所区别，我们在学习探究的时候参考的应该是<code>objc-private</code>,<code>objc-runtime-new</code>等文件，由于在<code>objc-private.h</code>中定义了<code>#define OBJC_TYPES_DEFINED 1</code>，所以<code>objc.h</code>已不适用。</strong></p>
+<h4 id="struct-objc-class"><a href="#struct-objc-class" class="headerlink" title="struct objc_class"></a>struct objc_class</h4><p>首先先展示旧版OBJC1的objc_class结构体<br><img src="https://i.loli.net/2021/11/16/UwlXRKryIDtiZC7.jpg" alt="旧版objc_class-w417"></p>
+<p><strong>接着是OBJC2版本的objc_class结构体</strong><br><img src="https://i.loli.net/2021/11/16/H1IQBFmNeA6PXyC.jpg" alt="新版objc_class"><br>以上是OBJC2版本的<code>objc_class</code>结构，当前我们使用的OC版本都是这个结构，其与OBJC1版本的<code>objc_class</code>结构区别非常大，诸如method列表、properties列表等已不再直接在结构体中暴露出来。</p>
+<p><strong>在新版的objc_class中，结构体内由于继承了<code>objc_object</code>，所以其实它也是保留了一个ISA指针的。学过旧版Runtime知识的同学应该知道，对象的ISA指针指向对象所属的类，而类的ISA指针指向元类（metaclass）</strong></p>
+<p>接下来我们解析一下<code>struct objc_class</code>结构体中几个值的作用。</p>
+<ul>
+<li>Class ISA: 指向类的元类（Meta Class)</li>
+<li>cache_t cache: 缓存列表。由于一个类的方法可能会有很多，所以当调用了一个方法后，Runtime会将方法加入到cache中，以减少下次调用该方法的查找时间，提高程序的运行效率</li>
+<li>class_data_bits_t bits: 在旧版中方法列表等值都直接在结构体中暴露出来，而新版中<code>objc_class</code>用<code>bits</code>将这些数据分隔并隐藏了起来，通过<code>bits</code>我们可以取到<code>class_rw_t*</code>类型的data，通过<code>class_rw_t</code>可以取到<code>class_ro_t</code>。也就是说类被分成了<code>class_rw_t</code>和<code>class_ro_t</code>两个部分。</li>
+</ul>
+<h4 id="继承链"><a href="#继承链" class="headerlink" title="继承链"></a>继承链</h4><p>从以上分析可得，新版与旧版的类与对象的关系链并没有太大区别，只是新版的类结构进行了一些优化和封装。关系链依然是 对象-&gt;类-&gt;元类<br><img src="https://i.loli.net/2021/11/16/odFQx3nIRz9Sb8c.jpg"></p>
+<h3 id="类的结构"><a href="#类的结构" class="headerlink" title="类的结构"></a>类的结构</h3><p>与OBJC1版本的代码不同，OBJC2中类结构里并没有直接暴露出属性、方法等内容。这些内容都藏在了<code>class_data_bits_t</code>变量中。而在其中又分成了<code>class_rw_t</code>和<code>class_ro_t</code>，后来Apple为了内存占用方面的考虑，由再次优化了这个结构，在<code>class_rw_t</code>和<code>class_ro_t</code>这个结构上再次分别分化出了<code>class_rw_ext_t</code>.</p>
+<h4 id="struct-objc-class-1"><a href="#struct-objc-class-1" class="headerlink" title="struct objc_class"></a>struct objc_class</h4><p><img src="https://i.loli.net/2021/11/16/H1IQBFmNeA6PXyC.jpg" alt="新版objc_class"></p>
+<p>这是OBJC2的Class结构，其中各个值的意义在上文中已讲过。在这里如果我们想要访问<code>class_rw_t</code>的话，需要先取到<code>class_data_bits_t bits</code>.</p>
+<p>由于无法直接访问到bits，所以我们要利用结构体的内存分布规律来在lldb中获取到bits。由于ISA与superclass都是一个指针，所以他们各占8字节。cache通过查看它的结构可以得知它占16个字节，所以bits在结构体中的内存偏移应该为32字节。</p>
+<p>通过这样的方法拿到bits后，调用<code>data()</code>方法，就可以取到<code>class_rw_t</code></p>
+<h4 id="class-rw-t"><a href="#class-rw-t" class="headerlink" title="class_rw_t"></a>class_rw_t</h4><p>在上文中提到了获取<code>class_rw_t</code>的方法，现在我们看看它里面有什么。<br><img src="https://i.loli.net/2021/11/16/1uVJgG5rWDCmdbz.jpg"></p>
+<p>跳过一大堆的函数，我们可以看到熟悉的几个函数。<br><img src="https://i.loli.net/2021/11/16/wa38snuPMEVybtB.jpg"></p>
+<p>所以，调用这几个函数，应该就可以获取到对应旧版OBJC1代码中的<code>methods</code>,<code>properties</code>了。</p>
+<p>同时，通过<code>ro()</code>函数也可以获取到对应的<code>class_ro_t</code></p>
+<h4 id="class-ro-t"><a href="#class-ro-t" class="headerlink" title="class_ro_t"></a>class_ro_t</h4><p><img src="https://i.loli.net/2021/11/16/BgZSE9Iuvnah7YF.jpg" alt="class_ro_t"><br>在<code>class_ro_t</code>中，可以看到有<code>baseMethodList</code>,<code>baseProtocols</code>,<code>ivars</code>,<code>baseProperties</code>等几个值。在OC中，实例方法的定义存放在类的<code>class_rw_t</code>中，而类方法、成员变量等则存放在<strong>元类</strong>的<code>class_ro_t</code>中。在程序开始运行时，Runtime会基于<code>class_ro_t</code>拷贝出一份值作为<code>class_rw_t</code>，当我们进行动态添加方法时，改动的其实是<code>class_rw_t</code>，<code>class_ro_t</code>是<strong>const</strong>的，不可修改。</p>
+<h3 id="lldb调试验证"><a href="#lldb调试验证" class="headerlink" title="lldb调试验证"></a>lldb调试验证</h3><p>以上的内容都是我们根据对源代码的阅读和分析给出的一个结论，接下来我们将利用<code>objc4-781</code>源码与<strong>lldb</strong>进行编译调试后验证上述提到的结构和结论。</p>
+<p>我们首先编写一个简单的main函数<br><img src="https://i.loli.net/2021/11/16/KXqMyJZsj4mtHWB.jpg" alt="-w521"></p>
+<p>其中<code>LGPerson</code>类拥有一个属性，一个类方法以及一个实例方法。</p>
+<h4 id="获取class-data-bits-t"><a href="#获取class-data-bits-t" class="headerlink" title="获取class_data_bits_t"></a>获取class_data_bits_t</h4><p>首先，在前文的分析中我们知道要获取类结构中的数据我们首先需要取到<code>class_data_bits_t</code>, 由于内存偏移可知，要取得该值需要在类对象地址的基础上偏移8+8+16=32个字节，转化成16进制即<strong>0x20</strong></p>
+<p>进入lldb调试模式后我们来尝试获取<code>class_data_bits_t</code></p>
+<p><img src="https://i.loli.net/2021/11/16/ImYONCUZ2uFKPXp.jpg"></p>
+<p>从上图可以看到，我们成功取到了<code>class_data_bits_t</code>类型的指针。</p>
+<h4 id="获取class-rw-t"><a href="#获取class-rw-t" class="headerlink" title="获取class_rw_t"></a>获取class_rw_t</h4><p><code>class_rw_t</code>结构是类中比较关键的一个结构，即使它还分出来了一个<code>class_rw_ext_t</code>,但由于后者是出于优化的设计，本文在讨论时约定默认提到<code>class_rw_t</code>隐含<code>class_rw_ext_t</code>.</p>
+<p>查看<code>class_data_bits_t</code>的结构定义，我们可以发现在里面有一个public的<code>data()</code>方法，该方法通过<code>bits &amp; FAST_DATA_MASK</code>返回<code>class_rw_t</code>的指针。</p>
+<p>在上一小段得到的$2基础上调用<code>data()</code>函数，我们可以得到类的<code>class_rw_t</code>。</p>
+<p><img src="https://i.loli.net/2021/11/16/fESeHL2Mi1uQDdn.jpg" alt="-w422"></p>
+<p>至此，我们可以验证前文中的结论是正确的了。</p>
+<h4 id="instance-methods"><a href="#instance-methods" class="headerlink" title="instance methods"></a>instance methods</h4><p>实例方法存放于类的<code>class_rw_t</code>中，在<code>class_rw_t</code>中我们可以找到这样几个方法。<br><img src="https://i.loli.net/2021/11/16/LXq2cVsFOnafHU1.jpg" alt="-w747"></p>
+<p>我们先尝试获取一下类的实例方法列表，看看能不能看到我们定义的实例方法。</p>
+<p><img src="https://i.loli.net/2021/11/16/QfFYuzla2SiqMLB.jpg" alt="-w616"></p>
+<p>调用<code>method()</code>函数后，返回的是一个<code>method_array_t</code>,从它的定义和结构来看，它是一个二维的容器。我们需要获取到里面的内容，取它的list。</p>
+<p>获取到list之后，里面存放的是一个地址，我们接着获取这个地址。</p>
+<p>可以看到，lldb对于<code>$5.ptr</code>的输出是一个<code>method_list_t *const</code>的地址，至此我们就获取到类的方法列表了。</p>
+<p>由于获取到了方法列表的地址，我们使用<code>*操作符</code>来读取一下地址上的数据。</p>
+<p><img src="https://i.loli.net/2021/11/16/CVEimTZ9bABwWhF.jpg" alt="-w602"></p>
+<p>可以看到读出来的<code>method_list_t</code>里是一个<code>entsize_list_tt</code>的结构。我们可以在代码里找到这个结构的定义。<br><img src="https://i.loli.net/2021/11/16/9jflQHqMBGZiRPN.jpg" alt="-w716"></p>
+<p>在这个结构体内部定义了获取数组内的值的方法。</p>
+<p><img src="https://i.loli.net/2021/11/16/Xr34oUxn8dsYjgC.jpg" alt="-w573"></p>
+<p>显然，我们可以调用<code>get()</code>函数来获取到<code>entsize_list_tt</code>里的内容。当我们调用<code>get()</code>后却发现，读出来的数据为空，这是为什么呢？<br>查阅网上资料后才发现，method的具体内容被一个<code>big()</code>隐藏里，在之前的版本中<code>big()</code>的定义和实现是能在代码中找到的，但本文参考的<code>objc4-781</code>版本代码中貌似没有找到该函数的定义，若有读者知道<code>big()</code>的相关信息欢迎在评论区指出。</p>
+<p>在调用<code>big()</code>后，lldb终于是输出了我们想看到的内容。</p>
+<p><img src="https://i.loli.net/2021/11/16/yd73FieECP9HZgu.jpg" alt="-w551"></p>
+<p>可以看到我们定义的实例方法<code>instanceMethod1</code>成功地被打印了出来，而<code>method_t::big</code>的结构就是<code>method_t</code>定义的经典三段式结构（name-types-imp)</p>
+<p><img src="https://i.loli.net/2021/11/16/RNp9vAnIVDSgxO3.jpg" alt="-w590"></p>
+<h4 id="class-methods"><a href="#class-methods" class="headerlink" title="class methods"></a>class methods</h4><p>前文中我们已经找到了属性、实例方法、成员变量（存放在类对象的class_ro_t）中，那么还剩下一个东西，那就是类方法class method。类方法其实存放在元类Meta Class里。我们知道<code>objc_class</code>继承了<code>objc_object</code>，也就是说它结构中是隐含了一个<code>ISA</code>指针的。<br>在对象中，对象的ISA指针指向了对象所属的类，那类中的ISA指针指向哪里呢？元类。</p>
+<p><img src="https://i.loli.net/2021/11/16/odFQx3nIRz9Sb8c.jpg"></p>
+<p>这张图中的链接关系，现在只剩下class-&gt;meta class这条没有被验证了。接下来我们利用lldb找一下元类。</p>
+<p>第一步我们需要找到类对象的ISA指针。<br><img src="https://i.loli.net/2021/11/16/GpH2fsezyBQD1cu.jpg" alt="-w371"></p>
+<p>在<code>objc_object</code>结构体中有一个叫<code>ISA()</code>的函数<br><img src="https://i.loli.net/2021/11/16/xkF2ElvMjeibVYn.jpg" alt="-w571"></p>
+<p>查看该函数的实现</p>
+<p><img src="https://i.loli.net/2021/11/16/mOSwysMvKL7gjkl.jpg" alt="-w454"></p>
+<p>发现，将<code>isa.bits &amp; ISA_MASK</code>可以得到ISA指向的Class，查阅更多资料后发现这个的确是获取到元类的方法。</p>
+<p><img src="https://i.loli.net/2021/11/16/FAcabnt9JQoDeP5.jpg" alt="-w462"></p>
+<p>使用<code>x/4gx</code>指令读取类对象地址的内容，第一个地址即为类中的ISA指针存放的地址。</p>
+<p>将该地址 <code>&amp;</code> 上ISA_MASK, 即0x00007ffffffffff8ULL，用<code>po</code>打印得到的结果，发现的确是LGPerson类，并且显然地址与<code>[objc2 class]</code>方法得到的不一样，说明这个就是元类的地址了。</p>
+<p>接下来的流程与其他的无异，将该地址加上0x20的偏移量，得到<strong>元类的class_data_bits_t</strong>。接着调用<code>data()</code>方法得到相关数据。</p>
+<p><img src="https://i.loli.net/2021/11/16/7osdmV1DaQy83Ur.jpg" alt="获取class_rw_t"><br><img src="https://i.loli.net/2021/11/16/tBiYh3RNoEKdFIv.jpg" alt="类方法"></p>
+<p><strong>可以看到，在这里我们成功找到了类方法，这说明我们关于找元类的方法是正确的，同时类方法也的确是存储在元类中。</strong></p>
+<p>其实，类方法最开始的存储位置应该是在<strong>元类的class_ro_t中</strong>的，通过打印class_ro_t的内容，我们同样可以找到类方法的定义。</p>
+<p><img src="https://i.loli.net/2021/11/16/g8XbcdNmHQrD6VE.jpg" alt="-w607"></p>
+<h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>之前已经多次看过关于类与对象的底层源码，并且也尝试了lldb调试验证理论，但系统地记录并跑通所有验证还是第一次。个人认为理解类与对象的本质和原理非常重要，诸如method swizzling等runtime黑科技也是基于对类与对象的理解而产生的。通过对类与对象结构的学习，像为什么Category不能在运行时添加成员变量等问题也水到渠成地解决了。虽然这篇文章耗时非常长,时间大多耗在走通lldb的验证上，但最后还是收获满满。</p>
 
     </article>
     <!-- license -->
@@ -455,6 +646,11 @@
             
         </li>
         <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2021/11/14/autoreleasePool/" title="autorelease and autoreleasePool">
+                    <div class="prevTitle">autorelease and autoreleasePool</div>
+                </a>
             
         </li>
     </ul>
@@ -576,6 +772,23 @@
 
         </div>
         <!-- toc -->
+        
+            <div class="toc-wrapper" style=
+
+
+
+
+
+
+
+    top:40vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%9C%AC%E8%B4%A8"><span class="toc-number">1.</span> <span class="toc-text">类与对象的本质</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.0.1.</span> <span class="toc-text">类与对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#OC-to-C"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">OC to C++</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#struct-objc-object"><span class="toc-number">1.0.1.2.</span> <span class="toc-text">struct objc_object</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#struct-objc-class"><span class="toc-number">1.0.1.3.</span> <span class="toc-text">struct objc_class</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF%E9%93%BE"><span class="toc-number">1.0.1.4.</span> <span class="toc-text">继承链</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E7%BB%93%E6%9E%84"><span class="toc-number">1.0.2.</span> <span class="toc-text">类的结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#struct-objc-class-1"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">struct objc_class</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#class-rw-t"><span class="toc-number">1.0.2.2.</span> <span class="toc-text">class_rw_t</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#class-ro-t"><span class="toc-number">1.0.2.3.</span> <span class="toc-text">class_ro_t</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lldb%E8%B0%83%E8%AF%95%E9%AA%8C%E8%AF%81"><span class="toc-number">1.0.3.</span> <span class="toc-text">lldb调试验证</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96class-data-bits-t"><span class="toc-number">1.0.3.1.</span> <span class="toc-text">获取class_data_bits_t</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96class-rw-t"><span class="toc-number">1.0.3.2.</span> <span class="toc-text">获取class_rw_t</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#instance-methods"><span class="toc-number">1.0.3.3.</span> <span class="toc-text">instance methods</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#class-methods"><span class="toc-number">1.0.3.4.</span> <span class="toc-text">class methods</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-number">1.0.4.</span> <span class="toc-text">写在最后</span></a></li></ol></li></ol></li></ol>
+            </div>
         
         <!-- sidebar -->
         <div class="sidebar sidebar-hide">
@@ -1223,6 +1436,8 @@
         <!-- CNZZ -->
         
         <!-- async load share.js -->
+        
+            <script src="/scripts/share.js" async></script>    
         
         <!-- mermaid -->
         
