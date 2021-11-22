@@ -20,18 +20,35 @@
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog,iOS,swift">
     
     <meta name="description" content="">
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Tino又想吃肉了">
-<meta property="og:url" content="http://example.com/tags/leetcode/index.html">
+    <meta name="description" content="记录一些阅读在weak table源码中出现过的sidetable源码的分析与记录，顺带阅读retain与release的实现逻辑。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SideTables与retain,release">
+<meta property="og:url" content="http://example.com/2021/11/22/SideTables%E4%B8%8Eretain-release/index.html">
 <meta property="og:site_name" content="Tino又想吃肉了">
+<meta property="og:description" content="记录一些阅读在weak table源码中出现过的sidetable源码的分析与记录，顺带阅读retain与release的实现逻辑。">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/11/22/At7FCv1uLHn4PVa.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/22/1Zk2CAqHplxfYvI.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/22/2M5EVIAocFjzsgy.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/22/zdxGqRh4DHypj5I.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/22/ABSYCfFTtWekwg9.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/22/G14fLHJy682utmF.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/22/MJsG5fEbNFrklV6.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/22/zmPneKUEGc1t3YJ.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/22/XcqsdJvO9bG6yat.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/22/Vz87DCFvcONUQg5.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/22/jkAy1uPapc4ZRYQ.jpg">
+<meta property="article:published_time" content="2021-11-22T07:35:43.000Z">
+<meta property="article:modified_time" content="2021-11-22T07:38:26.789Z">
 <meta property="article:author" content="Tino Wu">
+<meta property="article:tag" content="底层原理">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/11/22/At7FCv1uLHn4PVa.jpg">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon1.ico">
     
-    <title>Tino又想吃肉了</title>
+    <title>SideTables与retain,release · Tino又想吃肉了</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -219,6 +236,8 @@
         }
     </script>
     
+        <body class="post-body">
+    
         <!-- header -->
         <header class="header header-mobile">
     <!-- top read progress line -->
@@ -248,6 +267,17 @@
     </div>
     <!-- toggle banner for post layout -->
     
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">Tino又想吃肉了</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name">SideTables与retain,release</a>
+            </div>
+        </div>
+    
 </header>
 
         <!-- dark mode -->
@@ -276,24 +306,91 @@
 
 
 
+    height:40vh;
+
 ">
     
     <!-- 主页  -->
+    
+        
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/IMG_8046.JPG)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+                SideTables与retain,release
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+                
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        
+        
+            
+        
+        
+        <span class="post-category" data-categories="Note"">
+            <i class="far fa-folder post-category-icon"></i>
+            <span class="post-category-text">
+                Note
+            </span>
+        </span>
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="底层原理">底层原理</a>
+    
+</div>
+
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">1.6k</span>Reading time: <span class="post-count reading-time">5 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2021/11/22</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -423,509 +520,93 @@
         
             <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
             <div class="container container-unloaded">
-                <main class="main index-page">
-    
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2021/09/08/%E8%AF%BE%E7%A8%8B%E8%A1%A8/">
-                
-                <span class="abstract-title-text">课程表</span>
-            </a>
-            <div class="abstract-content">
-                <p>Leetcode no.207课程表。初见以为思路是哈希表，后来以为是动态规划，最后发现原来是BFS…</p>
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/09/08</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-        
-        
-            
-        
-        
-        <span class="post-category" data-categories="Note"">
-            <i class="far fa-folder post-category-icon"></i>
-            <span class="post-category-text">
-                Note
-            </span>
-        </span>
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="swift">swift</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="algorithm">algorithm</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="leetcode">leetcode</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="BFS">BFS</a>
-    
-</div>
+                <main class="main post-page">
+    <article class="article-entry">
+        <p>记录一些阅读在weak table源码中出现过的sidetable源码的分析与记录，顺带阅读retain与release的实现逻辑。</p>
+<span id="more"></span>
+<h3 id="SideTables"><a href="#SideTables" class="headerlink" title="SideTables"></a>SideTables</h3><p>在阅读关于弱引用表weak table相关源码时，我们大概了解了一些关于SideTable的相关知识，知道了他是一个散列表，也就是Key-Value格式存储的map。通过在源码中搜索SideTable，可以发现他的更多细节。</p>
+<p><strong>首先明确一点，SideTables与SideTable是两个不同的数据结构，我们先来看看SideTables</strong></p>
+<p>在源码中搜索<code>SideTables</code>，可以找到它的相关定义。</p>
+<p><img src="https://i.loli.net/2021/11/22/At7FCv1uLHn4PVa.jpg"></p>
+<p>可以看到，<code>SideTables</code>是一个<code>StripedMap&lt;SideTable&gt;</code>类型的全局静态变量，实际上是调用了<code>SideTablesMap.get()</code>函数，该函数定义在<code>objc::ExplicitInit</code>类中。</p>
+<p>接下来看看<code>StripedMap</code>是一个什么结构。<br><img src="https://i.loli.net/2021/11/22/1Zk2CAqHplxfYvI.jpg"></p>
+<p>通过注释我们可以知道，<code>StripedMap</code>是一个泛型结构，他是一个<code>void* -&gt; T</code>类型的Map，也就是说它是一个<code>key为void*,value为T</code>的哈希表，即我们的<code>SideTables</code>是一个哈希表。<br>在上图的红色框部分，我们可以看到代码定义了<code>StripeCount</code>这个变量，该变量在IPhone真机上为8，在其他平台上为64.在接下来的代码中我们可以看到该变量的作用。</p>
+<p><img src="https://i.loli.net/2021/11/22/2M5EVIAocFjzsgy.jpg"></p>
+<p>可以看到，<code>StripeCount</code>变量被用来创建一个类型为<code>PaddedT</code>的数组。在这里我们可以知道，SideTables实际上是一个存储了类型为T的变量的哈希表，它通过<code>indexForPointer</code>函数计算出指针的哈希值，可以看到哈希算法为<code>((addr &gt;&gt; 4) ^ (addr &gt;&gt; 9)) % StripeCount;</code><br>又从之前的<code>static StripedMap&lt;SideTable&gt;&amp; SideTables()</code>可以知道，<code>SideTables</code>即为一个存储了<code>SideTable</code>的哈希表，该表在IPhone真机上长度为8，也就是一共有8个SideTable，在其他平台上长度为64，即一共有64个SideTable。</p>
+<p>接下来让我们来看看SideTable的结构。</p>
+<h3 id="SideTable"><a href="#SideTable" class="headerlink" title="SideTable"></a>SideTable</h3><p><img src="https://i.loli.net/2021/11/22/zdxGqRh4DHypj5I.jpg" alt="SideTable"></p>
+<p>在源码中搜索<code>SideTable</code>，可以找到<code>SideTable</code>的结构定义。</p>
+<p>在结构体中只有三个变量，分别是<code>spinlock_t</code>类型的自旋锁，用于加锁防止多线程操作导致的数据竞赛问题；<code>RefcountMap</code>类型的引用计数表，<code>weak_table_t</code>类型的弱引用表，弱引用表在之前的文章中已分析过。</p>
+<p>我们在这里先来回顾一下之前的弱引用表中的弱引用对象插入表的操作，来回顾一下weak table与sidetable的联系。</p>
+<h4 id="weak-table与sidetable"><a href="#weak-table与sidetable" class="headerlink" title="weak table与sidetable"></a>weak table与sidetable</h4><p><img src="https://i.loli.net/2021/11/22/ABSYCfFTtWekwg9.jpg"></p>
+<p><img src="https://i.loli.net/2021/11/22/G14fLHJy682utmF.jpg"></p>
+<p>可以看到，在弱引用对象的插入方法中，方法在一开始先定义了旧对象与新对象的SideTable变量，并通过<code>&amp;SideTable[obj]</code>方法来获取到对象对应的SideTable。而在下图中的弱引用对象实际的插入时，我们可以看到弱应用表是用<code>sidetable-&gt;weak_table</code>来获得的。</p>
+<p><strong>也就是说，在Runtime说虽然说广义上是只存在了一个全局的弱引用表，但实际上弱引用表是不止一个的，每个对象根据对象的地址找到自己对应的SideTable，再通过SideTable找到自己对应的Weak Table，即在IPhone真机中共有最多8个SideTable和8个Weak table，在其他平台上共有最多64个SideTable和64个WeakTable，引用计数表同理。这些通过散列表存储的分散表一起组成了广义上的全局弱引用表/引用计数表。</strong></p>
+<h3 id="Retain与Release"><a href="#Retain与Release" class="headerlink" title="Retain与Release"></a>Retain与Release</h3><h4 id="Retain"><a href="#Retain" class="headerlink" title="Retain"></a>Retain</h4><p>在上文中我们理清了SideTables、SideTable与弱引用表、引用计数表之间的关系，接着我们来尝试一下看看<code>Retain</code>和<code>Release</code>方法。</p>
+<p>在MRC中，调用<code>Retain</code>方法会使得对象的引用计数+1，而调用<code>Release</code>方法会使得对象的引用计数-1，当引用计数为0时该对象就会被系统释放。</p>
+<p>首先在源码中搜索<code>retain</code>。</p>
+<p><img src="https://i.loli.net/2021/11/22/MJsG5fEbNFrklV6.jpg"></p>
+<p>可以看到<code>retain</code>方法实际只调用了<code>_objc_rootRetain(self)</code>方法，通过<code>self</code>将对象传入函数。</p>
+<p>这里我们跳过中间的一个私有方法，直接来看最终的<code>rootRetain()</code>函数。</p>
+<p><img src="https://i.loli.net/2021/11/22/zmPneKUEGc1t3YJ.jpg"></p>
+<p>可以看到，在<code>rootRetain</code>函数中与SideTable相关的并且进行相关retain操作的代码在上图红框里，在这里分为了<code>sidetable_tryRetain</code>与<code>sidetable_retain</code>两个方法。</p>
+<p>接着我们进到<code>sidetable_retain</code>方法中看看它的具体实现。</p>
+<p><img src="https://i.loli.net/2021/11/22/XcqsdJvO9bG6yat.jpg" alt="sidetable_retain"></p>
+<p><code>sidetable_retain</code>的具体实现并不复杂，可以看到首先是检查了一下参数，接着通过**全局静态变量SideTables()**取到该对象对应的<code>SideTable</code>，这里我们注意到，在前文已经提到SideTables是一个哈希表，所以这里直接使用<code>SideTables()[this]</code>的语法就可以取到该对象对应的SideTable。</p>
+<p>SideTable中包含了自旋锁、引用计数表、弱引用表三个属性，由于此处进行的是<code>retain</code>操作，所以首先对表加锁，接着通过<code>table.refcnts[this]</code>取出对象对应的引用计数。从这里可以看出引用计数表实际上也是一张哈希表。</p>
+<p>接着就是判断后对该对象的引用计数➕1了，<code>SIDE_TABLE_RC_ONE</code>实际上就是在宏定义的1，所以<code>retain</code>操作会使得对象的引用计数加一，最后释放SideTable的自旋锁。</p>
+<h4 id="Release"><a href="#Release" class="headerlink" title="Release"></a>Release</h4><p>接下来看看<code>release</code>的相关实现，第一步依然是找出<code>release</code>在代码中的具体实现。</p>
+<p><img src="https://i.loli.net/2021/11/22/Vz87DCFvcONUQg5.jpg" alt="rootRelease"></p>
+<p>可以看到在<code>objc_object::rootRelease</code>函数里的关键代码就是<code>sidetable_release()</code>函数，该函数负责了将对象的引用计数-1。<br><code>objc_object::rootRelease(bool performDealloc, bool handleUnderflow)</code>第一个参数从命名可以看到，该参数标示了对象在被release了之后是否要被释放。</p>
+<p><img src="https://i.loli.net/2021/11/22/jkAy1uPapc4ZRYQ.jpg" alt="sidetable_release"></p>
+<p>可以看到在<code>sidetable_release</code>函数中同样是通过<strong>全局静态变量SideTables</strong>获取到对象对应的SideTable，接着通过引用计数的判断来设置<code>do_dealloc</code>变量的值，若不需要释放则对引用计数-1，<strong>若需要释放，则将对象的引用计数设为<code>SIDE_TABLE_DEALLOCATING</code>状态并且在最后通过<code>objc_msgSend</code>调用对象的<code>dealloc</code>方法</strong>，自此release<br>方法执行完毕。</p>
+<h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>经过对SideTables、SideTable的探索和学习，进一步加深了对之前weak table的理解。SideTable将引用计数表、弱引用表串联了起来，并且对内存管理中的<code>retain</code>、<code>release</code>也有了更深的理解。</p>
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
+    </article>
+    <!-- license -->
     
-        
-        
-        
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
             
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2021/09/05/%E4%B8%80%E9%81%93%E7%BB%8F%E5%85%B8%E7%9A%84BFS/">
-                
-                <span class="abstract-title-text">一道经典的BFS</span>
-            </a>
-            <div class="abstract-content">
-                <p>剑指 Offer 32 - I. 从上到下打印二叉树，要求按照每层从左至右的顺序打印，也就是BFS（广度优先搜索）。记录一下<code>BFS+队列</code>的方案</p>
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/09/05</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-        
-        
+        </li>
+        <li class="previous">
             
-        
-        
-        <span class="post-category" data-categories="Note"">
-            <i class="far fa-folder post-category-icon"></i>
-            <span class="post-category-text">
-                Note
-            </span>
-        </span>
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="swift">swift</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="algorithm">algorithm</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="leetcode">leetcode</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="tree">tree</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="BFS">BFS</a>
-    
-</div>
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2021/11/16/Runtime%E6%8E%A2%E6%9E%902-0/" title="Runtime探析2.0">
+                    <div class="prevTitle">Runtime探析2.0</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- comment -->
+     
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2021/09/03/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">
-                
-                <span class="abstract-title-text">快速排序</span>
-            </a>
-            <div class="abstract-content">
-                <p>题目是要找出数组中最小的k个数，那么肯定要涉及到排序。</p>
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/09/03</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-        
-        
-            
-        
-        
-        <span class="post-category" data-categories="Note"">
-            <i class="far fa-folder post-category-icon"></i>
-            <span class="post-category-text">
-                Note
-            </span>
-        </span>
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="swift">swift</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="algorithm">algorithm</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="leetcode">leetcode</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="排序">排序</a>
-    
-</div>
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
             
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2021/09/03/%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/">
-                
-                <span class="abstract-title-text">三数之和</span>
-            </a>
-            <div class="abstract-content">
-                <p>两数之和的进阶版，很容易想到使用多个指针，可以将三数之和转化为两数之和问题，但是这个问题的规模使得写的时候由于超时快被气死…<br><strong>系统复习系列</strong></p>
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/09/03</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-        
-        
-            
-        
-        
-        <span class="post-category" data-categories="Note"">
-            <i class="far fa-folder post-category-icon"></i>
-            <span class="post-category-text">
-                Note
-            </span>
-        </span>
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="swift">swift</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="algorithm">algorithm</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="leetcode">leetcode</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="双指针">双指针</a>
-    
-</div>
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
             
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2021/09/01/%E5%BF%AB%E6%85%A2%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E7%BB%93%E7%82%B9/">
-                
-                <span class="abstract-title-text">找出链表的倒数第N个结点</span>
-            </a>
-            <div class="abstract-content">
-                <p>快慢指针的一个应用<br><strong>系统复习系列</strong></p>
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/09/01</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-        
-        
-            
-        
-        
-        <span class="post-category" data-categories="Note"">
-            <i class="far fa-folder post-category-icon"></i>
-            <span class="post-category-text">
-                Note
-            </span>
-        </span>
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="swift">swift</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="algorithm">algorithm</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="leetcode">leetcode</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="双指针">双指针</a>
-    
-</div>
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
             
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2021/08/25/%E4%B8%80%E9%81%93%E5%85%B8%E5%9E%8B%E7%9A%84DFS/">
-                
-                <span class="abstract-title-text">一道典型的DFS</span>
-            </a>
-            <div class="abstract-content">
-                <p>Leetcode 797.所有可能的路径，看这个名字就是DFS的味道…</p>
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/08/25</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-        
-        
-            
-        
-        
-        <span class="post-category" data-categories="Note"">
-            <i class="far fa-folder post-category-icon"></i>
-            <span class="post-category-text">
-                Note
-            </span>
-        </span>
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="swift">swift</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="algorithm">algorithm</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="leetcode">leetcode</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="DFS算法">DFS算法</a>
-    
-</div>
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2021/07/22/%E6%9C%80%E5%A4%A7%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/">
-                
-                <span class="abstract-title-text">最大回文子串(Leetcode no.5)</span>
-            </a>
-            <div class="abstract-content">
-                <p>Leetcode第五题，判断最大回文子串，难度中等。（个人感觉在中等里算较难的）</p>
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/07/22</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-        
-        
-            
-        
-        
-        <span class="post-category" data-categories="Note"">
-            <i class="far fa-folder post-category-icon"></i>
-            <span class="post-category-text">
-                Note
-            </span>
-        </span>
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="swift">swift</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="algorithm">algorithm</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="leetcode">leetcode</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="动态规划">动态规划</a>
-    
-</div>
+            <!-- utteranc评论 -->
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2021/03/25/%E5%88%A4%E6%96%AD%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/">
-                
-                <span class="abstract-title-text">判断平衡二叉树</span>
-            </a>
-            <div class="abstract-content">
-                <p>递归分治思想判断平衡二叉树</p>
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/03/25</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-        
-        
-            
-        
-        
-        <span class="post-category" data-categories="Note"">
-            <i class="far fa-folder post-category-icon"></i>
-            <span class="post-category-text">
-                Note
-            </span>
-        </span>
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="swift">swift</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="algorithm">algorithm</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="leetcode">leetcode</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="tree">tree</a>
-    
-</div>
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2021/03/25/%E5%B0%86%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E8%BD%AC%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/">
-                
-                <span class="abstract-title-text">将有序数组转为二叉搜索树</span>
-            </a>
-            <div class="abstract-content">
-                <p>根据一个有序数组建立平衡二叉搜索树</p>
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/03/25</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-        
-        
-            
-        
-        
-        <span class="post-category" data-categories="Note"">
-            <i class="far fa-folder post-category-icon"></i>
-            <span class="post-category-text">
-                Note
-            </span>
-        </span>
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="swift">swift</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="algorithm">algorithm</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="leetcode">leetcode</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="tree">tree</a>
-    
-</div>
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2021/03/16/%E5%AF%B9%E7%A7%B0%E4%BA%8C%E5%8F%89%E6%A0%91/">
-                
-                <span class="abstract-title-text">对称二叉树</span>
-            </a>
-            <div class="abstract-content">
-                <p>判断对称二叉树的两种解法</p>
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/03/16</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-        
-        
-            
-        
-        
-        <span class="post-category" data-categories="Note"">
-            <i class="far fa-folder post-category-icon"></i>
-            <span class="post-category-text">
-                Note
-            </span>
-        </span>
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="swift">swift</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="algorithm">algorithm</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="leetcode">leetcode</a>
-    
-</div>
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
+            
+            
+
+        </div>
     
-    <!-- paginator  -->
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    
+    <!-- Mathjax -->
     
 </main>
 
@@ -1016,6 +697,23 @@
 
         </div>
         <!-- toc -->
+        
+            <div class="toc-wrapper" style=
+
+
+
+
+
+
+
+    top:40vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#SideTables"><span class="toc-number">1.</span> <span class="toc-text">SideTables</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SideTable"><span class="toc-number">2.</span> <span class="toc-text">SideTable</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#weak-table%E4%B8%8Esidetable"><span class="toc-number">2.1.</span> <span class="toc-text">weak table与sidetable</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Retain%E4%B8%8ERelease"><span class="toc-number">3.</span> <span class="toc-text">Retain与Release</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Retain"><span class="toc-number">3.1.</span> <span class="toc-text">Retain</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Release"><span class="toc-number">3.2.</span> <span class="toc-text">Release</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-number">4.</span> <span class="toc-text">写在最后</span></a></li></ol>
+            </div>
         
         <!-- sidebar -->
         <div class="sidebar sidebar-hide">
@@ -1684,6 +1382,8 @@
         <!-- CNZZ -->
         
         <!-- async load share.js -->
+        
+            <script src="/scripts/share.js" async></script>    
         
         <!-- mermaid -->
         
