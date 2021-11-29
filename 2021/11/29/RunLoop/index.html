@@ -20,26 +20,36 @@
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog,iOS,swift">
     
     <meta name="description" content="">
-    <meta name="description" content="题目是要找出数组中最小的k个数，那么肯定要涉及到排序。">
+    <meta name="description" content="根据源码大概整理了一次RunLoop的底层原理和运行机制…(因为之前没找着源码）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="快速排序">
-<meta property="og:url" content="http://example.com/2021/09/03/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/index.html">
+<meta property="og:title" content="RunLoop">
+<meta property="og:url" content="http://example.com/2021/11/29/RunLoop/index.html">
 <meta property="og:site_name" content="Tino又想吃肉了">
-<meta property="og:description" content="题目是要找出数组中最小的k个数，那么肯定要涉及到排序。">
+<meta property="og:description" content="根据源码大概整理了一次RunLoop的底层原理和运行机制…(因为之前没找着源码）">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-09-03T08:54:38.000Z">
-<meta property="article:modified_time" content="2021-09-03T09:01:52.695Z">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/7tOV5jQuc6KxTCL.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/AzUhB2wPfuvWgG1.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/bRB7w5dJKQc98Fm.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/lA75BDWZJuoyG4C.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/zKj4fONHCdYct83.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/1wHnvmKCTMa26YI.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/Qp7GOhDYWH1glRu.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/VyC7xEd5wJHlvLb.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/uLPIrMBif4w5DJm.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/fILgyiCEcRWPqnS.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/rcC352EYmP9VnWJ.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/r8gRXJ2SatfIDel.jpg">
+<meta property="article:published_time" content="2021-11-29T03:42:24.000Z">
+<meta property="article:modified_time" content="2021-11-29T03:44:30.593Z">
 <meta property="article:author" content="Tino Wu">
-<meta property="article:tag" content="swift">
-<meta property="article:tag" content="algorithm">
-<meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="排序">
+<meta property="article:tag" content="底层原理">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/11/29/7tOV5jQuc6KxTCL.jpg">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon1.ico">
     
-    <title>快速排序 · Tino又想吃肉了</title>
+    <title>RunLoop · Tino又想吃肉了</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -265,7 +275,7 @@
                 <a href="/">Tino又想吃肉了</a>
             </div>
             <div class="post-title header-element">
-                <a href="#" class="post-name">快速排序</a>
+                <a href="#" class="post-name">RunLoop</a>
             </div>
         </div>
     
@@ -313,7 +323,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-                快速排序
+                RunLoop
             <!-- 404 -->
             
         </h1>
@@ -345,26 +355,20 @@
         </span>
     
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="swift">swift</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="algorithm">algorithm</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="leetcode">leetcode</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="排序">排序</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="底层原理">底层原理</a>
     
 </div>
 
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">470</span>Reading time: <span class="post-count reading-time">1 min</span></span>
+                        <span>Word count: <span class="post-count word-count">2.7k</span>Reading time: <span class="post-count reading-time">9 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <!-- 撰写日期 -->
                     <span class="iconfont-archer post-intro-calander">&#xe676;</span>
-                    <span class="post-intro-time">2021/09/03</span>
+                    <span class="post-intro-time">2021/11/29</span>
                     <!-- busuanzi -->
                     
                         <span id="busuanzi_container_page_pv" class="busuanzi-pv">
@@ -519,17 +523,77 @@
             <div class="container container-unloaded">
                 <main class="main post-page">
     <article class="article-entry">
-        <p>题目是要找出数组中最小的k个数，那么肯定要涉及到排序。</p>
+        <p>根据源码大概整理了一次RunLoop的底层原理和运行机制…(因为之前没找着源码）</p>
 <span id="more"></span>
 <blockquote>
-<p>设计一个算法，找出数组中最小的k个数。以任意顺序返回这k个数均可。</p>
+<p>Runloop是iOS系统中的事件循环，它保证了我们的程序不会在main函数执行完后就被退出，<strong>（线程保活）</strong>，可以粗糙地理解成一个<code>while(true)</code>的循环，但它的实现并没有那么简单。实际上它是一个NSRunLoop的对象，在对象内部维护了一个事件循环，当没有事件要处理时，Runloop将线程控制器交给系统，即从<code>用户态-&gt;内核态</code>，当被唤醒时又从<code>内核态-&gt;用户态</code>，实现了在休眠时不占用CPU资源。</p>
 </blockquote>
-<p>很显然，这题只需要排序就行了，考察的就是八大排序算法。（除非你直接调<code>sort()</code>,当然这是面试官见打）<br><strong>快排的思路为</strong>：将某一个元素作为枢纽，最简单的就是将第一个元素作为枢纽，然后通过一次划分算法，将数组划分为由枢纽隔开的两个子数组，枢纽左边的元素全部小于（或大于）枢纽，枢纽右边的元素全大于（或小于）枢纽，并通过递归对每个子数组进行快排。</p>
-<p><strong>划分的思路为</strong>：从右往左找到第一个小于枢纽的元素，并与枢纽交换，从左往右找到第一个大于枢纽的元素，并与枢纽交换。也就是要运用<strong>双指针</strong></p>
-<p>以下为代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">func quickSort(_ arr: [Int], _ l : Int, _ r : Int) -&gt; [Int] &#123;</span><br><span class="line">        var num &#x3D; arr</span><br><span class="line">        if l &lt; r &#123;</span><br><span class="line">            var i &#x3D; l</span><br><span class="line">            var j &#x3D; r</span><br><span class="line">            var x &#x3D; num[i] </span><br><span class="line">            while (i &lt; j) &#123;</span><br><span class="line">                while (i &lt; j &amp;&amp; num[j] &gt;&#x3D; x) &#123; &#x2F;&#x2F; 从右向左找到第一个比枢纽小的</span><br><span class="line">                    j -&#x3D; 1</span><br><span class="line">                &#125;</span><br><span class="line">                if i &lt; j &#123;</span><br><span class="line">                    num[i] &#x3D; num[j]</span><br><span class="line">                    &#x2F;&#x2F;num.swapAt(i,j)</span><br><span class="line">                    i +&#x3D; 1</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                while (i &lt; j &amp;&amp; num[i] &lt; x) &#123; &#x2F;&#x2F; 从左向右找到第一个比枢纽大的</span><br><span class="line">                    i +&#x3D; 1</span><br><span class="line">                &#125;</span><br><span class="line">                if i &lt; j &#123;</span><br><span class="line">                    &#x2F;&#x2F;num.swapAt(i,j)</span><br><span class="line">                    num[j] &#x3D; num[i]</span><br><span class="line">                    j -&#x3D; 1</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            num[i] &#x3D; x</span><br><span class="line">            num &#x3D; quickSort(num,l,i-1)</span><br><span class="line">            num &#x3D; quickSort(num,i+1,r)</span><br><span class="line">        &#125;</span><br><span class="line">        return num</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>八大排序算法是比较重要的知识点，需要多学习并且用语言实现出来，还要知道优化思路。</p>
+<h3 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h3><p>正如前面的引言提到的，一般程序运行完毕后就会自动退出，比如当我们在Xcode中新建一个macOS的CommandLine项目，当main函数return后程序即运行完毕并退出。<br>然而，我们的APP显然不能这样，所以我们要让APP可以随时响应而不退出。这样的机制通常使用事件循环（Event Loop）来实现，在iOS中即为Runloop。<br><strong>与Runtime不同的是，Runloop是一个可实际获取的对象，对应Foundation框架的<code>NSRunloop</code>类与Core Foundation框架的<code>CFRunloop</code>类</strong>，NSRunloop是基于CFRunloop的上层封装。</p>
+<h3 id="Runloop核心"><a href="#Runloop核心" class="headerlink" title="Runloop核心"></a>Runloop核心</h3><p>前面我们提到，Runloop可以简单地概括成一个<code>while(true)</code>的循环，但实际上这样的实现会使CPU进行大量无谓的空转。所以，Runloop机制的核心就是保证线程在有events需要处理时能唤醒，在没有events时能进行休眠。<br>而实现真正的休眠，是靠没有events时从<code>用户态-&gt;内核态</code>实现的，当有事件时，系统内核通过<code>mach_msg()</code>或者<code>mach port</code>方法将事件发送给对应的Runloop，Runloop收到事件后从休眠状态切换到唤醒状态，并从<code>内核态-&gt;用户态</code>。</p>
+<h3 id="如何唤醒Runloop"><a href="#如何唤醒Runloop" class="headerlink" title="如何唤醒Runloop"></a>如何唤醒Runloop</h3><h4 id="Source"><a href="#Source" class="headerlink" title="Source"></a>Source</h4><p>Source是Runloop中一个重要的概念，它代表了在上文中提到的events。<br>在Runloop中，Source分为两类</p>
+<ul>
+<li>Source0:该类Source是App的内部事件，不具有独立唤醒Runloop的能力。一个Source0需要被处理时，他需要被<code>CFRunLoopSourceSignal()</code>函数标记为待处理，并调用<code>CFRunLoopWakeUp</code>函数来唤醒Runloop，<code>CFRunLoopWakeUp</code>函数内部通过一个<code>_wakeUpPort</code>成员变量来唤醒Runloop，推测该变量是一个mach port，Runloop只有通过mach port与mach_msg()才可以唤醒。唤醒后通过调用<code>__CFRunLoopDoSources0</code>函数来处理Source0事件，并在之后将该事件标记为已处理。</li>
+<li>Source1:该类Source是由硬件事件生成的Source，如触摸、摇晃、旋转等。此类Source可唤醒Runloop。</li>
+</ul>
+<h4 id="Timer"><a href="#Timer" class="headerlink" title="Timer"></a>Timer</h4><p>使用NSTimer API注册执行的任务，就属于这一类</p>
+<h4 id="Observer"><a href="#Observer" class="headerlink" title="Observer"></a>Observer</h4><p> 某个Observer可以监听runloop的状态变化，并作出反应</p>
+<h3 id="Runloop与线程的关系"><a href="#Runloop与线程的关系" class="headerlink" title="Runloop与线程的关系"></a>Runloop与线程的关系</h3><ul>
+<li>Runloop与线程是一一对应的，且子线程的Runloop无法获取到其他子线程的Runloop,一一对应的关系以key-value存储在一个全局字典里。在<code>CFRunloop</code>中，只有<code>CFRunloopGetMain</code>和<code>CFRunloopGetCurrent</code>两个函数可以获取到Runloop</li>
+<li>主线程会自动创建Runloop以响应事件，但子线程并不会自动创建Runloop。由于NSTimer对象需要加入到Runloop中的mode，所以在子线程中调用<code>performSel afterdelay</code>系列方法并不会被调用，因为这些方法都会注册一个NSTimer到Runloop中，而子线程默认情况下是没有Runloop的。</li>
+<li>Runloop会在线程销毁时销毁</li>
+</ul>
+<h3 id="CFRunLoopMode"><a href="#CFRunLoopMode" class="headerlink" title="CFRunLoopMode"></a>CFRunLoopMode</h3><p>mode是管理着Runloop与source/timer/observer之间的桥梁，在一开始会注册五个mode</p>
+<ul>
+<li>kCFRunLoopDefaultMode: App的默认 Mode，通常主线程是在这个 Mode 下运行的。</li>
+<li>UITrackingRunLoopMode: 界面跟踪 Mode，用于 ScrollView 追踪触摸滑动，保证界面滑动时不受其他 Mode 影响。<strong>默认NSTimer是被加入到default mode中的，所以当滑动时Runloop切换到tracking mode，这时default mode中的Timer回调不会被调用，所以NSTimer的精度没有CADisplayLinker高。</strong></li>
+<li>UIInitializationRunLoopMode: 在刚启动 App 时第进入的第一个 Mode，启动完成后就不再使用。</li>
+<li>GSEventReceiveRunLoopMode: 接受系统事件的内部 Mode，通常用不到。</li>
+<li>kCFRunLoopCommonModes: 这是一个占位的 Mode，没有实际作用。</li>
+<li>如果需要将事件加入到多个mode中，则将它注册到commonMode中，该mode实际上是多个mode的集合。</li>
+<li><strong>出于将source/timer/observer分隔开的目的，RunLoop一次只能运行在一个mode下，当运行时在RunLoop的currentMode属性中会标记当前运行的mode。而当要切换mode时，RunLoop必须先退出，并选中一个mode重新进入，达到切换mode的目的。在切换mode时，被加入到commonModes中的事件会被拷贝一次到运行的mode中。</strong></li>
+</ul>
+<h3 id="源码验证"><a href="#源码验证" class="headerlink" title="源码验证"></a>源码验证</h3><h4 id="CFRunLoop"><a href="#CFRunLoop" class="headerlink" title="__CFRunLoop"></a>__CFRunLoop</h4><p>RunLoop在Core Foundation中对应的类是<code>CFRunLoopRef</code>,其对应的结构是<code>__CFRunLoop</code><br><img src="https://i.loli.net/2021/11/29/7tOV5jQuc6KxTCL.jpg" alt="-w795"></p>
+<p>可以看到结构体中包含了上文提到的mode,对应<code>CFRunLoopModeRef</code>,其结构如下图<br><img src="https://i.loli.net/2021/11/29/AzUhB2wPfuvWgG1.jpg" alt="-w778"></p>
+<p>在这里我们看到了上文提到的source,observer,timer,这是能唤醒RunLoop的三种类型，当然能独立唤醒RunLoop的只有sources1. Mode与source,observer,timer的关系如下图<br><img src="https://i.loli.net/2021/11/29/bRB7w5dJKQc98Fm.png" alt="-w455"></p>
+<p>一个 RunLoop 包含若干个 Mode，每个 Mode 又包含若干个 Source/Timer/Observer。<strong>每次调用 RunLoop 的主函数时，只能指定其中一个 Mode，这个Mode被称作 CurrentMode。如果需要切换 Mode，只能退出 Loop，再重新指定一个 Mode 进入。这样做主要是为了分隔开不同组的 Source/Timer/Observer，让其互不影响。</strong></p>
+<h4 id="CFRunloopGet0"><a href="#CFRunloopGet0" class="headerlink" title="_CFRunloopGet0()"></a>_CFRunloopGet0()</h4><p>在Core Foundation中，提供了两个接口来获取Runloop，分别是<code>CFRunloopGetMain</code>和<code>CFRunloopGetCurrent</code>,先来看看他们的源码实现。<br><img src="https://i.loli.net/2021/11/29/lA75BDWZJuoyG4C.jpg" alt="-w769"></p>
+<p>可以看到，两个函数实际上都是调用了<code>_CFRunLoopGet0()</code>方法，方法的参数是线程<code>pthread_t</code>。在<code>CFRunLoopGetCurrent()</code>中，如果当前线程的Runloop已存在，那么会在<code>_CFGetTSD()</code>函数中找到并返回。</p>
+<p>接下来继续看看<code>_CFRunLoopGet0()</code>函数，显然这是获取RunLoop的关键函数。先看一下第一部分。<br><img src="https://i.loli.net/2021/11/29/zKj4fONHCdYct83.jpg" alt="-w741"></p>
+<p><strong>这里注意到<code>__CFRunLoops</code>变量，它是一个<code>CFMutableDictionaryRef</code>类型的字典，key为线程，value为CFRunLoopRef</strong></p>
+<p><img src="https://i.loli.net/2021/11/29/1wHnvmKCTMa26YI.jpg" alt="-w499"></p>
+<p>在第一次进入时，<code>_CFRunLoopGet0()</code>函数先创建了<code>CFMutableDictionaryRef</code>类型的字典变量，显然这个就是全局RunLoop表了。这里也印证了前文提到的<strong>线程与RunLoop一一对应</strong>的结论。<br>接着我们可以看到，这里调用<code>__CFRunLoopCreate()</code>函数创建了主线程的RunLoop，所以RunLoop是直到被获取时才会被创建，如果不获取便不会被创建。RunLoop创建后以key为线程，value为CFRunLoopRef存储在全局RunLoop表中。</p>
+<p>接着看看第二部分，如果不是第一次进入则是走到这个流程的代码。</p>
+<p><img src="https://i.loli.net/2021/11/29/Qp7GOhDYWH1glRu.jpg" alt="-w803"></p>
+<p>首先定义了一个<code>loop</code>变量，从全局RunLoops表<code>__CFRunLoops</code>中查找线程对应的RunLoop，如果找到了则返回该CFRunLoopRef。<br>如果在<code>__CFRunLoops</code>中没有查找到该线程对应的RunLoop，则调用<code>__CFRunLoopCreate()</code>函数创建RunLoop，并添加到<code>__CFRunLoops</code>中。</p>
+<h4 id="CFRunLoopSource"><a href="#CFRunLoopSource" class="headerlink" title="__CFRunLoopSource"></a>__CFRunLoopSource</h4><p><img src="https://i.loli.net/2021/11/29/VyC7xEd5wJHlvLb.jpg"></p>
+<p>在mode中，Source对应<code>__CFRunLoopSource</code>结构体。在上文我们知道Source是分为Source0和Source1的，而他们其实都是<code>__CFRunLoopSource</code>，在结构体中，以<code>CFRunLoopSourceContext</code>来区分不同的Source,其中的<code>version0</code>和<code>version1</code>分别对应<code>source0</code>和<code>source1</code>。</p>
+<p><img src="https://i.loli.net/2021/11/29/uLPIrMBif4w5DJm.jpg" alt="Source0与Source1"></p>
+<p>上图即为<code>CFRunLoopSourceContext</code>和<code>CFRunLoopSourceContext1</code>的结构定义，可以看到CFRunLoopSourceContext1与CFRunLoopSourceContext0一个明显的区别就是<strong>CFRunLoopSourceContext1具有一个<code>mach_port_t</code>类型的变量</strong>。从这里就可以知道为什么Source0不可以独立唤醒RunLoop而Source1可以，在前文中我们提到只有<code>mach port</code>和<code>mach_msg()</code>可以独立唤醒RunLoop。</p>
+<h4 id="CFRunLoopCreate-CFThreadRef-t"><a href="#CFRunLoopCreate-CFThreadRef-t" class="headerlink" title="__CFRunLoopCreate(_CFThreadRef t)"></a>__CFRunLoopCreate(_CFThreadRef t)</h4><p>该函数被用来创建RunLoop，在<code>_CFRunloopGet0()</code>函数中若获取不到线程对应的RunLoop则调用该函数来创建一个新RunLoop。可以看到入参是一个<code>_CFThreadRef</code>类型的变量，代表着线程，因为线程与RunLoop是一一对应的。</p>
+<p><img src="https://i.loli.net/2021/11/29/fILgyiCEcRWPqnS.jpg" alt="__CFRunLoopCreate"></p>
+<p>在该函数中进行了对<code>__CFRunLoop</code>结构的分配内存与初始化，可以看到实际上是调用了<code>_CFRuntimeCreateInstance()</code>函数创建了<code>CFRunLoopRef</code>类型的实例，从该函数的名字以及代码可以看到，其实RunLoop的创建是利用Runtime的动态创建类的特性来创建的。</p>
+<h4 id="CFRunLoopWakeUp"><a href="#CFRunLoopWakeUp" class="headerlink" title="CFRunLoopWakeUp"></a>CFRunLoopWakeUp</h4><p><img src="https://i.loli.net/2021/11/29/rcC352EYmP9VnWJ.jpg" alt="CFRunLoopWakeUp"></p>
+<p>该函数在CFRunLoop中用来唤醒RunLoop，可以看到在<code>TARGET_OS_MAC</code>下，函数的关键调用是<code>__CFSendTrivialMachMessage()</code>函数，该函数使用了<code>CFRunLoop</code>中的<code>_wakeUpPort</code>属性。</p>
+<p><img src="https://i.loli.net/2021/11/29/r8gRXJ2SatfIDel.jpg" alt="__CFSendTrivialMachMessage"></p>
+<p>可以看到在<code>__CFSendTrivialMachMessage</code>函数内部，的确是使用了<code>mach_msg</code>的方式来给mach port发送信息，以达到唤醒RunLoop的目的。</p>
+<h3 id="Runloop应用之事件响应"><a href="#Runloop应用之事件响应" class="headerlink" title="Runloop应用之事件响应"></a>Runloop应用之事件响应</h3><blockquote>
+<p>从用户触摸屏幕，到我们的app响应这个触摸，中间其实需要经过多步的处理，并且涉及到的是硬件-&gt;软件的通信。之前关于Runloop的<code>Source</code>中提到<code>Source1</code>是一类由硬件生成的事件，那么以触摸事件为例子，看看Runloop是怎么处理事件响应的。</p>
+</blockquote>
+<h4 id="事件响应链"><a href="#事件响应链" class="headerlink" title="事件响应链"></a>事件响应链</h4><p>首先我们来梳理一下事件响应链。</p>
+<ol>
+<li>用户触发事件 </li>
+<li>系统将事件转交到对应 APP 的事件队列 </li>
+<li>APP 从消息队列头取出事件 </li>
+<li>交由 Main Window 进行消息分发 </li>
+<li>找到合适的 Responder 进行处理，如果没找到，则会沿着 Responder chain 返回到 APP 层，丢弃不响应该事件。</li>
+</ol>
+<p>从上面的五步，我们可以看到其实1和2是独立于app外的，需要涉及到硬件，从第3步开始事件才被发送到app内进行处理。</p>
+<h4 id="用户触发事件"><a href="#用户触发事件" class="headerlink" title="用户触发事件"></a>用户触发事件</h4><p>这一步始于用户点触屏幕，此时系统的<code>IOKit.framework</code>会生成一个<code>IOHIDEvent</code>事件，该事件会被<code>Spring board</code>接收。</p>
+<h4 id="事件转发到app"><a href="#事件转发到app" class="headerlink" title="事件转发到app"></a>事件转发到app</h4><p>当<code>IOHIDEvent</code>被接收后，将会通过mach port转发给对应的app进程。而这时，app中一个名为<code>com.apple.uikit.eventfetch-thread</code>的线程中已经注册了一个Source1，其回调是<code>__IOHIDEventSystemClientQueueCallback()</code>函数。</p>
+<h4 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h4><p><code>IOHIDEvent</code>被mach port转发到对应app进程后，就唤醒了<code>com.apple.uikit.eventfetch-thread</code>线程的Runloop，并调用了Source1对应的<code>__IOHIDEventSystemClientQueueCallback()</code>回调。该回调从消息队列中取出event,并将main thread<code>__handleEventQueue</code>对应的<code>Source0</code>设置为待处理状态，同时唤醒main thread的Runloop。</p>
+<h4 id="消息分发"><a href="#消息分发" class="headerlink" title="消息分发"></a>消息分发</h4><p>此时就开始调用<code>__eventQueueSourceCallback</code>函数进行消息分发，<code>_UIApplicationHandleEventQueue</code>会把<code>IOHIDEvent</code>封装成<code>UIEvent</code>并分发出去，开始hitTest等函数的调用，并且TouchBegan/end/move/cancel等函数都是在该回调中调用的。</p>
+<h4 id="In-short"><a href="#In-short" class="headerlink" title="In short"></a>In short</h4><p>用户触发事件， <code>IOKit.framework</code> 生成一个 <code>IOHIDEvent</code> 事件并由 <code>SpringBoard </code>接收，SpringBoard 会利用 <code>mach port</code>，产生 <code>source1</code>，来唤醒目标 APP 的 <code>com.apple.uikit.eventfetch-thread</code> 的 RunLoop。<code>Eventfetch thread</code> 会将 main runloop 中 <code>__handleEventQueue</code> 所对应的 <code>source0</code> 设置为 <code>signalled = Yes</code> 状态，同时唤醒 main RunLoop。mainRunLoop 则调用 <code>__eventQueueSourceCallback </code>进行事件队列处理。</p>
+<h3 id="Runloop与autorelease-pool"><a href="#Runloop与autorelease-pool" class="headerlink" title="Runloop与autorelease pool"></a>Runloop与autorelease pool</h3><p>Runloop会注册几个监听自己状态变化的回调，当Runloop进入一次事件循环时，会调用<code>AutoreleasePoolPage::push()</code>方法创建一个新的自动释放池并传入哨兵对象，而在即将退出或者休眠时则会将自动释放池中的对象pop出。</p>
 
     </article>
     <!-- license -->
@@ -538,17 +602,12 @@
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href="/2021/09/05/%E4%B8%80%E9%81%93%E7%BB%8F%E5%85%B8%E7%9A%84BFS/" title="一道经典的BFS">
-                    <div class="nextTitle">一道经典的BFS</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2021/09/03/%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/" title="三数之和">
-                    <div class="prevTitle">三数之和</div>
+                <a href="/2021/11/22/SideTables%E4%B8%8Eretain-release/" title="SideTables与retain,release">
+                    <div class="prevTitle">SideTables与retain,release</div>
                 </a>
             
         </li>
@@ -686,7 +745,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.</span> <span class="toc-text">总结</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">基础概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Runloop%E6%A0%B8%E5%BF%83"><span class="toc-number">2.</span> <span class="toc-text">Runloop核心</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%94%A4%E9%86%92Runloop"><span class="toc-number">3.</span> <span class="toc-text">如何唤醒Runloop</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Source"><span class="toc-number">3.1.</span> <span class="toc-text">Source</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Timer"><span class="toc-number">3.2.</span> <span class="toc-text">Timer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Observer"><span class="toc-number">3.3.</span> <span class="toc-text">Observer</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Runloop%E4%B8%8E%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">4.</span> <span class="toc-text">Runloop与线程的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CFRunLoopMode"><span class="toc-number">5.</span> <span class="toc-text">CFRunLoopMode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E9%AA%8C%E8%AF%81"><span class="toc-number">6.</span> <span class="toc-text">源码验证</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CFRunLoop"><span class="toc-number">6.1.</span> <span class="toc-text">__CFRunLoop</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CFRunloopGet0"><span class="toc-number">6.2.</span> <span class="toc-text">_CFRunloopGet0()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CFRunLoopSource"><span class="toc-number">6.3.</span> <span class="toc-text">__CFRunLoopSource</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CFRunLoopCreate-CFThreadRef-t"><span class="toc-number">6.4.</span> <span class="toc-text">__CFRunLoopCreate(_CFThreadRef t)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CFRunLoopWakeUp"><span class="toc-number">6.5.</span> <span class="toc-text">CFRunLoopWakeUp</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Runloop%E5%BA%94%E7%94%A8%E4%B9%8B%E4%BA%8B%E4%BB%B6%E5%93%8D%E5%BA%94"><span class="toc-number">7.</span> <span class="toc-text">Runloop应用之事件响应</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%93%8D%E5%BA%94%E9%93%BE"><span class="toc-number">7.1.</span> <span class="toc-text">事件响应链</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E8%A7%A6%E5%8F%91%E4%BA%8B%E4%BB%B6"><span class="toc-number">7.2.</span> <span class="toc-text">用户触发事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E8%BD%AC%E5%8F%91%E5%88%B0app"><span class="toc-number">7.3.</span> <span class="toc-text">事件转发到app</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="toc-number">7.4.</span> <span class="toc-text">消息队列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E5%88%86%E5%8F%91"><span class="toc-number">7.5.</span> <span class="toc-text">消息分发</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#In-short"><span class="toc-number">7.6.</span> <span class="toc-text">In short</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Runloop%E4%B8%8Eautorelease-pool"><span class="toc-number">8.</span> <span class="toc-text">Runloop与autorelease pool</span></a></li></ol>
             </div>
         
         <!-- sidebar -->
