@@ -20,26 +20,32 @@
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog,iOS,swift">
     
     <meta name="description" content="">
-    <meta name="description" content="根据一个有序数组建立平衡二叉搜索树">
+    <meta name="description" content="单独列一篇整理进程、线程、多线程以及iOS开发中的多线程解决方案">
 <meta property="og:type" content="article">
-<meta property="og:title" content="将有序数组转为二叉搜索树">
-<meta property="og:url" content="http://example.com/2021/03/25/%E5%B0%86%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E8%BD%AC%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/index.html">
+<meta property="og:title" content="进程与多线程">
+<meta property="og:url" content="http://example.com/2021/12/05/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E5%A4%9A%E7%BA%BF%E7%A8%8B/index.html">
 <meta property="og:site_name" content="Tino又想吃肉了">
-<meta property="og:description" content="根据一个有序数组建立平衡二叉搜索树">
+<meta property="og:description" content="单独列一篇整理进程、线程、多线程以及iOS开发中的多线程解决方案">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-03-25T14:01:43.000Z">
-<meta property="article:modified_time" content="2021-03-25T14:17:50.130Z">
+<meta property="og:image" content="https://s2.loli.net/2021/12/05/HyecmWo1MQSjZ4v.jpg">
+<meta property="og:image" content="https://s2.loli.net/2021/12/05/7N2CpF6aQzqhBso.jpg">
+<meta property="og:image" content="https://s2.loli.net/2021/12/05/MqAfNF6CY2kUaPX.jpg">
+<meta property="og:image" content="https://s2.loli.net/2021/12/05/5qSekmZ9VshwMQ3.jpg">
+<meta property="og:image" content="https://s2.loli.net/2021/12/05/OjdxvepkHqUV5mF.jpg">
+<meta property="og:image" content="https://s2.loli.net/2021/12/05/BMKLkNbWTsReZAD.jpg">
+<meta property="og:image" content="https://s2.loli.net/2021/12/05/2n9YPA3Ni4hmHuk.jpg">
+<meta property="og:image" content="https://s2.loli.net/2021/12/05/EKuFVXBnhvgC5ai.jpg">
+<meta property="article:published_time" content="2021-12-05T15:10:31.000Z">
+<meta property="article:modified_time" content="2021-12-05T15:15:58.050Z">
 <meta property="article:author" content="Tino Wu">
-<meta property="article:tag" content="swift">
-<meta property="article:tag" content="algorithm">
-<meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="tree">
+<meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2021/12/05/HyecmWo1MQSjZ4v.jpg">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon1.ico">
     
-    <title>将有序数组转为二叉搜索树 · Tino又想吃肉了</title>
+    <title>进程与多线程 · Tino又想吃肉了</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -265,7 +271,7 @@
                 <a href="/">Tino又想吃肉了</a>
             </div>
             <div class="post-title header-element">
-                <a href="#" class="post-name">将有序数组转为二叉搜索树</a>
+                <a href="#" class="post-name">进程与多线程</a>
             </div>
         </div>
     
@@ -313,7 +319,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-                将有序数组转为二叉搜索树
+                进程与多线程
             <!-- 404 -->
             
         </h1>
@@ -345,26 +351,20 @@
         </span>
     
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="swift">swift</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="algorithm">algorithm</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="leetcode">leetcode</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="tree">tree</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="操作系统">操作系统</a>
     
 </div>
 
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">560</span>Reading time: <span class="post-count reading-time">2 min</span></span>
+                        <span>Word count: <span class="post-count word-count">5.6k</span>Reading time: <span class="post-count reading-time">19 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <!-- 撰写日期 -->
                     <span class="iconfont-archer post-intro-calander">&#xe676;</span>
-                    <span class="post-intro-time">2021/03/25</span>
+                    <span class="post-intro-time">2021/12/05</span>
                     <!-- busuanzi -->
                     
                         <span id="busuanzi_container_page_pv" class="busuanzi-pv">
@@ -519,21 +519,133 @@
             <div class="container container-unloaded">
                 <main class="main post-page">
     <article class="article-entry">
-        <p>根据一个有序数组建立平衡二叉搜索树</p>
+        <p>单独列一篇整理进程、线程、多线程以及iOS开发中的多线程解决方案</p>
 <span id="more"></span>
-
-<h2 id="给定一个有序的数组，如nums-10-3-0-5-9"><a href="#给定一个有序的数组，如nums-10-3-0-5-9" class="headerlink" title="给定一个有序的数组，如nums = [-10,-3,0,5,9]"></a>给定一个有序的数组，如<code>nums = [-10,-3,0,5,9]</code></h2><blockquote>
-<p><strong>高度平衡</strong>二叉树是一棵满足「每个节点的左右两个子树的高度差的绝对值不超过 1 」的二叉树。</p>
+<h1 id="进程与多线程"><a href="#进程与多线程" class="headerlink" title="进程与多线程"></a>进程与多线程</h1><h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3><blockquote>
+<p>进程（Process）是计算机中的程序关于某数据集合上的一次运行活动，是系统进行资源分配和调度的基本单位，每个进程之间是独立的，每个进程均运行在其专用的且受保护的内存，是操作系统结构的基础。</p>
 </blockquote>
-<p>二叉树定义如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class TreeNode &#123;</span><br><span class="line"> public var val: Int</span><br><span class="line"> public var left: TreeNode?</span><br><span class="line"> public var right: TreeNode?</span><br><span class="line"> public init() &#123; self.val &#x3D; 0; self.left &#x3D; nil; self.right &#x3D; nil; &#125;</span><br><span class="line"> public init(_ val: Int) &#123; self.val &#x3D; val; self.left &#x3D; nil; self.right &#x3D; nil; &#125;</span><br><span class="line"> public init(_ val: Int, _ left: TreeNode?, _ right: TreeNode?) &#123;</span><br><span class="line">    self.val &#x3D; val</span><br><span class="line">    self.left &#x3D; left</span><br><span class="line">    self.right &#x3D; right</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="本题采用递归的实现方法。先说解题思路：由于数组已经是升序的了，那么我们第一个想法就是找到数组的中间元素，并以它的值作为根节点。那么接下来的节点怎么办呢？可以应用树的特性，每个二叉树节点本身也是一颗树，那么我们在第一次找到mid元素，下一次便用mid元素划分成两个数组，分别找到他们的中间元素作为最开始的root的left和right节点，并一直递归下去，就可以建成平衡二叉搜索树啦。"><a href="#本题采用递归的实现方法。先说解题思路：由于数组已经是升序的了，那么我们第一个想法就是找到数组的中间元素，并以它的值作为根节点。那么接下来的节点怎么办呢？可以应用树的特性，每个二叉树节点本身也是一颗树，那么我们在第一次找到mid元素，下一次便用mid元素划分成两个数组，分别找到他们的中间元素作为最开始的root的left和right节点，并一直递归下去，就可以建成平衡二叉搜索树啦。" class="headerlink" title="本题采用递归的实现方法。先说解题思路：由于数组已经是升序的了，那么我们第一个想法就是找到数组的中间元素，并以它的值作为根节点。那么接下来的节点怎么办呢？可以应用树的特性，每个二叉树节点本身也是一颗树，那么我们在第一次找到mid元素，下一次便用mid元素划分成两个数组，分别找到他们的中间元素作为最开始的root的left和right节点，并一直递归下去，就可以建成平衡二叉搜索树啦。"></a>本题采用递归的实现方法。先说解题思路：由于数组已经是升序的了，那么我们第一个想法就是找到数组的中间元素，并以它的值作为根节点。那么接下来的节点怎么办呢？可以应用树的特性，每个二叉树节点本身也是一颗树，那么我们在第一次找到mid元素，下一次便用mid元素划分成两个数组，分别找到他们的中间元素作为最开始的root的left和right节点，并一直递归下去，就可以建成平衡二叉搜索树啦。</h3><p><strong>下面放实现代码</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    func sortedArrayToBST(_ nums: [Int]) -&gt; TreeNode? &#123;</span><br><span class="line">        guard nums.count&gt;0 else&#123;</span><br><span class="line">            return nil</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return dfs(nums,0,nums.count-1)</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    func dfs(_ nums:[Int],_ lfs:Int,_ rfs:Int) -&gt; TreeNode?&#123;</span><br><span class="line">        if lfs &gt; rfs &#123;</span><br><span class="line">            return nil</span><br><span class="line">        &#125;</span><br><span class="line">        let mid &#x3D; lfs + (rfs - lfs)&#x2F;2</span><br><span class="line"></span><br><span class="line">        var root &#x3D; TreeNode.init(nums[mid])</span><br><span class="line"></span><br><span class="line">        root.left &#x3D; dfs(nums,lfs,mid-1)</span><br><span class="line"></span><br><span class="line">        root.right &#x3D; dfs(nums,mid+1,rfs)</span><br><span class="line"></span><br><span class="line">        return root</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>代码很简单，需要注意的有要防止数组本身为空的情况，和在<code>lfs&gt;rfs</code>时返回<code>nil</code></p>
-<h2 id="如果将问题推广，到更一般的情况呢？比如给你的是一颗没有排序的普通二叉树。"><a href="#如果将问题推广，到更一般的情况呢？比如给你的是一颗没有排序的普通二叉树。" class="headerlink" title="如果将问题推广，到更一般的情况呢？比如给你的是一颗没有排序的普通二叉树。"></a>如果将问题推广，到更一般的情况呢？比如给你的是一颗没有排序的普通二叉树。</h2><h3 id="这个时候只需要先进行一次二叉树遍历，记录所有节点的值并排序，最后按照上述方法递归实现即可。"><a href="#这个时候只需要先进行一次二叉树遍历，记录所有节点的值并排序，最后按照上述方法递归实现即可。" class="headerlink" title="这个时候只需要先进行一次二叉树遍历，记录所有节点的值并排序，最后按照上述方法递归实现即可。"></a>这个时候只需要先进行一次二叉树遍历，记录所有节点的值并排序，最后按照上述方法递归实现即可。</h3><p><em>树还是挺重要的，解题思路和方法也比较巧妙跟多样，需要多体会理解。</em><br><strong>记录思路跟实现代码，及时回顾</strong></p>
+<p>进程相对来说是<strong>更动态化一些的概念</strong>，进程是<strong>操作系统分配资源</strong>的最小单位，程序是一段写好的<strong>静态</strong>二进制代码。一个程序在操作系统中运行时，可能会拥有一个或多个进程，当一个程序只有一个进程时，这个进程就是程序本身。</p>
+<p>进程是<strong>程序运行时的一个状态</strong>。在系统允许的情况下（非技术原因），程序可以在计算机系统中单独运行多次，分别是多个不同的进程，他们之间的状态各不相同。</p>
+<p>进程拥有自己的<strong>地址空间</strong>，并且不同于线程，进程可以<strong>向系统申请资源</strong>。在系统中，存在PCB（进程控制块）来管理进程，在PCB中记录了进程的相关信息以及运行数据，如程序计数器、进程状态、CPU暂存器、IO状态等。</p>
+<ul>
+<li>程序计数器：接着要执行的指令地址</li>
+<li>进程状态：可以是new、ready、running、waiting或blocked等</li>
+<li>CPU寄存器：如累加器、变址寄存器、<strong>堆栈指针</strong>以及一般用途寄存器、状况代码等，主要用途在于<strong>中断时暂时存储资料，以便稍后继续利用</strong>；其数量及类别因计算机体系结构有所差异。进程调度中CPU切换进程时，就要将进程的状态例如在寄存器中的值存储起来。<strong>在进程未占用处理器时，进程的上下文是存储在进程的私有堆栈中的。</strong></li>
+<li>CPU排班法：标示进程优先级</li>
+<li>存储器管理：如标签页表等</li>
+<li>输入输出状态：配置进程使用I/O设备，如磁带机</li>
+</ul>
 <hr>
-<p>Tino Wu</p>
+<p>进程的PCB在系统中可以有几种<strong>组织方式（存放方式）</strong></p>
+<ul>
+<li>线性表方式：不论进程的状态如何，将所有的 PCB 连续地存放在内存的系统区。<strong>这种方式适用于系统中进程数目不多的情况。</strong></li>
+<li>索引表方式：该方式是线性表方式的改进，系统按照进程的状态分别建立就绪索引表、阻塞索引表等。</li>
+<li>链接表方式：系统按照进程的状态将进程的 PCB 组成队列，<strong>从而形成就绪队列、阻塞队列、运行队列等。</strong></li>
+</ul>
+<hr>
+<p><strong>进程之间可以进行通信</strong>，通常一个程序根据规模的大小可以拥有1个或多个进程，进程间的通信就显得尤为重要（IPC Inter-Process Communication）。IPC为资源互相隔离的进程提供了通信手段，常见的IPC实现方式有以下几种</p>
+<ul>
+<li>无名管道：只允许<strong>父子进程通信</strong>，缓存区开辟在内核区上，自带互斥机制，同一时间只能单向传输</li>
+<li>有名管道：可以允许没有亲缘关系的进程通信，<strong>缓存区在文件系统上</strong>，在创建时有一个路径与它绑定，只要能访问这个的进程就能进行IPC通信。<em>即，需要交换的信息被写在一个文件系统中的特定位置，需要交换则向该块内存读出或写入</em></li>
+<li>信号：信号是IPC通信中一种有限制的方式，<strong>它是一种异步的通知机制</strong>，相当于一个中断，由内核调解并分发给对应进程。此时如果信号被发送给了一个进程，操作系统将会中断进程中的所有非原子操作，如果进程有定义该信号处理的函数则执行对应函数，没有则执行默认操作。<em>常见的有终端中的<code>control + c</code>操作会发送一个终止信号，<code>kill()</code>信号也会发送一个终止信号给进程。</em></li>
+<li>消息队列：信息列表是由信息组成的链表，存储在内核中，由信息标示符标示。<strong>它也是一种异步的通信方式</strong>，进程可以将需要交流的信息写入到消息队列中而不用一直等待别的进程将消息取出。和信号相比，消息队列可以传达更多的信息。和管道相比，消息队列可以提供有格式的信息。<em>由于其异步的特点，接收者必须轮询消息队列才能获得最新的信息，这也是其中的一个缺点</em></li>
+<li>共享内存：<strong>映射一段能被其他进程访问的内存，实现共享该块内存的目的。</strong>具体过程是首先在物理内存中申请分配一块共享内存 ，分配成功后需要共享内存的进程将该块内存的物理地址映射到自己的地址空间中 ，即将共享内存的物理地址与地址空间的虚拟地址进行绑定（页表，MMU），在这之后进程就能访问到共享内存。在访问结束后，进程需要与该块共享内存解绑 。另外，使用共享内存时需要注意的是内存的写入需要自己实现同步机制 ，一般在使用共享内存通信时会与信号量配合使用，实现同步的访问。</li>
+<li>信号量</li>
+<li>套接字</li>
+</ul>
+<h3 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h3><blockquote>
+<p>线程可以说是一种轻量级的进程，但他不像进程一样拥有资源，线程只拥有所属进程的一点运行所必要的资源，它可以与所属进程的其他线程共享进程所持有的资源。在一个进程中可以同时拥有多个线程，但一个线程只对应一个进程。</p>
+</blockquote>
+<p>通常在一个进程中可以包含多个线程，它们可以利用进程所拥有的资源，在引入线程的操作系统中，通常都是<strong>把进程作为分配资源的基本单位，而把线程作为独立运行和独立调度的基本单位</strong>，由于线程比进程更小，基本上不拥有系统资源，故对它的调度所付出的开销就会小的多，能更高效的提高系统内多个程序间并发执行的程度。<em>也就是说线程间的切换开销比进程间的切换开销要小得多</em></p>
+<p>操作系统不会向线程分配资源，线程也不可以申请资源。<strong>同一进程中的多条线程将共享该进程中的全部系统资源，如虚拟地址空间，文件描述符和信号处理等等。</strong>但同一进程中的多个线程有各自的<strong>调用栈（call stack）</strong>，自己的<strong>寄存器环境（register context）</strong>，自己的<strong>线程本地存储（thread-local storage）</strong>。这是线程与进程的一大差别，核心区别是线程与进程的控制和隔离粒度不同。我们把多个进程考虑成一个个的沙盒，而线程就是沙盒中的一个个处理事务的工具，显然线程的控制粒度更细一些。</p>
+<p>在某些情况下，线程也需要线程间的通信，因为线程自身的调用栈和寄存器环境也是私有的，其他线程无法获取到。多个线程只是共享着进程的资源和地址空间。</p>
+<p>相对于进程的PCB，线程的状态由线程控制块Thread Control Block TCB描述。TCB包括以下信息:</p>
+<ul>
+<li>线程状态。</li>
+<li>当线程不运行时，<strong>被保存的现场资源。</strong></li>
+<li>一组<strong>执行堆栈</strong>。</li>
+<li>存放每个线程的<strong>局部变量</strong>主存区。</li>
+<li>访问同一个进程中的主存和其它资源。</li>
+</ul>
+<hr>
+<p><strong>进程和线程的关系</strong></p>
+<ul>
+<li>进程是操作系统分配和管理资源的最小单位，线程是进程中执行运算的最小单位，也是CPU进行计算的最小单位。线程可以说是一种轻量级的进程，但他不像进程一样拥有资源，线程只拥有所属进程的一点运行所必要的资源，它可以与所属进程的其他线程共享进程所持有的资源。在一个进程中可以同时拥有多个线程，但一个线程只对应一个进程。 </li>
+<li>区别：1.进程拥有资源，线程只访问资源 2.线程的销毁切换代价低，进程的销毁切换代价高 3.线程作为调度和分配的基本单位，进程作为资源分配的基本单位</li>
+</ul>
+<h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h3><blockquote>
+<p>多线程（multithreading），是指从软件或者硬件上实现多个线程并发执行的技术。具有多线程能力的计算机因有硬件支持而能够在同一时间执行多于一个线程，进而提升整体处理性能。具有这种能力的系统包括对称多处理机、多核心处理器以及芯片级多处理或同时多线程处理器。在一个程序中，这些独立运行的程序片段叫作 “线程”（Thread），利用它编程的概念就叫作“多线程处理”。</p>
+</blockquote>
+<p>实现多线程是采用一种<strong>并发执行</strong>机制。简单地说就是把<strong>一个处理器划分为若干个短的时间片，每个时间片依次轮流地执行处理各个应用程序，由于一个时间片很短，相对于一个应用程序来说，就好像是处理器在为自己单独服务一样，从而达到多个应用程序在同时进行的效果。</strong>多线程就是把操作系统中的这种并发执行机制原理运用在一个程序中，把一个程序划分为若干个子任务，多个子任务并发执行，每一个任务就是一个线程。这就是多线程程序。</p>
+<p>然而在多线程开发中，也存在着一些缺点。</p>
+<ul>
+<li>过多的线程：如果程序中存在过多的线程，那么线程之间切换的开销就变得可观了起来，CPU为了在线程间进行切换可能会消耗非常多的时间和资源</li>
+<li>数据竞赛：在多线程开发中最常见的问题就是数据竞赛。当多个线程同时访问或者修改同一个资源或变量，显然会产生某个进程读取到的资源出错的情况，在执行过程中产生了脏数据导致了错误。多个线程的操作中通常需要一些同步机制来保证程序的正确执行。</li>
+</ul>
+<h3 id="多线程解决方案"><a href="#多线程解决方案" class="headerlink" title="多线程解决方案"></a>多线程解决方案</h3><p>上文中提到了多线程的数据竞赛问题，在实际的开发中已经有了许多的解决方案，最常见的就是各种锁。<br>同时，为了进行多线程编程，我们也需要一些开辟后台线程的能力。在iOS开发中，我们常见的唱作线程的工具一般有pthread、NSThread、GCD几种。<br>pthread是一个跨平台、基于C语言的多线程开发库；NSThread是基于Objective-C语言的对pthread的上层封装，需要开发者自己管理线程的生命周期，在日常开发中最常用到的可能是<code>[NSThread currentThread];</code>😂<br>GCD是Apple开发的基于C语言的多线程开发库，他提出了较新的队列和派发概念，不需要由开发者管理线程的生命周期。</p>
+<h3 id="GCD（Grand-Central-Dispatch"><a href="#GCD（Grand-Central-Dispatch" class="headerlink" title="GCD（Grand Central Dispatch)"></a>GCD（Grand Central Dispatch)</h3><h4 id="Dispatch-Objects"><a href="#Dispatch-Objects" class="headerlink" title="Dispatch Objects"></a>Dispatch Objects</h4><p>Dispatch Objects（调度对象）有多种类型，包括<code>dispatch_queue_t</code>、<code>dispatch_group_t</code> 和 <code>dispatch_source_t</code></p>
+<p>这些通过查阅源码可以看到其实是GCD使用宏创建出来的别名，实际上Dispatch Objects在Objective-C（ARC）环境下都是遵循了对应协议的<code>NSObject</code>对象。<br>在Objective-C（ARC）中，不需要我们手动管理Dispatch Objects的内存，在调度完毕后他们会被ARC自动释放。</p>
+<h4 id="dispatch-queue-t"><a href="#dispatch-queue-t" class="headerlink" title="dispatch_queue_t"></a>dispatch_queue_t</h4><p>在GCD中，采用了一种比较简单直观的并发模型，其采用队列和派发的概念来进行并发执行任务的抽象。其中队列的结构就是<code>dispatch_queue_t</code>.</p>
+<p>GCD的队列中主要分为两种，分别是串行队列和并发队列。</p>
+<ul>
+<li>串行队列：被派发到串行队列中的任务会以FIFO的原则被同步调用。如果是同步sync派发，则会在主线程上同步执行任务；如果是异步派发，则有可能（不一定会，由线程池调控）会开辟一条新的线程同步执行队列中的任务，<strong>这里不同于并发队列，在串行队列的异步派发情况下，虽然任务会在子线程被执行，但任务都是在同一条子线程执行的，而并发队列的异步派发下任务可能在不同的子线程执行。</strong>。</li>
+<li>并发队列：被派发到并发队列中的可以被并发调用，在将任务异步派发到并发队列上执行的时候，任务的执行顺序并没有保证，并且任务可能会在各自的线程中被执行。<strong>然而，如果将任务同步派发到并发队列上，无论是手动创建的并发队列亦或是全局并发队列，任务都会在主队列上同步执行。</strong></li>
+<li>主队列：主队列是一个特殊的串行队列。</li>
+<li>全局队列：全局队列是一个特殊的并发队列，栅栏函数在全局队列上并不起作用。</li>
+</ul>
+<h4 id="派发机制-dispatch-sync"><a href="#派发机制-dispatch-sync" class="headerlink" title="派发机制 - dispatch_sync"></a>派发机制 - dispatch_sync</h4><p><code>dispatch_sync</code>函数是GCD中的同步派发函数，与<code>dispatch_async</code>一起构成GCD的任务派发机制。<code>dispatch_sync</code>在参数中包含了派发的队列以及提交的任务block。在GCD中，任务以block的形式定义，在底层任务都是一个个的<code>dispatch_block_t</code>。</p>
+<p>顾名思义，<code>dispatch_sync</code>提供的是同步派发机制，在派发时会阻塞当前线程，并等待block中的任务执行完毕后再进行返回，所以容易产生死锁。</p>
+<p>然而，这里的同步指的是派发操作的同步，任务的执行机制主要取决于派发的队列。</p>
+<ul>
+<li>在使用<strong>同步派发将任务派发至串行队列时</strong>，任务会按照FIFO的原则同步执行，并不开辟子线程，任务在主线程上同步执行。</li>
+<li>在使用<strong>同步派发将任务派发至并发队列时</strong>，任务会按照FIFO的原则同步执行，也不开辟子线程，任务在主线程上同步执行。</li>
+</ul>
+<p><strong>也就是说，dispatch_sync不具有开辟新线程的能力。</strong></p>
+<h4 id="派发机制-dispatch-async"><a href="#派发机制-dispatch-async" class="headerlink" title="派发机制 - dispatch_async"></a>派发机制 - dispatch_async</h4><p><code>dispatch_async</code>函数是GCD中的<strong>异步派发函数</strong>。<code>dispatch_async</code>的参数与<code>dispatch_sync</code>函数一样，也是包含了派发的队列以及提交的任务block。</p>
+<p>与<code>dispatch_sync</code>最大的不同是，<code>dispatch_async</code>具有开辟子线程的能力，并且由于它是异步派发，所以并不会像同步派发那样阻塞线程，在将任务派发至任务队列后就可以返回，而不必等待任务执行完成。</p>
+<p>同样的，异步派发中任务的执行机制也与派发的队列有着较大关系。</p>
+<ul>
+<li>在使用<strong>异步派发将任务派发至串行队列时</strong>，任务会按照FIFO的原则同步执行，<strong>但会开辟子线程，并且队列中的任务都在该子线程中按照FIFO同步执行</strong>。</li>
+<li>在使用<strong>异步派发将任务派发至并发队列时</strong>，<strong>任务会被并发执行，并开辟不同的子线程，任务与任务之间的执行顺序不被保证且无法复现</strong>，任务可能各自在不同的子线程上执行。但出于代价的考虑，当任务较多时，线程池并不会总是给该队列分配与任务数相等的子线程。</li>
+<li>在使用<strong>异步派发将任务派发至主队列时</strong>，由于主队列是一个串行队列，并且是一个特殊的串行队列，所以此时并不会开辟新的线程，<strong>任务在主线程主队列上同步按序执行</strong>。</li>
+<li>在使用<strong>异步派发将任务派发至全局队列时</strong>，情况同<code>异步派发+</code></li>
+</ul>
+<h4 id="派发导致的死锁"><a href="#派发导致的死锁" class="headerlink" title="派发导致的死锁"></a>派发导致的死锁</h4><p>由于派发机制的能力，在使用他们时如果不慎很容易产生死锁。</p>
+<p><strong>最常见的一种死锁就是在主线程中同步派发任务。</strong><br><img src="https://s2.loli.net/2021/12/05/HyecmWo1MQSjZ4v.jpg" alt="主队列同步派发"></p>
+<p>可以看到，程序在这里崩溃了，原因就是在这里产生了死锁。</p>
+<p><img src="https://s2.loli.net/2021/12/05/7N2CpF6aQzqhBso.jpg" alt="调用栈"></p>
+<p>由于我们调用<code>dispatch_sync</code>是在主线程中，所以我们这里就相当于向主队列加入了一个任务，该任务是执行<code>dispatch_sync</code>函数，这里我们称为任务1. 同时，sync派发向主队列添加了一个任务，任务是执行<code>NSLog</code>语句，这里我们称为任务2.<br><img src="https://s2.loli.net/2021/12/05/MqAfNF6CY2kUaPX.jpg"></p>
+<p>前面我们提到，<strong>sync派发会阻塞线程，需要等待任务执行完毕后才可以返回</strong>。在这里，我们的主线程正在执行任务1，任务1的内容是sync派发，所以<code>dispatch_sync</code>函数此时阻塞了主线程，等待<code>dispatch_sync</code>的任务2执行完成。</p>
+<p>而<code>dispatch_sync</code>函数此时将任务2派发到了主队列，此时主队列正在执行任务1，由于串行队列的FIFO原则，任务2需要等待任务1执行完毕才能开始执行，然而任务1此时却在等待任务2执行完毕才宣布自己执行完毕，<strong>因为这里是一个sync派发</strong>。所以任务1和任务2互相等待，造成了死锁。解决方案也很简单，将同步派发换成异步派发就可以。</p>
+<hr>
+<p>另一种常见的死锁情况就是派发与派发之间的嵌套。</p>
+<p>向一个串行队列中异步派发一个任务，在任务中再向该队列同步派发一个任务，让我们看看会发生什么。</p>
+<p><img src="https://s2.loli.net/2021/12/05/5qSekmZ9VshwMQ3.jpg"><br>// log 任务1</p>
+<p>可以看到，同样也发生了死锁。原因就是我们向串行队列中异步派发了一个任务1，此时由于async派发不会阻塞线程，所以async函数输出任务1后便返回了。</p>
+<p>然而，到任务2这里，由于async函数向队列中派发了任务2，任务2是一个sync派发，sync派发会阻塞线程。sync函数将任务3派发至队列中，但由于sync函数要等待任务执行完毕后才能返回，所以sync函数要求执行任务3，但是队列目前正在执行任务2，按照FIFO原则，需要任务2执行完毕后才能执行任务3，<strong>任务2正在准备执行任务3，而任务3却在等待任务2执行完毕来开始自己的执行，所以任务2和任务3发生了互相等待，造成线程死锁</strong>。</p>
+<h4 id="栅栏函数"><a href="#栅栏函数" class="headerlink" title="栅栏函数"></a>栅栏函数</h4><ul>
+<li>dispatch_barrier_sync</li>
+<li>dispatch_barrier_async</li>
+</ul>
+<p>GCD中的栅栏函数可以将队列中的任务分为三组，形象地发挥了栅栏的作用。<br>在队列中，栅栏函数派发的任务会等待比自己早加入到队列中的任务执行完毕后再开始执行，并保证在自己之后加入队列的任务在自己执行完毕后才能开始执行。</p>
+<p>也就是说，栅栏函数将队列中的任务分为了<strong>比自己早加入 ｜ 自己 ｜ 比自己晚加入</strong>三组任务，并且任务在宏观上严格按照该顺序执行，即<code>早加入-&gt;自己-&gt;晚加入</code>。</p>
+<p>而在<strong>早加入和晚加入两组中，他们内部任务的执行顺序并不被栅栏函数保证</strong>。栅栏函数只保证自己在所有比自己早加入的任务执行完后开始执行，不保证他们的执行顺序。比自己晚加入的任务同理。</p>
+<p>而<code>dispatch_barrier_sync</code>和<code>dispatch_barrier_async</code>两个函数的唯一差别只是sync会阻塞线程。</p>
+<p><strong>需要注意的是，在全局队列上，栅栏函数并不生效。</strong></p>
+<p><img src="https://s2.loli.net/2021/12/05/OjdxvepkHqUV5mF.jpg"><br><img src="https://s2.loli.net/2021/12/05/BMKLkNbWTsReZAD.jpg"></p>
+<p>可以看到，任务1理应在task2前执行的，但此时却是task2先执行。</p>
+<p>而在手动创建的并发队列上，栅栏函数正常工作。所以全局队列虽然是一个并发队列，但它有着一些特殊性，栅栏函数在全局队列上并不生效。</p>
+<p><img src="https://s2.loli.net/2021/12/05/2n9YPA3Ni4hmHuk.jpg"></p>
+<h4 id="dispatch-once"><a href="#dispatch-once" class="headerlink" title="dispatch_once"></a>dispatch_once</h4><p><code>dispatch_once</code>函数可以保证block内的代码只被执行一次，在使用时先创建一个<code>dispatch_once_t</code>类型的变量。</p>
+<p>该函数常用来实现单例。</p>
+<p><img src="https://s2.loli.net/2021/12/05/EKuFVXBnhvgC5ai.jpg"></p>
+<h4 id="dispatch-group-t-组函数"><a href="#dispatch-group-t-组函数" class="headerlink" title="dispatch_group_t 组函数"></a>dispatch_group_t 组函数</h4><p>在实际开发中，我们有时会需要进行异步操作的同步执行，也就是异步转同步。这一步可以用锁、栅栏函数、信号量实现，也可以用组函数实现。</p>
+<p>组函数在使用时先创建一个group，之后可以使用<code>dispatch_group_sync</code>和<code>dispatch_group_async</code>向组函数派发任务</p>
+<p>同时，也可以使用<code>dispatch_group_enter</code>和<code>dispatch_group_leave</code>实现细粒度控制。</p>
+<p>最后使用<code>dispatch_group_wait</code>阻塞线程，等待任务执行完毕。</p>
+<h4 id="dispatch-semaphore-信号量"><a href="#dispatch-semaphore-信号量" class="headerlink" title="dispatch_semaphore 信号量"></a>dispatch_semaphore 信号量</h4><p><code>dispatch_semaphore</code>是在GCD中对于信号量的实现。<br>信号量机制在操作系统的学习中已经接触过了，对于信号量，只有两个关键的原语操作，分别是<code>signal</code>与<code>wait</code>,对应GCD中的<code>dispatch_semaphore_signal()</code>和<code>dispatch_semaphore_wait()</code>.</p>
+<p>前者会令信号量+1，后者会令信号量-1. 在使用信号量同步时，我们在执行任务前需要先获取一个信号量，若获取不到则会使线程阻塞，也就是说<code>dispatch_semaphore_wait()</code>在获取不到信号量时是会使线程堵塞的。</p>
+<p>初始化信号量时，我们使用<code>dispatch_semaphore_create()</code>来创建一个信号量，参数传一个整数。</p>
 
     </article>
     <!-- license -->
@@ -542,17 +654,12 @@
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href="/2021/03/25/%E5%88%A4%E6%96%AD%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/" title="判断平衡二叉树">
-                    <div class="nextTitle">判断平衡二叉树</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2021/03/17/map-filter-reduce/" title="map,filter,reduce">
-                    <div class="prevTitle">map,filter,reduce</div>
+                <a href="/2021/11/29/RunLoop/" title="RunLoop">
+                    <div class="prevTitle">RunLoop</div>
                 </a>
             
         </li>
@@ -690,7 +797,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%99%E5%AE%9A%E4%B8%80%E4%B8%AA%E6%9C%89%E5%BA%8F%E7%9A%84%E6%95%B0%E7%BB%84%EF%BC%8C%E5%A6%82nums-10-3-0-5-9"><span class="toc-number">1.</span> <span class="toc-text">给定一个有序的数组，如nums &#x3D; [-10,-3,0,5,9]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E9%A2%98%E9%87%87%E7%94%A8%E9%80%92%E5%BD%92%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%B3%95%E3%80%82%E5%85%88%E8%AF%B4%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF%EF%BC%9A%E7%94%B1%E4%BA%8E%E6%95%B0%E7%BB%84%E5%B7%B2%E7%BB%8F%E6%98%AF%E5%8D%87%E5%BA%8F%E7%9A%84%E4%BA%86%EF%BC%8C%E9%82%A3%E4%B9%88%E6%88%91%E4%BB%AC%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%83%B3%E6%B3%95%E5%B0%B1%E6%98%AF%E6%89%BE%E5%88%B0%E6%95%B0%E7%BB%84%E7%9A%84%E4%B8%AD%E9%97%B4%E5%85%83%E7%B4%A0%EF%BC%8C%E5%B9%B6%E4%BB%A5%E5%AE%83%E7%9A%84%E5%80%BC%E4%BD%9C%E4%B8%BA%E6%A0%B9%E8%8A%82%E7%82%B9%E3%80%82%E9%82%A3%E4%B9%88%E6%8E%A5%E4%B8%8B%E6%9D%A5%E7%9A%84%E8%8A%82%E7%82%B9%E6%80%8E%E4%B9%88%E5%8A%9E%E5%91%A2%EF%BC%9F%E5%8F%AF%E4%BB%A5%E5%BA%94%E7%94%A8%E6%A0%91%E7%9A%84%E7%89%B9%E6%80%A7%EF%BC%8C%E6%AF%8F%E4%B8%AA%E4%BA%8C%E5%8F%89%E6%A0%91%E8%8A%82%E7%82%B9%E6%9C%AC%E8%BA%AB%E4%B9%9F%E6%98%AF%E4%B8%80%E9%A2%97%E6%A0%91%EF%BC%8C%E9%82%A3%E4%B9%88%E6%88%91%E4%BB%AC%E5%9C%A8%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%89%BE%E5%88%B0mid%E5%85%83%E7%B4%A0%EF%BC%8C%E4%B8%8B%E4%B8%80%E6%AC%A1%E4%BE%BF%E7%94%A8mid%E5%85%83%E7%B4%A0%E5%88%92%E5%88%86%E6%88%90%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%EF%BC%8C%E5%88%86%E5%88%AB%E6%89%BE%E5%88%B0%E4%BB%96%E4%BB%AC%E7%9A%84%E4%B8%AD%E9%97%B4%E5%85%83%E7%B4%A0%E4%BD%9C%E4%B8%BA%E6%9C%80%E5%BC%80%E5%A7%8B%E7%9A%84root%E7%9A%84left%E5%92%8Cright%E8%8A%82%E7%82%B9%EF%BC%8C%E5%B9%B6%E4%B8%80%E7%9B%B4%E9%80%92%E5%BD%92%E4%B8%8B%E5%8E%BB%EF%BC%8C%E5%B0%B1%E5%8F%AF%E4%BB%A5%E5%BB%BA%E6%88%90%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E5%95%A6%E3%80%82"><span class="toc-number">1.1.</span> <span class="toc-text">本题采用递归的实现方法。先说解题思路：由于数组已经是升序的了，那么我们第一个想法就是找到数组的中间元素，并以它的值作为根节点。那么接下来的节点怎么办呢？可以应用树的特性，每个二叉树节点本身也是一颗树，那么我们在第一次找到mid元素，下一次便用mid元素划分成两个数组，分别找到他们的中间元素作为最开始的root的left和right节点，并一直递归下去，就可以建成平衡二叉搜索树啦。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E5%B0%86%E9%97%AE%E9%A2%98%E6%8E%A8%E5%B9%BF%EF%BC%8C%E5%88%B0%E6%9B%B4%E4%B8%80%E8%88%AC%E7%9A%84%E6%83%85%E5%86%B5%E5%91%A2%EF%BC%9F%E6%AF%94%E5%A6%82%E7%BB%99%E4%BD%A0%E7%9A%84%E6%98%AF%E4%B8%80%E9%A2%97%E6%B2%A1%E6%9C%89%E6%8E%92%E5%BA%8F%E7%9A%84%E6%99%AE%E9%80%9A%E4%BA%8C%E5%8F%89%E6%A0%91%E3%80%82"><span class="toc-number">2.</span> <span class="toc-text">如果将问题推广，到更一般的情况呢？比如给你的是一颗没有排序的普通二叉树。</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%99%E4%B8%AA%E6%97%B6%E5%80%99%E5%8F%AA%E9%9C%80%E8%A6%81%E5%85%88%E8%BF%9B%E8%A1%8C%E4%B8%80%E6%AC%A1%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86%EF%BC%8C%E8%AE%B0%E5%BD%95%E6%89%80%E6%9C%89%E8%8A%82%E7%82%B9%E7%9A%84%E5%80%BC%E5%B9%B6%E6%8E%92%E5%BA%8F%EF%BC%8C%E6%9C%80%E5%90%8E%E6%8C%89%E7%85%A7%E4%B8%8A%E8%BF%B0%E6%96%B9%E6%B3%95%E9%80%92%E5%BD%92%E5%AE%9E%E7%8E%B0%E5%8D%B3%E5%8F%AF%E3%80%82"><span class="toc-number">2.1.</span> <span class="toc-text">这个时候只需要先进行一次二叉树遍历，记录所有节点的值并排序，最后按照上述方法递归实现即可。</span></a></li></ol></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E4%B8%8E%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">进程与多线程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B"><span class="toc-number">1.0.1.</span> <span class="toc-text">进程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B"><span class="toc-number">1.0.2.</span> <span class="toc-text">线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="toc-number">1.0.3.</span> <span class="toc-text">多线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">1.0.4.</span> <span class="toc-text">多线程解决方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GCD%EF%BC%88Grand-Central-Dispatch"><span class="toc-number">1.0.5.</span> <span class="toc-text">GCD（Grand Central Dispatch)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Dispatch-Objects"><span class="toc-number">1.0.5.1.</span> <span class="toc-text">Dispatch Objects</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dispatch-queue-t"><span class="toc-number">1.0.5.2.</span> <span class="toc-text">dispatch_queue_t</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B4%BE%E5%8F%91%E6%9C%BA%E5%88%B6-dispatch-sync"><span class="toc-number">1.0.5.3.</span> <span class="toc-text">派发机制 - dispatch_sync</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B4%BE%E5%8F%91%E6%9C%BA%E5%88%B6-dispatch-async"><span class="toc-number">1.0.5.4.</span> <span class="toc-text">派发机制 - dispatch_async</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B4%BE%E5%8F%91%E5%AF%BC%E8%87%B4%E7%9A%84%E6%AD%BB%E9%94%81"><span class="toc-number">1.0.5.5.</span> <span class="toc-text">派发导致的死锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%85%E6%A0%8F%E5%87%BD%E6%95%B0"><span class="toc-number">1.0.5.6.</span> <span class="toc-text">栅栏函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dispatch-once"><span class="toc-number">1.0.5.7.</span> <span class="toc-text">dispatch_once</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dispatch-group-t-%E7%BB%84%E5%87%BD%E6%95%B0"><span class="toc-number">1.0.5.8.</span> <span class="toc-text">dispatch_group_t 组函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dispatch-semaphore-%E4%BF%A1%E5%8F%B7%E9%87%8F"><span class="toc-number">1.0.5.9.</span> <span class="toc-text">dispatch_semaphore 信号量</span></a></li></ol></li></ol></li></ol></li></ol>
             </div>
         
         <!-- sidebar -->
