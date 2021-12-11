@@ -50,7 +50,7 @@
 <meta property="og:image" content="https://s2.loli.net/2021/12/11/ojZEy5YDLkaFS7x.jpg">
 <meta property="og:image" content="https://s2.loli.net/2021/12/11/JcPRxb4Oo5y1MgQ.jpg">
 <meta property="article:published_time" content="2021-12-11T13:17:43.000Z">
-<meta property="article:modified_time" content="2021-12-11T13:23:21.720Z">
+<meta property="article:modified_time" content="2021-12-11T13:37:48.856Z">
 <meta property="article:author" content="Tino Wu">
 <meta property="article:tag" content="计网">
 <meta name="twitter:card" content="summary">
@@ -372,7 +372,7 @@
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">18.6k</span>Reading time: <span class="post-count reading-time">65 min</span></span>
+                        <span>Word count: <span class="post-count word-count">18.7k</span>Reading time: <span class="post-count reading-time">65 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -698,8 +698,9 @@
 <p>以查询<code>zh.wikipedia.org</code>为例，正常情况下DNS服务的执行流程如下：</p>
 <ul>
 <li>在浏览器输入域名并访问</li>
-<li>查询本地HOST文件中是否存在该域名的静态映射，如果有则查询结束。</li>
 <li>查询本地浏览器的DNS缓存中是否存在该域名的DNS信息，如果有则查询结束。</li>
+<li>查询操作系统的DNS缓存中是否有该域名的记录</li>
+<li>查询本地HOST文件中是否存在该域名的静态映射，如果有则查询结束。</li>
 <li>通过UDP发送查询报文到本地域名服务器，本地域名服务器查看自身的缓存中是否有该域名的记录</li>
 <li>如果本地域名服务器中的记录老化或不存在，则：</li>
 <li>DNS服务器向根域名服务器发送查询报文”query zh.wikipedia.org”，根域名服务器返回顶级域 .org 的顶级域名服务器地址。</li>
