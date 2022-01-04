@@ -42,6 +42,7 @@
 <meta property="og:image" content="https://s2.loli.net/2021/12/11/jfNvMaYAwPK2Te1.jpg">
 <meta property="og:image" content="https://s2.loli.net/2021/12/11/ahtrFvqROYADi8B.jpg">
 <meta property="og:image" content="https://s2.loli.net/2021/12/11/fAj8QVlYMbZLWhN.jpg">
+<meta property="og:image" content="https://s2.loli.net/2022/01/04/cnldbueoVaRqxh9.jpg">
 <meta property="og:image" content="https://s2.loli.net/2021/12/11/msXAfWer7tMCFPv.jpg">
 <meta property="og:image" content="https://s2.loli.net/2021/12/11/kaXhG47ouIcSQ9J.jpg">
 <meta property="og:image" content="https://s2.loli.net/2021/12/11/trIWBFN6VQlYHqb.jpg">
@@ -53,7 +54,7 @@
 <meta property="og:image" content="https://s2.loli.net/2021/12/11/ojZEy5YDLkaFS7x.jpg">
 <meta property="og:image" content="https://s2.loli.net/2021/12/11/JcPRxb4Oo5y1MgQ.jpg">
 <meta property="article:published_time" content="2021-12-11T13:17:43.000Z">
-<meta property="article:modified_time" content="2021-12-19T14:43:14.336Z">
+<meta property="article:modified_time" content="2022-01-04T06:59:42.677Z">
 <meta property="article:author" content="Tino Wu">
 <meta property="article:tag" content="计网">
 <meta name="twitter:card" content="summary">
@@ -375,7 +376,7 @@
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">21.4k</span>Reading time: <span class="post-count reading-time">75 min</span></span>
+                        <span>Word count: <span class="post-count word-count">26.9k</span>Reading time: <span class="post-count reading-time">94 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -571,7 +572,7 @@
 <li>与<code>GET</code>方法不同的是，<strong>POST方法并不是一个幂等的方法</strong>，每次POST方法都有可能会新建或修改服务器上的资源，所以浏览器在提交相同的POST请求时会弹出弹窗让用户确认是否要重复提交表单。</li>
 <li>在POST方法中，方法的参数一般来说被编码在请求的<code>body</code>中，与GET方法直接在编写在URL中的方式相比，POST方法可以说相对安全一些。<strong>但需要注意的是，由于HTTP协议是明文传输的，所以即使参数放在BODY中也是不安全的，在抓包时里面的数据都可以看得一清二楚。</strong> 因此，如果需要更加安全的传输，可以对POST方法的BODY部分的数据进行加密。</li>
 <li>由于POST请求携带的数据放在BODY部分，所以它可以携带的数据一般来说比GET更多，GET请求的URL长度是有限制的，也就是说参数长度以及数量是有限的。</li>
-<li>在许多情况下，浏览器会对POST请求做一些优化以提高网络服务的速度。由于POST请求常用来提交文件或表单，所以它的BODY部分的数据可能较大。<strong>浏览器会将POST优化成两个请求，在第一个请求中发送原请求的header，获得服务器的成功响应后再发送BODY。</strong> 另外</li>
+<li>在许多情况下，浏览器会对POST请求做一些优化以提高网络服务的速度。由于POST请求常用来提交文件或表单，所以它的BODY部分的数据可能较大。<strong>浏览器会将POST优化成两个请求，在第一个请求中发送原请求的header，获得服务器的成功响应后再发送BODY。</strong> </li>
 </ul>
 </li>
 <li>PUT：向服务器更新指定资源最新的数据</li>
@@ -649,7 +650,7 @@
 </ul>
 </li>
 <li>二进制分帧传输<ul>
-<li>有别于Http1.1的明文传输，Http/2使用了二进制来打包、传输服务器与客户端之间的信息。Http/2将每个TCP连接分成了若干个流，每个流可以传输若干个信息，每个信息直接由若高最小的数据帧组成，<strong>这是Http1.1与Http2最大的区别所在。</strong></li>
+<li>有别于Http1.1的明文传输，Http/2使用了二进制来打包、传输服务器与客户端之间的信息。Http/2将每个TCP连接分成了若干个流，每个流可以传输若干个信息，每个信息直接由若干最小的数据帧组成，<strong>这是Http1.1与Http2最大的区别所在。</strong></li>
 </ul>
 </li>
 <li>多路复用</li>
@@ -660,7 +661,7 @@
 <li>可以在一个TCP连接中并发请求</li>
 </ul>
 </li>
-<li>Http 3: 基于QUIC</li>
+<li>Http 3: 基于QUIC，目前仍是草案阶段。</li>
 </ul>
 <p><strong>HTTP/1.1相较于HTTP/1.0协议的区别主要体现在：</strong></p>
 <ul>
@@ -710,6 +711,25 @@
 <li>Hosts：一个没有拓展名的文件，在里面记录了<code>域名-&gt;IP地址</code>的信息，在浏览器发起一个对域名的请求时首先会检查该文件中有没有该域名的记录。</li>
 <li>ETag：唯一确定一个资源的值（可能是由hash算法得出来的hash值），随着资源的改变会改变</li>
 <li>range：Http1.1之后新增了对range字段的支持，客户端可以在range字段中填写所需资源的指定部分。当使用该字段时服务器返回206的成功状态码</li>
+</ul>
+<h4 id="常见状态码"><a href="#常见状态码" class="headerlink" title="常见状态码"></a>常见状态码</h4><ul>
+<li>100 Continue</li>
+<li>101 Switching protocols</li>
+<li>102 Processing</li>
+<li>200 OK</li>
+<li>201 Created</li>
+<li>206 Partial Content</li>
+<li>300 Multiple Choices</li>
+<li>301 Moved Permanently</li>
+<li>302 Found 临时重定向</li>
+<li>303 See Other</li>
+<li>304 Not Modified</li>
+<li>400 Bad Request</li>
+<li>401 Unauthorized</li>
+<li>403 Forbidden</li>
+<li>404 Not Found</li>
+<li>502 Bad Gateway</li>
+<li>504 Gateway Timeout</li>
 </ul>
 <h4 id="实现断点续传的原理"><a href="#实现断点续传的原理" class="headerlink" title="实现断点续传的原理"></a>实现断点续传的原理</h4><ul>
 <li><code>http1.1</code>推出了<code>range</code>字段，以提供客户端对服务器请求特定部分资源的能力，利用该字段就可以实现断点续传，当然前提是服务器支持<code>range</code>和<code>分块传输</code>。在连接建立后，客户端维护当前收到的资源大小，当连接或传输因某些原因中断时，客户端会再次向服务器发起资源请求，在这时的请求报文中<code>range</code>字段写入已收到的资源大小。服务器收到该请求报文后解析<code>range</code>字段就知道需要发给客户端的是哪部分内容，并在响应报文的<code>content-range</code>字段写明是报文实体是哪部分的资源。这样就实现了断点续传。<strong>需要注意的是，如果服务器支持断点续传，那么在续传的响应报文状态码会是<code>206</code>而不是<code>200</code>，如果服务器不支持断点续传也就是<code>range</code>字段，那么将会重新返回整个资源并返回<code>200</code>状态码。</strong></li>
@@ -776,6 +796,32 @@
 </ul>
 <h3 id="DNS-域名解析系统"><a href="#DNS-域名解析系统" class="headerlink" title="DNS 域名解析系统"></a>DNS 域名解析系统</h3><p>在日常的网络中，通常不使用IP地址来直接访问网络中的资源，而是使用人比较容易记住的<code>域名</code>。所以在访问网络时，需要进行从<code>域名-&gt;IP地址</code>的转换/翻译，提供这个服务的就是<strong>DNS域名解析系统。</strong></p>
 <p>DNS（Domain Name System）是一项服务，也是一个协议。DNS协议是属于应用层的协议，为网络提供域名到IP地址的转换。它直接使用UDP协议作为运输层的协议，而不经过HTTP等协议。 所以在最基础的DNS系统中，协议栈是<code>DNS协议-&gt;UDP协议</code></p>
+<h4 id="协议栈"><a href="#协议栈" class="headerlink" title="协议栈"></a>协议栈</h4><p><strong>然而，虽然绝大部分情况下DNS协议都是使用UDP协议进行数据传输，但有时候也需要使用到TCP协议。</strong></p>
+<p>日常进行的域名请求的报文大小基本都比较小，所以UDP协议就可以支持DNS系统的查询。</p>
+<p>DNS支持的常见查询类型包括</p>
+<ul>
+<li>A记录（IPv4）</li>
+<li>AAAA记录（IPv6）</li>
+<li>CNAME记录</li>
+</ul>
+<p>然而，DNS也支持像<code>AXFR类型</code>的特殊查询，该类型的查询通常用于DNS区域传输，它的作用就是在多个命名服务器之间快速迁移记录，即将DNS服务器的数据库信息迁移到别的数据库，可想而知其中的数据量是比较大的。</p>
+<p>在RFC1034中提到，DNS查询可以通过UDP或者TCP协议来进行传输，但由于DNS系统对于数据的准确性有着高度要求，我们在进行<code>AXFR类型</code>的特殊查询时必须采用TCP或者其他可靠的协议。</p>
+<p>在RFC1035中提到，UDP协议携带的数据不应该超过512字节，当超过的时候即会被分片，并且由于数据在传输时可能会丢失，所以在<code>AXFR类型</code>的特殊查询中需要重传的特性。</p>
+<p>同时，在未来的DNS记录中，由于IPv6的地址增大且其他字段的增加，UDP协议的512字节可能会不足被DNS系统使用，这时我们就需要使用TCP协议来进行DNS请求。</p>
+<p>总得来说，DNS系统使用TCP/UDP的主要理由有如下几点</p>
+<ul>
+<li>UDP 协议<ul>
+<li>DNS 查询的数据包较小、机制简单</li>
+<li>UDP 协议的额外开销小、有着更好的性能表现</li>
+</ul>
+</li>
+<li>TCP 协议<ul>
+<li>DNS 查询由于 <code>DNSSEC</code> 和 <code>IPv6</code> 的引入迅速膨胀，导致 DNS 响应经常超过 MTU 造成数据的分片和丢失，我们需要依靠更加可靠的 TCP 协议完成数据的传输</li>
+<li>随着 DNS 查询中包含的数据不断增加，TCP 协议头以及三次握手带来的额外开销比例逐渐降低，不再是占据总传输数据大小的主要部分</li>
+</ul>
+</li>
+</ul>
+<p>也就是说，当DNS报文大小超过了512字节，甚至超过了MTU时，我们就应该选择TCP协议或者其他的可靠协议来进行DNS请求的传输。<br>当然，目前的DNS请求绝大部分都还是使用了UDP协议，通过Wireshark抓包也可以验证这一点。</p>
 <h4 id="DNS查询过程"><a href="#DNS查询过程" class="headerlink" title="DNS查询过程"></a>DNS查询过程</h4><p>在网络中一般存在多种DNS服务器。</p>
 <ul>
 <li>本地域名服务器：一般是DNS客户端设置的DNS服务器，由本地的ISP服务商提供</li>
@@ -873,6 +919,17 @@
 <li>同时还会查看服务器证书的有效期是否过期、域名是否与当前服务器相同等信息</li>
 <li>服务器证书中也包含了服务器的公钥，这在之后的握手中才用到</li>
 </ul>
+<h3 id="SPDY-｜-HTTP-2"><a href="#SPDY-｜-HTTP-2" class="headerlink" title="SPDY ｜ HTTP/2"></a>SPDY ｜ HTTP/2</h3><blockquote>
+<p>SPDY是一种开放网络协议，是基于TCP协议的应用层协议，是HTTP/2的前身。在HTTP/2推出后已正式被HTTP/2取代。</p>
+</blockquote>
+<p>SPDY旨在缩短网络的加载时间和安全性，使用如多路复用、压缩、优先级等机制来加快加载时间。</p>
+<p>而在SPDY基础上创造出来的HTTP/2协议有着以下主要的改进</p>
+<ul>
+<li>HPACK头部压缩算法</li>
+<li>多路复用（将多个请求复用同一个TCP连接，并可以并发请求。HTTP/2将一个TCP连接分成了多个流，每个流可以传输若干信息，每个信息由最小的二进制帧构成。在HTTP/2中采用了二进制打包，这也是HTTP/2与之前版本的最大区别所在）</li>
+<li>Server Push</li>
+<li>修复队头阻塞问题（然而，由于HTTP/2是基于TCP协议的，所以如果有一个TCP数据包丢包，仍会遭受队头阻塞问题）</li>
+</ul>
 <h3 id="常见的网络安全问题"><a href="#常见的网络安全问题" class="headerlink" title="常见的网络安全问题"></a>常见的网络安全问题</h3><h4 id="CSRF（Cross-site-request-forgery，跨站请求伪造）：原理和防范"><a href="#CSRF（Cross-site-request-forgery，跨站请求伪造）：原理和防范" class="headerlink" title="CSRF（Cross-site request forgery，跨站请求伪造）：原理和防范"></a>CSRF（Cross-site request forgery，跨站请求伪造）：原理和防范</h4><ul>
 <li>原理：攻击者盗用用户已受信任的身份向另外一个网站发送一个恶意请求。比如在银行页面先登陆，获取了本地的cookie后，攻击者利用这个cookie向转账页面发送一个转账请求。CSRF能够做的事情包括：以你名义发送邮件，发消息，盗取你的账号，甚至于购买商品，虚拟货币转账……造成的问题包括：个人隐私泄露以及财产安全。<img src="https://s2.loli.net/2021/12/11/d4BJ28Ch7lNo5LZ.jpg" alt="-w660"></li>
 <li>防范：<ul>
@@ -939,15 +996,35 @@
 <h4 id="报文格式"><a href="#报文格式" class="headerlink" title="报文格式"></a>报文格式</h4><p>在IP层使用了IP地址来确定目标主机，所以说网络层提供了主机与主机之间的逻辑通信。然而通常来说网络中的信息是一个程序发送给另一个主机上的特定程序的，而运输层则提供了这样的功能。运输层通过引入<code>端口</code>来确定每一个程序，提供了进程与进程之间的逻辑通信。</p>
 <p>TCP协议的报文格式如下<br><img src="https://s2.loli.net/2021/12/11/p25mBRd8CYNKlgX.jpg" alt="-w1068"></p>
 <ul>
-<li>来源端口 ｜ 目的端口 ：两个端口号在TCP报文表头中占据了总共4个字节，一个端口号占2个字节，一共16个比特，也就是能表示2^16=65536个端口号。</li>
+<li>来源端口 ｜ 目的端口 ：两个端口号在TCP报文表头中占据了总共4个字节，一个端口号占2个字节，一共16个比特，也就是能表示2^16 =65536个端口号。</li>
 <li>序列号：Seq，占4个字节。为了保证不丢包，在TCP中为每个数据包设置了一个序列号，接收方收到后要返回一个ACK，ACK包中包含了已收到的数据包的序列号。同时序列号也使得TCP支持按序到达。</li>
 <li>确认号：ack，发送确认报文时填写目前已收到的最后一个报文的Seq</li>
 <li>窗口大小：占2个字节，用来表示从确认号开始，本报文的发送方可以接收的字节数，即接收窗口的大小，用于流量控制</li>
 <li>校验和：占2个字节，利用校验函数得出的16位的值，在发送和接收时都要验证校验和的值是否正确，以检验数据包是否出错。</li>
 <li>选择字段：可选字段，其中有一个<strong>窗口扩大因子</strong>，取值0-14，用于将接收窗口的值左移，使窗口值翻倍。<em>因为目前TCP的接收窗口通常都大于65535个字节</em></li>
 </ul>
-<h4 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h4><p>TCP是一个<strong>有连接</strong>的协议，在开始通信前首先通信双方要建立连接，之后才能开始通信。</p>
-<p>虽然存在一对终端同时向对方发起TCP握手请求的可能，但一般来说都是服务器保持listen状态，即被动打开，客户端主动向服务器发起连接请求，即主动打开。<br>服务器上通常有着两个队列，分别是</p>
+<h4 id="为什么要握手？"><a href="#为什么要握手？" class="headerlink" title="为什么要握手？"></a>为什么要握手？</h4><p>TCP是一个<strong>有连接</strong>的协议，在开始通信前首先通信双方要建立连接，之后才能开始通信。<br>而在三次握手之前，先来思考一个问题，为什么TCP连接需要握手这个过程？注意，问题问的是为什么要握手，而不是为什么要三次握手。</p>
+<ul>
+<li><strong>什么是连接？</strong></li>
+</ul>
+<p>学习过计算机网络知识的人都知道，三次握手后TCP连接就完成了建立，客户端甚至可以在第三次握手包里就放入需要发送的数据。然而，一个关键的问题是：什么是连接？TCP协议位于网络模型的运输层，其提供了进程和进程之间的<strong>逻辑通信</strong>，通过端口来标示一个进程。显然，TCP协议并没有使用一个网线来直接建立进程与进程之间的物理连接，TCP连接是一个抽象的连接。</p>
+<p>在<code>RFC793 - Transmission Control Protocol</code>中定义了TCP连接是什么。</p>
+<p><strong>简单总结，TCP连接是 用于保证可靠性和流控制机制的信息，包括 Socket、序列号以及窗口大小叫做连接。</strong></p>
+<p>也就是说，TCP连接的目的仍然是为了实现其协议的可靠性，TCP连接其实就是协议为了保证可靠性而存储的一组数据。</p>
+<p>当我们在程序中使用API建立TCP连接时，要使用Socket来建立TCP连接。同时，在握手时通信的两端也要将随机生成的Seq发送给对方，因为Seq是随机生成的，为了不被猜出和避免重放攻击。同时，通信双方也需要初始化窗口大小来进行流量控制。</p>
+<p>当一个TCP连接被发起时，服务端在建立连接后就为该条TCP连接保存了包括 Socket、序列号以及窗口大小等信息的数据，而这份数据就对应着一条TCP连接。</p>
+<ul>
+<li>知道了连接是什么，那为什么要握手？</li>
+</ul>
+<p>通过握手，TCP通信的双方才能拥有包括 Socket、序列号以及窗口大小等数据。由于TCP连接是一个全双工的协议，也就是说通信的双方都需要持有建立起的TCP连接，所以TCP连接理论上最少需要两次。但两次的握手实际上存在弊端，那么就引入了TCP三次握手。</p>
+<ul>
+<li>两次握手的弊端<ul>
+<li>1.无法验证通信双方的收发功能是否都正常</li>
+<li>2.服务端会收到已失效的TCP建立连接报文的影响</li>
+</ul>
+</li>
+</ul>
+<h4 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h4><p>虽然存在一对终端同时向对方发起TCP握手请求的可能，但一般来说都是服务器保持listen状态，即被动打开，客户端主动向服务器发起连接请求，即主动打开。<br>服务器上通常有着两个队列，分别是</p>
 <ul>
 <li>SYN队列：存放完成了二次握手的结果。 队列长度由listen函数的参数backlog指定</li>
 <li>ACCEPT队列：存放完成了三次握手的结果。队列长度由listen函数的参数backlog指定</li>
@@ -959,19 +1036,45 @@
 <li>客户端收到该响应包后，明白连接已可以建立，返回一个ACK应答包，包中的SYN被置为0，ack为B+1，同时包的序号为A+1. 在这步中，已可以携带需要发送的数据。</li>
 </ul>
 <p>通过这三次握手，客户端成功与服务端建立了TCP连接。</p>
-<p><strong>为什么是三次握手而不是两次或四次握手？</strong><br>为什么不是两次握手，有着两方面的原因：</p>
+<ul>
+<li><strong>为什么是三次握手而不是两次或四次握手？</strong></li>
+</ul>
+<p>有两方面的原因：</p>
 <ul>
 <li>如果只有两次握手，那么在第一次握手中服务端知道了客户端的发送功能正常，在第二次握手中客户端知道了服务端的收发功能都正常，然而服务端却不知道客户端的接收功能是否正常，这时如果服务端向客户端发送数据而客户端的接收功能不正常，那么会浪费大量资源。</li>
 <li>另外，如果客户端一开始发送了第一个申请建立连接的握手包1，但这个握手包在某个网络节点中被长时间延滞了。这时客户端由于超时重传，会发送第二个申请建立连接的握手包2. 假设第二次的握手非常顺利，并且连接成功建立并且发送完了数据，之后连接被关闭。这时之前滞留的握手包1被发送至了服务器，服务器以为客户端正在申请一个新的连接，于是发送第二次握手的应答包给客户端，假如采用二次握手，此时连接已建立。但客户端并没有要求新连接，服务端会长时间保留该连接等待客户端发送数据，从而占用了许多资源。如果采用三次握手，服务器要等待客户端的第三次握手包才正式建立连接，就避免了这个问题。<strong>总的来说，这一点是为了防止已失效的连接请求报文到达服务端，从而产生错误。</strong></li>
 </ul>
+<p>第二条原因中，如果服务端收到了一个过期的TCP连接报文，他会正常地发送SYN报文给客户端。然而，客户端根据报文的Seq、ack可以验证出这是一个无效的TCP连接请求，于是发送<code>RST=1</code>的报文给服务端，使其放弃该条连接。</p>
+<p>而四次握手显然没有必要。</p>
 <h4 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h4><p>TCP连接的断开需要经过四次挥手，且连接的双方都可以发起挥手。<br>假设此时客户端希望关闭连接，调用了<code>close()</code>函数</p>
 <ul>
 <li>客户端首先向服务端发送第一个挥手包，其中的FIN被置为1，Seq为一个随机数A，此时客户端进入<code>FIN_WAIT_1</code>状态，并进入半开状态。<em>即只接收数据，不发送数据</em></li>
 <li>服务端收到挥手包后，首先向客户端回复一个ACK包，表示自己已经收到了关闭连接的请求，但仍有数据需要传输。ACK包中ACK被置为1，ack为A+1，Seq为一个随机数B。<strong>服务端在发送完该挥手包后变为<code>CLOSE_WAIT</code>状态（半关闭状态）。客户端收到该ACK包后，进入<code>FIN_WAIT_2</code>状态（半关闭状态），等待服务端关闭连接。此时可以接收服务端的数据。</strong></li>
 <li>服务端在发送完数据后，发送同意关闭连接的第三次挥手包，包中FIN被置为1，Seq为一个随机数Y，发送完毕后进入<code>LAST_ACK</code>状态。由于TCP是一个全双工的协议，所以在断开连接时需要拆除双方的收发通道。</li>
-<li>客户端收到服务端的FIN包后，向服务端发送最后的ACK包，包中的ACK被置为1，ack为Y+1.<strong>服务端收到该ACK包后真正关闭连接</strong>。客户端在发送ACK包后需要等待2个MSL的时间（Maximum Segment Lifetime 最大段生命周期），RFC793定义了MSL为2分钟，Linux设置成了30s。<strong>设置这个等待期目的是防止最后的ACK包没有成功送达给</strong> 此时客户端处于<code>TIME_WAIT</code>状态。最后，客户端关闭连接，TCP连接断开。</li>
+<li>客户端收到服务端的FIN包后，向服务端发送最后的ACK包，包中的ACK被置为1，ack为Y+1.<strong>服务端收到该ACK包后真正关闭连接</strong>。客户端在发送ACK包后需要等待2个MSL的时间（Maximum Segment Lifetime 最大段生命周期），RFC793定义了MSL为2分钟，Linux设置成了30s。<strong>设置这个等待期目的是防止最后的ACK包没有成功送达</strong> 此时客户端处于<code>TIME_WAIT</code>状态。最后，客户端关闭连接，TCP连接断开。</li>
 </ul>
 <p><strong>为什么是四次挥手而不是三次挥手？</strong><br>如果是三次挥手，在第二次挥手中一端需要同时发送<code>FIN和ACK</code>，此时如果还有没发送完的数据就会出错，为了避免这种问题发送第二次挥手的那端可以等待数据发送完后再发送<code>FIN包</code>。<br>所以，如果在收到第一次挥手的FIN包时，该端已经没有要发送的数据，可以直接将四次挥手简化成三次挥手，在第二次挥手时同时发送<code>FIN和ACK</code>。</p>
+<h4 id="TCP快速打开-TCP-Fast-Open"><a href="#TCP快速打开-TCP-Fast-Open" class="headerlink" title="TCP快速打开 TCP Fast Open"></a>TCP快速打开 TCP Fast Open</h4><blockquote>
+<p>TCP的三次握手为可靠连接提供了支持，但在一些情况下它也成为影响TCP性能表现的一个原因。TFO是一种目的为了简化握手过程的TCP拓展，用于提高通行双方连接建立的速度。</p>
+</blockquote>
+<p>TFO的实施基于两个过程</p>
+<ul>
+<li>TFO请求</li>
+<li>TFO实施</li>
+</ul>
+<p>在TFO请求时，即客户端第一次与该服务端建立连接（或Fast Open Cookie过期）</p>
+<ul>
+<li>客户端首先发起TCP连接建立申请，即SYN数据包。该数据包包含了<code>Fast-Open</code>选项，并且该选项的Cookie为空，这代表客户端向服务端申请一个<code>Fast Open Cookie</code></li>
+<li>服务端在收到后，若服务端支持TFO，将生成一个<code>Fast Open Cookie</code>，并在接下来的SYN-ACK数据包中返回给客户端</li>
+<li>客户端在收到后，向服务端发送ACK数据包，并将收到的<code>Fast Open Cookie</code>缓存到本地</li>
+</ul>
+<p>在TFO实施阶段，客户端将利用缓存的<code>Fast Open Cookie</code></p>
+<ul>
+<li>客户端发起SYN数据包，并在SYN数据包中**包含需要发送的数据和<code>Fast Open Cookie</code>**。而在普通的TCP连接SYN数据包中，是不允许包含要发送的数据的。</li>
+<li>服务端收到后，将检验<code>Fast Open Cookie</code>的有效性。若cookie有效，则服务端会在SYN-ACK包中通时对Seq和数据进行ack；若cookie无效，服务端将丢弃SYN包中的数据，并只对Seq进行ack。也就是说，若cookie无效，则进入普通的TCP连接建立流程。在这步中，若cookie得到确认，服务端也可以向客户端发送数据了。</li>
+<li>客户端收到SYN-ACK后，若数据部分得到了服务端的确认，则会继续发送数据并发送对SYN-ACK数据包的ACK。若数据部分没有得到确认，客户端将会发送ACK并重新发送数据。</li>
+</ul>
+<p>通过以上过程，可以知道通过使用TFO技术，通信双方在获取了TFO Cookie后的TCP连接，可以相当于免除握手的过程，客户端在SYN包中即可包含要发送的数据。大大降低了握手带来的性能开销。</p>
 <h4 id="SYN攻击"><a href="#SYN攻击" class="headerlink" title="SYN攻击"></a>SYN攻击</h4><blockquote>
 <p>SYN 攻击是一种典型的 DoS/DDoS 攻击。通过大量的发起SYN包，使得服务器为这些请求都分配资源，并插入到SYN队列中，造成了正常的连接无法建立TCP连接</p>
 </blockquote>
@@ -989,7 +1092,13 @@
 </li>
 </ul>
 <h4 id="TCP-Keep-alive心跳包"><a href="#TCP-Keep-alive心跳包" class="headerlink" title="TCP Keep-alive心跳包"></a>TCP Keep-alive心跳包</h4><p>TCP连接中，如果一端断开另一端并不能马上知道，这时如果系统中存在大量这种半连接会占用很多资源，于是在TCP连接中服务端会定时地给客户端发送一个心跳包，如果收到心跳包的ACK则认为连接正常，如果多次重传仍收不到ACK则丢弃该连接。</p>
-<h4 id="可靠传输"><a href="#可靠传输" class="headerlink" title="可靠传输"></a>可靠传输</h4><p>TCP在每个报文段中都填写了一个序号Seq，以此实现可靠传输。Seq是一个4个字节的字段，即它的范围是0～2^32-1,当到达2^32时又变回0.<br>通过Seq，TCP可以实现确认送达和去除重复的报文段。<br>在接收方收到报文时，需要发送一个ACK报文给发送方，其中的ack即为收到报文的Seq。</p>
+<h4 id="可靠传输"><a href="#可靠传输" class="headerlink" title="可靠传输"></a>可靠传输</h4><p>完整的可靠传输依靠以下几点：</p>
+<ul>
+<li>Seq</li>
+<li>确认到达机制</li>
+<li>重传机制</li>
+</ul>
+<p>TCP在每个报文段中都填写了一个序号Seq，以此实现可靠传输。Seq是一个4个字节的字段，即它的范围是0～2^32 -1 ,当到达2^32 时又变回0.<br>通过Seq，TCP可以实现确认送达和去除重复的报文段。<br>在接收方收到报文时，需要发送一个ACK报文给发送方，其中的ack即为收到报文的Seq。</p>
 <p>通过使用序号和确认号，TCP层可以把收到的报文段中的字节按正确的顺序交付给应用层。在发送确认包时，为了防止对性能造成较大影响，可以使用延迟确认技术。即发送的确认包中的seq代表目前seq之前的数据包都已收到。</p>
 <ul>
 <li>累计确认：发送的ACK中seq代表已正确收到seq及以前的所有报文</li>
@@ -1029,6 +1138,68 @@
 </ul>
 </li>
 </ul>
+<h4 id="性能问题"><a href="#性能问题" class="headerlink" title="性能问题"></a>性能问题</h4><blockquote>
+<p>TCP协议虽然是一个可靠的传输协议，但它在被设计之初其实并没有考虑到当今如此复杂的网络环境。在现在，如电梯、高铁等网络信号不好的环境都会出现网络断断续续的现象，而这些可能就是TCP协议导致的，TCP协议在弱网环境下存在着性能瓶颈</p>
+</blockquote>
+<p>底层的数据传输协议在设计时必须要对带宽的利用率和通信延迟进行权衡和取舍，所以想要解决实际生产中的全部问题是不可能的，TCP 选择了充分利用带宽，为流量而设计，期望在尽可能短的时间内传输更多的数据。</p>
+<p>在网络通信中，从发送方发出数据开始到发送方接受到数据的确认时为止，称为一个往返时间（Round-Trip Time，RTT）。</p>
+<p>在弱网环境下，丢包率会很高，而在这种环境下TCP的性能表现比较差。</p>
+<p>而在弱网环境下，导致TCP协议性能下降的原因主要有三个：</p>
+<ul>
+<li><p>TCP的拥塞控制算法，在遇到丢包时会主动下降吞吐量</p>
+</li>
+<li><p>TCP的三次握手增加了开销</p>
+</li>
+<li><p>TCP的累积确认机制导致了多余数据段的重传</p>
+</li>
+<li><p>拥塞控制</p>
+</li>
+</ul>
+<p>拥塞控制显然是主要的导致TCP在弱网环境下表现不佳的原因。在遇到丢包或超时时，TCP的拥塞控制算法会使TCP进入重传和恢复的阶段。而在TCP连接刚建立时，TCP的拥塞控制算法会进入慢启动和拥塞避免状态。</p>
+<ul>
+<li>三次握手</li>
+</ul>
+<p>三次握手的最优情况下是通过三次数据包的发送就快速建立起连接，在这种情况下，TCP三次握手的建立需要1.5个RTT的时间。</p>
+<p>然而，在弱网环境下，TCP三次握手显然不能这么快速地建立。在TCP三次握手阶段同样可能会存在丢包等问题，所以当发生丢包时，握手带来的开销就远不止1.5个RTT的时间了。</p>
+<ul>
+<li>重传机制</li>
+</ul>
+<p>在TCP中常用的重传机制是建立在Seq和ack的基础上的，比较常用的是累积确认机制。在累积确认中，当接收方向发送方发送一个ack，发送方即认为在ack之前的报文已全部正确接收。</p>
+<p>然而，这种机制在有些时候表现并不太好。比如当接收方收到了Seq为2-5的数据，而这时，依赖累积确认机制的接收方无法发送有效的ack，因为他没有收到Seq为1的报文。这时发送方只能重发Seq为1-5的数据，导致了性能的下降。<br><em>注：在这里，如果在应用了重复冗余ACK重传机制的情况下，接收方会发送多个ack为1的ACK包，接收方如果在短时间内收到了三个这样的ACK包后会触发重复冗余ACK重传机制直接重传Seq为1的数据包，就不用重传1-5了。</em></p>
+<p>在比较新的实现中，提出了<code>选择确认</code>这种较累积确认更灵活、表现更好的确认机制，来避免上述的问题。</p>
+<p>为了解决TCP的性能问题，目前业界提出了多种解决方案，大致分为优化TCP和重建新协议两类解决方案</p>
+<ul>
+<li>选择性 ACK（Selective ACK, SACK），TCP 快开启（TCP Fast Open, TFO）等技术被提出以优化TCP的性能</li>
+<li>使用UDP构建的新协议如QUIC协议等被提出</li>
+</ul>
+<h4 id="TCP拆包-粘包"><a href="#TCP拆包-粘包" class="headerlink" title="TCP拆包/粘包"></a>TCP拆包/粘包</h4><blockquote>
+<p>当应用层协议使用 TCP/IP 协议传输数据时，TCP/IP 协议簇可能会将应用层发送的数据分成多个包依次发送，而数据的接收方收到的数据可能是分段的或者拼接的，所以它需要对接收的数据进行拆分或者重组。</p>
+</blockquote>
+<p>TCP/IP协议栈中，拆包有两种情况</p>
+<ul>
+<li>IP协议根据MTU（最大传输单元）来分片传输过大的数据包，避免物理设备的限制</li>
+<li>TCP协议会根据MSS（最大报文段大小）来分段传输过大的数据段，以保证传输的可靠性和性能</li>
+</ul>
+<p>在第一种情况，即IP协议中，在传输前需要协商一个MTU，以确定能够发送的最大数据包大小。一般MTU由通信链路上的设备最小MTU决定。</p>
+<p>该机制依赖于<strong>路径最大传输单元发现</strong>机制来确定链路的MTU。其中，以太网对数据帧的限制一般是1500字节</p>
+<p>而在第二种情况，即TCP协议中，在传输前需要确定一个MSS，在正常情况下，TCP连接的 MSS 是 MTU - 40 字节，即 1460 字节；不过如果通信双方没有指定 MSS 的话，在默认情况下 MSS 的大小是 536 字节。</p>
+<p>前面提到TCP协议会根据MSS来分段传输过大的数据段，为了保证传输的可靠性。<br>考虑如果没有MSS的情况，一个过大的TCP报文段会被IP协议分片传输，而其中的TCP报文头部只有一个，当被分片的IP分组出现了丢包现象时，接收方即没有办法重新组装该分组，并且因为没有头部，所以只能重传整个报文。这就是TCP使用MSS拆包的意义。</p>
+<blockquote>
+<p>然而，TCP协议在设计时是被设计成了一个面向字节流的协议，并不是像UDP一样是面向数据包的协议。当TCP协议在运行时，可能会将应用层写入的多个不相关的数据写入到一个TCP报文中发送出去，而由于应用层协议设计的不周到，没有在数据中插入可以分割每个请求的信息，造成接收方无法处理同一个TCP报文中携带的多个请求，这就是TCP粘包的问题。</p>
+</blockquote>
+<p>解决的办法，就是在应用层交给运输层的数据中加入<strong>消息边界</strong>。<br>消息边界通常有两类实现的方式</p>
+<ul>
+<li>长度</li>
+<li>终止符</li>
+</ul>
+<p>而使用长度的一类解决方式又分为</p>
+<ul>
+<li>固定长度</li>
+<li>动态长度</li>
+</ul>
+<p>在HTTP协议中，如果没有使用chunked编码传输的话，消息边界就是依靠长度来实现的。<br>在响应头部中，会有一个<code>Content-Length</code>头部字段。接收方的应用层协议在从socket中读取数据时，根据<code>Content-Length</code>字段中标示的长度就可以读出对应的数据，然后重组成应用层数据。</p>
+<p>而在使用了chunked编码的HTTP/1.1中，实现消息边界依靠了终止符。<br>在chunked编码的请求中，HTTP请求被编码成了一个个的块发送出去，而在一个请求的最末尾使用一个负载为0的chunked块来标示消息的边界，从而与其他消息隔开。</p>
+<p>而在UDP协议中，由于UDP协议是面向数据包的协议，它自身就存在了消息边界，所以就不存在粘包的问题。与之相对的，应用层的一个数据包大小应尽量的接近UDP协议的最大负载，以充分利用带宽。<br><strong>但UDP的下层协议是IP协议，也就是说它的最大传输长度仍然受到MTU的限制。理论上UDP可以传输最大2^16 -1-8的数据，但一般来说MTU大小为1500，减去IP协议20字节的头部和UDP协议8字节的头部，也就是说UDP协议最好传输的数据不要超过1472字节，以避免被分片传输。</strong></p>
 <h3 id="UDP-User-Datagram-Protocol"><a href="#UDP-User-Datagram-Protocol" class="headerlink" title="UDP User Datagram Protocol"></a>UDP User Datagram Protocol</h3><p>相对于TCP，UDP提供了<strong>无连接、不可靠</strong>的传输服务。它在传输前并不需要先建立连接，同时它也没有确认到达等服务，并不保证数据的按序到达。对于TCP而言，TCP提供了一种数据的流传输，UDP则是提供了一种包传输。TCP可以传输更多的数据，UDP可以传输的数据相对较小。</p>
 <p>UDP适用于不需要在应用中执行错误纠正以及不需要保证可靠性的情况，使用UDP可以避免协议栈在错误纠正等方面造成的开销。</p>
 <h4 id="常用场景"><a href="#常用场景" class="headerlink" title="常用场景"></a>常用场景</h4><p>由于UDP不可靠、无连接的特性，它经常在以下一些更注重实时性的应用中使用</p>
@@ -1049,6 +1220,24 @@
 <p>从报头结构来看，可以发现UDP的报头开销比TCP要小得多，所以一些要求低延迟而不需要保证高可靠的应用通常采用UDP。</p>
 <h4 id="拥塞控制、流量控制"><a href="#拥塞控制、流量控制" class="headerlink" title="拥塞控制、流量控制"></a>拥塞控制、流量控制</h4><p>在UDP中并不提供这两项服务，但开发者可以在应用层来根据需要提供这两项服务。</p>
 <p><strong>数据拥塞控制协议（DCCP）就是通过在诸如流媒体类型的高速率UDP流中增加主机拥塞控制，来减小这个潜在的问题。</strong></p>
+<h3 id="QUIC"><a href="#QUIC" class="headerlink" title="QUIC"></a>QUIC</h3><blockquote>
+<p>QUIC协议是一个通用的传输层协议，它基于UDP协议创造，旨在保留UDP协议速度的同时拥有几乎与TCP协议相同的可靠性。QUIC协议提高了目前的TCP应用的性能，它通过UDP连接在两个端点之间创建多个多路连接来实现这一目标。</p>
+</blockquote>
+<p>QUIC协议的改进行为与SPDY｜HTTP/2协议类似，他们都使用了在端对端之间建立若干条连接来提高性能。然而由于HTTP/2协议是一个应用层协议，建立在TCP协议之上，所以它无法充分利用多路连接，在TCP丢包时仍然会遭遇队头阻塞。<br>在大多数实现中，TCP会将连接上的任何错误视为阻塞，停止进一步传输，直到错误得到解决或连接被视为失败。如果使用单个连接来发送多个数据流，就像在HTTP/2协议中那样，所有这些数据流都会被阻止，尽管其中只有一个可能有问题。例如，如果在下载用于收藏夹图标的GIF图像时出现一个错误，页面的其余部分将等待问题得到解决</p>
+<p>但在QUIC协议中，其与HTTP/2中的多路复用协同工作，数据可以独立地通过端对端之间的多条连接发送，其中一个丢包也不会影响到别的数据。</p>
+<h4 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h4><ul>
+<li>在运输层使用了多路复用，一个连接中的若干个流可以独立工作</li>
+<li>将拥塞避免算法从两个端点的内核空间移动到了用户空间。拥塞避免算法是影响TCP在弱网情况下性能表现的一个非常大的因素，然而TCP是存储在内核空间的，升级只能跟随操作系统的升级。在拥塞避免算法移动到用户空间后，对算法的调整和升级将会变得便利很多</li>
+<li>大大减少在连接创建时的开销。 在QUIC中，由于目前大部分的HTTP连接都使用了TLS，所以QUIC支持将TLS握手合并到连接建立时的握手一起进行，这样将可以降低HTTPS连接建立时所需要的RTT开销</li>
+<li>提供QUIC层级的重传机制。 QUIC基于的UDP协议不提供重传机制，所以QUIC自身提供了重传机制，这对于可靠性来说是非常必要的。 QUIC的重传机制在一个流发生错误时，其他流仍然可以正常工作，QUIC只需要重传发生错误的流的数据即可</li>
+<li>QUIC提高了网络切换时的性能，这在TCP中也是非常影响性能的一大因素。 在TCP中，一旦用户切换了网络，比如Wi-Fi-&gt;蜂窝数据，TCP就需要等待所有的连接超时断开，然后再重新建立TCP连接，这在网络切换时的微信中十分常见。<strong>QUIC为了解决这个问题，使用一个唯一的连接标识符来标示每一条端对端的QUIC连接，在切换网络后只需要发送携带该连接标识符的数据包就可以快速地恢复连接，而不需要关系源IP地址是否变化。</strong> 而在TCP中，由于TCP连接由&lt;源IP、源端口、目的IP、目的端口&gt;四元组来唯一确定，所以当源IP发生变化时需要重建建立连接</li>
+<li>QUIC使用了更加适应当今网络环境的拥塞控制算法，使其在弱网环境下也有比TCP更好的表现</li>
+</ul>
+<h4 id="拥塞控制-1"><a href="#拥塞控制-1" class="headerlink" title="拥塞控制"></a>拥塞控制</h4><ul>
+<li>Google BBR</li>
+</ul>
+<p>QUIC使用的拥塞控制算法为<code>Google BBR</code>。在TCP的拥塞控制算法如Reno算法中，通常将所有丢包都视为网络拥塞，这使其性能受到了限制。</p>
+<p>BBR 算法主要出发点是，数据包丢失可能并不意味着网络拥塞，网络中的一小处波动都有可能导致拥塞。因此，即使面对次优的网络条件，BBR也能提供持续的吞吐量性能。</p>
 <hr>
 <h2 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h2><h3 id="IPv4"><a href="#IPv4" class="headerlink" title="IPv4"></a>IPv4</h3><blockquote>
 <p>IP协议是TCP/IP协议簇中的核心协议，是网络通信中非常重要的一个协议。在TCP中，TCP定义了端口提供了进程与进程之间的逻辑通信；在IP中，IP定义了IP地址提供了主机与主机之间的逻辑通信。</p>
@@ -1057,6 +1246,17 @@
 <p>它<strong>不保证任何数据包均能送达目的地，也不保证所有数据包均按照正确的顺序无重复地到达</strong>。这些方面是由上层的传输协议（如传输控制协议）处理的。</p>
 <h4 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h4><p>IP协议定义了IP地址，用来标示连接到网络中的主机。IPv4使用32位的IP地址，即4个字节。因此理论上IPv4只具有2^32 个IP地址，目前来说是不够当前的网络规模使用的。因此，子网划分等概念也随之被提出，同时IPv6也开始了部署，IPv6具有着更多的IP地址，足够目前的网络规模使用。</p>
 <p>IPv4的地址通常被写成点分十进制的格式，即每个四个字节分别用点隔开，并用十进制表示每个字节。如<code>255.255.255.0</code></p>
+<h4 id="首部结构"><a href="#首部结构" class="headerlink" title="首部结构"></a>首部结构</h4><p><img src="https://s2.loli.net/2022/01/04/cnldbueoVaRqxh9.jpg" alt="-w1046"></p>
+<ul>
+<li>版本：占4bits，IPv4则值为4</li>
+<li>首部长度：IP报文的首部最小固定长度为20字节，首部长度表示首部有多少个32位长（4字节），也就是说它最小是5（0101），最大为15</li>
+<li>标识符：占16位（2字节），用来唯一地标示分片传输中的每一个分组，因为分片传输的分组不一定会按序到达，在组装是利用该标识符来按正确的顺序组装分组</li>
+<li>标志：用来标志是否允许分片</li>
+<li>分片偏移：当前分组在分片中的偏移量</li>
+<li>源IP地址：占32位（4字节）</li>
+<li>目的IP地址</li>
+<li>选项：可选项</li>
+</ul>
 <h4 id="地址分类"><a href="#地址分类" class="headerlink" title="地址分类"></a>地址分类</h4><p>根据第一个字节将地址分为ABCDE五种地址。<br><img src="https://s2.loli.net/2021/12/11/msXAfWer7tMCFPv.jpg" alt="-w1001"></p>
 <h4 id="CIDR-无类别域间路由"><a href="#CIDR-无类别域间路由" class="headerlink" title="CIDR 无类别域间路由"></a>CIDR 无类别域间路由</h4><blockquote>
 <p>无类别域间路由（Classless Inter-Domain Routing、CIDR）是一个用于给用户分配IP地址以及在互联网上有效地路由IP数据包的对IP地址进行归类的方法。</p>
@@ -1172,6 +1372,8 @@
 </ul>
 <p>也就是说，如果是同一个网段仅需要进行一次ARP请求就可以找到目标主机的MAC地址，如果不在一个网段的话最多需要三次。（第一次网段内请求失败，第二次请求网关的MAC地址，第三次请求目标主机的MAC地址）<br><img src="https://s2.loli.net/2021/12/11/JcPRxb4Oo5y1MgQ.jpg" alt="-w1056"></p>
 <p><strong>ARP缓存表采用老化机制，在一段时间内如果表中的某一行没有使用，就会被删除，这样可减少缓存表的长度，加快查询速度。</strong></p>
+<hr>
+<p><em>更新于2022.1.4</em></p>
 
     </article>
     <!-- license -->
@@ -1328,7 +1530,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C"><span class="toc-number">1.</span> <span class="toc-text">计算机网络</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.</span> <span class="toc-text">网络模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#OSI%E4%B8%83%E5%B1%82%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">OSI七层模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP-IP%E4%BA%94%E5%B1%82%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.2.</span> <span class="toc-text">TCP&#x2F;IP五层模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82"><span class="toc-number">1.2.</span> <span class="toc-text">应用层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Http"><span class="toc-number">1.2.1.</span> <span class="toc-text">Http</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%89%AF%E4%BD%9C%E7%94%A8%E4%B8%8E%E5%B9%82%E7%AD%89"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">副作用与幂等</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A0%E7%8A%B6%E6%80%81"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">无状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cookie"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">Cookie</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Session"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">Session</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#URI"><span class="toc-number">1.2.1.5.</span> <span class="toc-text">URI</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81-url-%E7%BC%96%E7%A0%81%EF%BC%9F"><span class="toc-number">1.2.1.6.</span> <span class="toc-text">为什么需要 url 编码？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%84%E7%89%88%E6%9C%AC%E7%9A%84HTTP"><span class="toc-number">1.2.1.7.</span> <span class="toc-text">各版本的HTTP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%A5%E6%96%87"><span class="toc-number">1.2.1.8.</span> <span class="toc-text">报文</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E5%AD%97%E6%AE%B5"><span class="toc-number">1.2.1.9.</span> <span class="toc-text">常见字段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%96%AD%E7%82%B9%E7%BB%AD%E4%BC%A0%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-number">1.2.1.10.</span> <span class="toc-text">实现断点续传的原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E8%AF%B7%E6%B1%82"><span class="toc-number">1.2.1.11.</span> <span class="toc-text">条件请求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#POST-GET-%E5%8C%BA%E5%88%AB"><span class="toc-number">1.2.1.12.</span> <span class="toc-text">POST&#x2F;GET 区别</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS-%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.2.2.</span> <span class="toc-text">DNS 域名解析系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#DNS%E6%9F%A5%E8%AF%A2%E8%BF%87%E7%A8%8B"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">DNS查询过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DNS%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">DNS报文格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DNS%E6%8C%9F%E6%8C%81"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">DNS挟持</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Https-%EF%BC%88Http-over-TLS"><span class="toc-number">1.2.3.</span> <span class="toc-text">Https （Http over TLS)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#TLS-SSL-%E6%8F%A1%E6%89%8B"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">TLS&#x2F;SSL 握手</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%81%E4%B9%A6%E9%AA%8C%E8%AF%81"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">证书验证</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98"><span class="toc-number">1.2.4.</span> <span class="toc-text">常见的网络安全问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CSRF%EF%BC%88Cross-site-request-forgery%EF%BC%8C%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0%EF%BC%89%EF%BC%9A%E5%8E%9F%E7%90%86%E5%92%8C%E9%98%B2%E8%8C%83"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">CSRF（Cross-site request forgery，跨站请求伪造）：原理和防范</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#XSS%EF%BC%88Cross-Site-Scripting%EF%BC%8C%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB%EF%BC%89%EF%BC%9A%E5%8E%9F%E7%90%86%E5%92%8C%E9%98%B2%E8%8C%83"><span class="toc-number">1.2.4.2.</span> <span class="toc-text">XSS（Cross Site Scripting，跨站脚本攻击）：原理和防范</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB%E6%A6%82%E5%BF%B5%E4%B8%8E%E9%98%B2%E6%AD%A2"><span class="toc-number">1.2.4.3.</span> <span class="toc-text">中间人攻击概念与防止</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E6%94%BE%E6%94%BB%E5%87%BB"><span class="toc-number">1.2.4.4.</span> <span class="toc-text">重放攻击</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Dos-%E6%8B%92%E7%BB%9D%E8%AE%BF%E9%97%AE%E6%94%BB%E5%87%BB"><span class="toc-number">1.2.4.5.</span> <span class="toc-text">Dos 拒绝访问攻击</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E8%BE%93%E5%B1%82"><span class="toc-number">1.3.</span> <span class="toc-text">运输层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP-Transport-Control-Protocol"><span class="toc-number">1.3.1.</span> <span class="toc-text">TCP Transport Control Protocol</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">报文格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">三次握手</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">四次挥手</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SYN%E6%94%BB%E5%87%BB"><span class="toc-number">1.3.1.4.</span> <span class="toc-text">SYN攻击</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP-Keep-alive%E5%BF%83%E8%B7%B3%E5%8C%85"><span class="toc-number">1.3.1.5.</span> <span class="toc-text">TCP Keep-alive心跳包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93"><span class="toc-number">1.3.1.6.</span> <span class="toc-text">可靠传输</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6"><span class="toc-number">1.3.1.7.</span> <span class="toc-text">流量控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="toc-number">1.3.1.8.</span> <span class="toc-text">拥塞控制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UDP-User-Datagram-Protocol"><span class="toc-number">1.3.2.</span> <span class="toc-text">UDP User Datagram Protocol</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">常用场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%A5%E5%A4%B4%E7%BB%93%E6%9E%84"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">报头结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E3%80%81%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6"><span class="toc-number">1.3.2.3.</span> <span class="toc-text">拥塞控制、流量控制</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="toc-number">1.4.</span> <span class="toc-text">网络层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IPv4"><span class="toc-number">1.4.1.</span> <span class="toc-text">IPv4</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#IP%E5%9C%B0%E5%9D%80"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">IP地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%B0%E5%9D%80%E5%88%86%E7%B1%BB"><span class="toc-number">1.4.1.2.</span> <span class="toc-text">地址分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CIDR-%E6%97%A0%E7%B1%BB%E5%88%AB%E5%9F%9F%E9%97%B4%E8%B7%AF%E7%94%B1"><span class="toc-number">1.4.1.3.</span> <span class="toc-text">CIDR 无类别域间路由</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NAT-Network-Address-Translation"><span class="toc-number">1.4.1.4.</span> <span class="toc-text">NAT Network Address Translation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E7%89%87"><span class="toc-number">1.4.1.5.</span> <span class="toc-text">分片</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E7%BB%84"><span class="toc-number">1.4.1.6.</span> <span class="toc-text">重组</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IPv6"><span class="toc-number">1.4.2.</span> <span class="toc-text">IPv6</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8EIPv4%E5%AF%B9%E6%AF%94"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">与IPv4对比</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ICMP-Internet-Control-Message-Protocol"><span class="toc-number">1.4.3.</span> <span class="toc-text">ICMP Internet Control Message Protocol</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%A5%E6%96%87%E7%BB%93%E6%9E%84"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">报文结构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E9%83%A8%E7%BD%91%E5%85%B3%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.4.4.</span> <span class="toc-text">内部网关路由协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RIP-Routing-Information-Protocol"><span class="toc-number">1.4.4.1.</span> <span class="toc-text">RIP Routing Information Protocol</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OSPF-Open-Shortest-Path-First-%E5%BC%80%E6%94%BE%E5%BC%8F%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E4%BC%98%E5%85%88"><span class="toc-number">1.4.4.2.</span> <span class="toc-text">OSPF Open Shortest Path First 开放式最短路径优先</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BGP-Border-Gateway-Protocol-%E8%BE%B9%E7%95%8C%E7%BD%91%E5%85%B3%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.4.4.3.</span> <span class="toc-text">BGP Border Gateway Protocol 边界网关协议</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82"><span class="toc-number">1.5.</span> <span class="toc-text">数据链路层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ARP-Address-Resolution-Protocol-%E5%9C%B0%E5%9D%80%E8%A7%A3%E6%9E%90%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.5.1.</span> <span class="toc-text">ARP Address Resolution Protocol 地址解析协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F-1"><span class="toc-number">1.5.1.1.</span> <span class="toc-text">报文格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%90%86"><span class="toc-number">1.5.1.2.</span> <span class="toc-text">运行原理</span></a></li></ol></li></ol></li></ol></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C"><span class="toc-number">1.</span> <span class="toc-text">计算机网络</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.</span> <span class="toc-text">网络模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#OSI%E4%B8%83%E5%B1%82%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">OSI七层模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP-IP%E4%BA%94%E5%B1%82%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.2.</span> <span class="toc-text">TCP&#x2F;IP五层模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82"><span class="toc-number">1.2.</span> <span class="toc-text">应用层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Http"><span class="toc-number">1.2.1.</span> <span class="toc-text">Http</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%89%AF%E4%BD%9C%E7%94%A8%E4%B8%8E%E5%B9%82%E7%AD%89"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">副作用与幂等</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A0%E7%8A%B6%E6%80%81"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">无状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cookie"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">Cookie</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Session"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">Session</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#URI"><span class="toc-number">1.2.1.5.</span> <span class="toc-text">URI</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81-url-%E7%BC%96%E7%A0%81%EF%BC%9F"><span class="toc-number">1.2.1.6.</span> <span class="toc-text">为什么需要 url 编码？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%84%E7%89%88%E6%9C%AC%E7%9A%84HTTP"><span class="toc-number">1.2.1.7.</span> <span class="toc-text">各版本的HTTP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%A5%E6%96%87"><span class="toc-number">1.2.1.8.</span> <span class="toc-text">报文</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E5%AD%97%E6%AE%B5"><span class="toc-number">1.2.1.9.</span> <span class="toc-text">常见字段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%8A%B6%E6%80%81%E7%A0%81"><span class="toc-number">1.2.1.10.</span> <span class="toc-text">常见状态码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%96%AD%E7%82%B9%E7%BB%AD%E4%BC%A0%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-number">1.2.1.11.</span> <span class="toc-text">实现断点续传的原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E8%AF%B7%E6%B1%82"><span class="toc-number">1.2.1.12.</span> <span class="toc-text">条件请求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#POST-GET-%E5%8C%BA%E5%88%AB"><span class="toc-number">1.2.1.13.</span> <span class="toc-text">POST&#x2F;GET 区别</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS-%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.2.2.</span> <span class="toc-text">DNS 域名解析系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E6%A0%88"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">协议栈</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DNS%E6%9F%A5%E8%AF%A2%E8%BF%87%E7%A8%8B"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">DNS查询过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DNS%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">DNS报文格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DNS%E6%8C%9F%E6%8C%81"><span class="toc-number">1.2.2.4.</span> <span class="toc-text">DNS挟持</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Https-%EF%BC%88Http-over-TLS"><span class="toc-number">1.2.3.</span> <span class="toc-text">Https （Http over TLS)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#TLS-SSL-%E6%8F%A1%E6%89%8B"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">TLS&#x2F;SSL 握手</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%81%E4%B9%A6%E9%AA%8C%E8%AF%81"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">证书验证</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SPDY-%EF%BD%9C-HTTP-2"><span class="toc-number">1.2.4.</span> <span class="toc-text">SPDY ｜ HTTP&#x2F;2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98"><span class="toc-number">1.2.5.</span> <span class="toc-text">常见的网络安全问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CSRF%EF%BC%88Cross-site-request-forgery%EF%BC%8C%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0%EF%BC%89%EF%BC%9A%E5%8E%9F%E7%90%86%E5%92%8C%E9%98%B2%E8%8C%83"><span class="toc-number">1.2.5.1.</span> <span class="toc-text">CSRF（Cross-site request forgery，跨站请求伪造）：原理和防范</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#XSS%EF%BC%88Cross-Site-Scripting%EF%BC%8C%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB%EF%BC%89%EF%BC%9A%E5%8E%9F%E7%90%86%E5%92%8C%E9%98%B2%E8%8C%83"><span class="toc-number">1.2.5.2.</span> <span class="toc-text">XSS（Cross Site Scripting，跨站脚本攻击）：原理和防范</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB%E6%A6%82%E5%BF%B5%E4%B8%8E%E9%98%B2%E6%AD%A2"><span class="toc-number">1.2.5.3.</span> <span class="toc-text">中间人攻击概念与防止</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E6%94%BE%E6%94%BB%E5%87%BB"><span class="toc-number">1.2.5.4.</span> <span class="toc-text">重放攻击</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Dos-%E6%8B%92%E7%BB%9D%E8%AE%BF%E9%97%AE%E6%94%BB%E5%87%BB"><span class="toc-number">1.2.5.5.</span> <span class="toc-text">Dos 拒绝访问攻击</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E8%BE%93%E5%B1%82"><span class="toc-number">1.3.</span> <span class="toc-text">运输层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP-Transport-Control-Protocol"><span class="toc-number">1.3.1.</span> <span class="toc-text">TCP Transport Control Protocol</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">报文格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%8F%A1%E6%89%8B%EF%BC%9F"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">为什么要握手？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">三次握手</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B"><span class="toc-number">1.3.1.4.</span> <span class="toc-text">四次挥手</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80-TCP-Fast-Open"><span class="toc-number">1.3.1.5.</span> <span class="toc-text">TCP快速打开 TCP Fast Open</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SYN%E6%94%BB%E5%87%BB"><span class="toc-number">1.3.1.6.</span> <span class="toc-text">SYN攻击</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP-Keep-alive%E5%BF%83%E8%B7%B3%E5%8C%85"><span class="toc-number">1.3.1.7.</span> <span class="toc-text">TCP Keep-alive心跳包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93"><span class="toc-number">1.3.1.8.</span> <span class="toc-text">可靠传输</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6"><span class="toc-number">1.3.1.9.</span> <span class="toc-text">流量控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="toc-number">1.3.1.10.</span> <span class="toc-text">拥塞控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98"><span class="toc-number">1.3.1.11.</span> <span class="toc-text">性能问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP%E6%8B%86%E5%8C%85-%E7%B2%98%E5%8C%85"><span class="toc-number">1.3.1.12.</span> <span class="toc-text">TCP拆包&#x2F;粘包</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UDP-User-Datagram-Protocol"><span class="toc-number">1.3.2.</span> <span class="toc-text">UDP User Datagram Protocol</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">常用场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%A5%E5%A4%B4%E7%BB%93%E6%9E%84"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">报头结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E3%80%81%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6"><span class="toc-number">1.3.2.3.</span> <span class="toc-text">拥塞控制、流量控制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#QUIC"><span class="toc-number">1.3.3.</span> <span class="toc-text">QUIC</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%94%B9%E8%BF%9B"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">改进</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6-1"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">拥塞控制</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="toc-number">1.4.</span> <span class="toc-text">网络层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IPv4"><span class="toc-number">1.4.1.</span> <span class="toc-text">IPv4</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#IP%E5%9C%B0%E5%9D%80"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">IP地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A6%96%E9%83%A8%E7%BB%93%E6%9E%84"><span class="toc-number">1.4.1.2.</span> <span class="toc-text">首部结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%B0%E5%9D%80%E5%88%86%E7%B1%BB"><span class="toc-number">1.4.1.3.</span> <span class="toc-text">地址分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CIDR-%E6%97%A0%E7%B1%BB%E5%88%AB%E5%9F%9F%E9%97%B4%E8%B7%AF%E7%94%B1"><span class="toc-number">1.4.1.4.</span> <span class="toc-text">CIDR 无类别域间路由</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NAT-Network-Address-Translation"><span class="toc-number">1.4.1.5.</span> <span class="toc-text">NAT Network Address Translation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E7%89%87"><span class="toc-number">1.4.1.6.</span> <span class="toc-text">分片</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E7%BB%84"><span class="toc-number">1.4.1.7.</span> <span class="toc-text">重组</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IPv6"><span class="toc-number">1.4.2.</span> <span class="toc-text">IPv6</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8EIPv4%E5%AF%B9%E6%AF%94"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">与IPv4对比</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ICMP-Internet-Control-Message-Protocol"><span class="toc-number">1.4.3.</span> <span class="toc-text">ICMP Internet Control Message Protocol</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%A5%E6%96%87%E7%BB%93%E6%9E%84"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">报文结构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E9%83%A8%E7%BD%91%E5%85%B3%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.4.4.</span> <span class="toc-text">内部网关路由协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RIP-Routing-Information-Protocol"><span class="toc-number">1.4.4.1.</span> <span class="toc-text">RIP Routing Information Protocol</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OSPF-Open-Shortest-Path-First-%E5%BC%80%E6%94%BE%E5%BC%8F%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E4%BC%98%E5%85%88"><span class="toc-number">1.4.4.2.</span> <span class="toc-text">OSPF Open Shortest Path First 开放式最短路径优先</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BGP-Border-Gateway-Protocol-%E8%BE%B9%E7%95%8C%E7%BD%91%E5%85%B3%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.4.4.3.</span> <span class="toc-text">BGP Border Gateway Protocol 边界网关协议</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82"><span class="toc-number">1.5.</span> <span class="toc-text">数据链路层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ARP-Address-Resolution-Protocol-%E5%9C%B0%E5%9D%80%E8%A7%A3%E6%9E%90%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.5.1.</span> <span class="toc-text">ARP Address Resolution Protocol 地址解析协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F-1"><span class="toc-number">1.5.1.1.</span> <span class="toc-text">报文格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%90%86"><span class="toc-number">1.5.1.2.</span> <span class="toc-text">运行原理</span></a></li></ol></li></ol></li></ol></li></ol>
             </div>
         
         <!-- sidebar -->
